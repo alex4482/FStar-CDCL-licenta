@@ -1,0 +1,139 @@
+# C:\OCaml64\home\alexd\.opam\ocaml-variants.4.12.0+mingw64c\bin\dune.exe build
+# OCAMLPARAM: unset
+# Shared cache: disabled
+# Workspace root: "D:\\fstar\\licenta"
+# Auto-detected concurrency: 8
+$ C:\OCaml64\home\alexd\.opam\ocaml-variants.4.12.0+mingw64c\bin\ocamlc.opt.exe -config > C:\OCaml64\tmp\dune_b5bd85_output
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dev
+#  ; merlin = true
+#  ; for_host = None
+#  ; fdo_target_exe = None
+#  ; build_dir = "default"
+#  ; toplevel_path =
+#      Some
+#        External
+#          "C:/OCaml64/home/alexd/.opam/ocaml-variants.4.12.0+mingw64c/lib/toplevel"
+#  ; ocaml_bin =
+#      External
+#        "C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\\bin"
+#  ; ocaml =
+#      Ok
+#        External
+#          "C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\\bin\\ocaml.exe"
+#  ; ocamlc =
+#      External
+#        "C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\\bin\\ocamlc.opt.exe"
+#  ; ocamlopt =
+#      Ok
+#        External
+#          "C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\\bin\\ocamlopt.opt.exe"
+#  ; ocamldep =
+#      Ok
+#        External
+#          "C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\\bin\\ocamldep.opt.exe"
+#  ; ocamlmklib =
+#      Ok
+#        External
+#          "C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\\bin\\ocamlmklib.opt.exe"
+#  ; env =
+#      map
+#        { "DUNE_OCAML_HARDCODED" :
+#            "C:\\\\OCaml64\\\\home\\\\alexd\\\\.opam\\\\ocaml-variants.4.12.0+mingw64c\\lib"
+#        ; "DUNE_OCAML_STDLIB" :
+#            "C:/OCaml64/home/alexd/.opam/ocaml-variants.4.12.0+mingw64c/lib/ocaml"
+#        ; "DUNE_SOURCEROOT" : "D:\\fstar\\licenta"
+#        ; "INSIDE_DUNE" : "D:\\fstar\\licenta\\_build/default"
+#        ; "MANPATH" : "D:\\fstar\\licenta\\_build/install/default/bin"
+#        ; "OCAML_COLOR" : "always"
+#        ; "OCAMLFIND_IGNORE_DUPS_IN" :
+#            "D:\\fstar\\licenta\\_build/install/default/lib"
+#        ; "OCAMLTOP_INCLUDE_PATH" :
+#            "D:\\fstar\\licenta\\_build/install/default/lib/toplevel"
+#        ; "OPAMCOLOR" : "always"
+#        }
+#  ; findlib_paths =
+#      [ External "D:/fstar/bin"
+#      ; External
+#          "C:\\\\OCaml64\\\\home\\\\alexd\\\\.opam\\\\ocaml-variants.4.12.0+mingw64c\\lib"
+#      ]
+#  ; arch_sixtyfour = true
+#  ; natdynlink_supported = true
+#  ; supports_shared_libraries = true
+#  ; ocaml_config =
+#      { version = "4.12.0"
+#      ; standard_library_default =
+#          "C:/cygwin/home/appveyor/.opam/4.12.0+mingw64c/lib/ocaml"
+#      ; standard_library =
+#          "C:/OCaml64/home/alexd/.opam/ocaml-variants.4.12.0+mingw64c/lib/ocaml"
+#      ; standard_runtime = "the_standard_runtime_variable_was_deleted"
+#      ; ccomp_type = "cc"
+#      ; c_compiler = "x86_64-w64-mingw32-gcc"
+#      ; ocamlc_cflags =
+#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-mms-bitfields" ]
+#      ; ocamlc_cppflags = []
+#      ; ocamlopt_cflags =
+#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-mms-bitfields" ]
+#      ; ocamlopt_cppflags = []
+#      ; bytecomp_c_compiler =
+#          [ "x86_64-w64-mingw32-gcc"
+#          ; "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-mms-bitfields"
+#          ]
+#      ; bytecomp_c_libraries = [ "-lws2_32"; "-lversion" ]
+#      ; native_c_compiler =
+#          [ "x86_64-w64-mingw32-gcc"
+#          ; "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-mms-bitfields"
+#          ]
+#      ; native_c_libraries = [ "-lws2_32"; "-lversion" ]
+#      ; native_pack_linker = [ "x86_64-w64-mingw32-ld"; "-r"; "-o" ]
+#      ; cc_profile = []
+#      ; architecture = "amd64"
+#      ; model = "default"
+#      ; int_size = 63
+#      ; word_size = 64
+#      ; system = "mingw64"
+#      ; asm = [ "x86_64-w64-mingw32-as" ]
+#      ; asm_cfi_supported = false
+#      ; with_frame_pointers = false
+#      ; ext_exe = ".exe"
+#      ; ext_obj = ".o"
+#      ; ext_asm = ".s"
+#      ; ext_lib = ".a"
+#      ; ext_dll = ".dll"
+#      ; os_type = "Win32"
+#      ; default_executable_name = "camlprog.exe"
+#      ; systhread_supported = true
+#      ; host = "x86_64-w64-mingw32"
+#      ; target = "x86_64-w64-mingw32"
+#      ; profiling = false
+#      ; flambda = false
+#      ; spacetime = false
+#      ; safe_string = true
+#      ; exec_magic_number = "Caml1999X029"
+#      ; cmi_magic_number = "Caml1999I029"
+#      ; cmo_magic_number = "Caml1999O029"
+#      ; cma_magic_number = "Caml1999A029"
+#      ; cmx_magic_number = "Caml1999Y029"
+#      ; cmxa_magic_number = "Caml1999Z029"
+#      ; ast_impl_magic_number = "Caml1999M029"
+#      ; ast_intf_magic_number = "Caml1999N029"
+#      ; cmxs_magic_number = "Caml1999D029"
+#      ; cmt_magic_number = "Caml1999T029"
+#      ; natdynlink_supported = true
+#      ; supports_shared_libraries = true
+#      ; windows_unicode = true
+#      }
+#  }
+$ (cd _build/default && C:\OCaml64\home\alexd\.opam\ocaml-variants.4.12.0+mingw64c\bin\ocamlc.opt.exe -g -w -24 -I .ppx/a4ea0d83c521725fd7b0167e93f2550b -I C:/OCaml64/home/alexd/.opam/ocaml-variants.4.12.0+mingw64c/lib/ocaml\compiler-libs -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ocaml-compiler-libs\common -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ocaml-compiler-libs\shadow -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppx_derivers -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppx_deriving\api -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppx_deriving_yojson -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppxlib -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppxlib\ast -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppxlib\astlib -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppxlib\print_diff -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppxlib\stdppx -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppxlib\traverse_builtins -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\result -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\sexplib0 -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\stdlib-shims -no-alias-deps -o .ppx/a4ea0d83c521725fd7b0167e93f2550b/dune__exe___ppx.cmo -c -impl .ppx/a4ea0d83c521725fd7b0167e93f2550b/_ppx.ml-gen)
+$ (cd _build/default && C:\OCaml64\home\alexd\.opam\ocaml-variants.4.12.0+mingw64c\bin\ocamlopt.opt.exe -g -w -24 -I .ppx/a4ea0d83c521725fd7b0167e93f2550b -I C:/OCaml64/home/alexd/.opam/ocaml-variants.4.12.0+mingw64c/lib/ocaml\compiler-libs -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ocaml-compiler-libs\common -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ocaml-compiler-libs\shadow -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppx_derivers -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppx_deriving\api -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppx_deriving_yojson -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppxlib -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppxlib\ast -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppxlib\astlib -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppxlib\print_diff -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppxlib\stdppx -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppxlib\traverse_builtins -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\result -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\sexplib0 -I C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\stdlib-shims -intf-suffix .ml-gen -no-alias-deps -o .ppx/a4ea0d83c521725fd7b0167e93f2550b/dune__exe___ppx.cmx -c -impl .ppx/a4ea0d83c521725fd7b0167e93f2550b/_ppx.ml-gen)
+$ (cd _build/default && C:\OCaml64\home\alexd\.opam\ocaml-variants.4.12.0+mingw64c\bin\ocamlopt.opt.exe -g -w -24 -o .ppx/a4ea0d83c521725fd7b0167e93f2550b/ppx.exe C:/OCaml64/home/alexd/.opam/ocaml-variants.4.12.0+mingw64c/lib/ocaml\compiler-libs\ocamlcommon.cmxa C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ocaml-compiler-libs\common/ocaml_common.cmxa C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppxlib\astlib/astlib.cmxa C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\stdlib-shims\stdlib_shims.cmxa C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppxlib\ast/ppxlib_ast.cmxa C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ocaml-compiler-libs\shadow/ocaml_shadow.cmxa C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppxlib\print_diff/ppxlib_print_diff.cmxa C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppx_derivers\ppx_derivers.cmxa C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppxlib\traverse_builtins/ppxlib_traverse_builtins.cmxa C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\sexplib0\sexplib0.cmxa C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppxlib\stdppx/stdppx.cmxa C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppxlib\ppxlib.cmxa C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\result\result.cmxa C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppx_deriving\api\ppx_deriving_api.cmxa C:\\OCaml64\\home\\alexd\\.opam\\ocaml-variants.4.12.0+mingw64c\lib\ppx_deriving_yojson\ppx_deriving_yojson.cmxa .ppx/a4ea0d83c521725fd7b0167e93f2550b/dune__exe___ppx.cmx)
+$ (cd _build/default && .ppx/a4ea0d83c521725fd7b0167e93f2550b/ppx.exe -o output/DataTypes.pp.ml --impl output/DataTypes.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/default && .ppx/a4ea0d83c521725fd7b0167e93f2550b/ppx.exe -o output/Main.pp.ml --impl output/Main.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
