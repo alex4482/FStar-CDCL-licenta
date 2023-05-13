@@ -1,31 +1,9 @@
-module Main
+module OtherFunctions
 
 open DataTypes
-open FStar.List
-module O = FStar.Option
-open FStar.IO
-
-let test1 = [   [NotVar 1; Var 2]; 
-                [NotVar 1; NotVar 3];
-                [NotVar 2] ;
-                [Var 2; Var 3]
-            ]
-
-let test4_false = [
-    [NotVar 1];[ Var 1];
-]
-
-let test2 = [[Var 2; Var 1]; [Var 3]]
-
-let test3 : (res : formula )=[ [Var 1; Var 4];
-    [Var 1; NotVar 3; NotVar 8];
-    [ Var 1; Var 8; Var 12];    
-    [Var 2; Var 11];
-    [NotVar 7; NotVar 3; Var 9];
-    [NotVar 7; Var 8; NotVar 9];
-    [Var 7; Var 8; NotVar 10];
-    [Var 7; Var 10; NotVar 12]]
-
+open DataTypesFunctions
+open FStar.List.Tot
+module L = FStar.List.Tot
 
 
 let rec are_clause_vars_in_assignment (t : truth_assignment) (c : clause)
@@ -35,6 +13,11 @@ let rec are_clause_vars_in_assignment (t : truth_assignment) (c : clause)
             if length xs = 0
                 then is_variable_in_assignment t (get_literal_variable x)
                 else is_variable_in_assignment t (get_literal_variable x) && are_clause_vars_in_assignment t xs
+
+let lemma_test_20 (t : truth_assignment) ( c : clause) : Lemma
+    (requires are_clause_vars_in_assignment t c)
+    (ensures (forall (c2 : clause{forall (l : literal{L.contains l c2}). (L.contains l c)}). (are_clause_vars_in_assignment t c2)))
+    =()
 
 let rec add_uniq_vars_from_clause_to_list 
     (vars: list nat_non_zero {List.Tot.noRepeats vars /\ length vars > 0}) (c : clause) 
@@ -242,27 +225,35 @@ let rec lemma_test_11 ( vars : list nat_non_zero) ( t : truth_assignment) : Lemm
         lemma_test_10 vars t;
         ()
 
-let rec lemma_test_12 ( vars : list nat_non_zero) ( t : truth_assignment) : Lemma
-    (requires List.Tot.noRepeats vars
-        /\ (exists (n : nat_non_zero{List.Tot.contains n vars}). 
-            (is_variable_in_assignment t n = false /\ List.Tot.contains n vars
-                /\ (no_vars_in_t_outside_f' (remove_var_from_list vars n ) t))) )
-    (ensures length vars > length t)
-    = if length t = 0 then ()
-        else 
-            if is_variable_in_assignment t (List.Tot.hd vars) = false 
-            then let vars2 = remove_var_from_list vars (List.Tot.hd vars) in
-                assert(no_vars_in_t_outside_f' vars2 t);
-                lemma_test_9 vars2 t;
-                assert(length vars2 >= length t);
-                assert(length vars > length t);  
-                ()
-            else let new_t = (remove_variable_from_assignment t (List.Tot.hd vars)) in 
-                    let new_vars = (remove_var_from_list vars (List.Tot.hd vars)) in 
-                        assert((exists (n : nat_non_zero{List.Tot.contains n vars}). 
-            (is_variable_in_assignment new_t n = false /\ List.Tot.contains n new_vars
-                /\ (no_vars_in_t_outside_f' (remove_var_from_list new_vars n ) new_t))));
-                        lemma_test_12 new_vars new_t  
+// let rec lemma_test_12 ( vars : list nat_non_zero) ( t : truth_assignment) : Lemma
+//     (requires List.Tot.noRepeats vars
+//         /\ (exists (n : nat_non_zero{List.Tot.contains n vars}). 
+//             (is_variable_in_assignment t n = false
+//                 /\ (no_vars_in_t_outside_f' (remove_var_from_list vars n ) t))) )
+//     (ensures length vars > length t)
+//     = if length t = 0 then ()
+//         else 
+//             if is_variable_in_assignment t (List.Tot.hd vars) = false 
+//             then let vars2 = remove_var_from_list vars (List.Tot.hd vars) in
+//                 assert(no_vars_in_t_outside_f' vars2 t);
+//                 lemma_test_9 vars2 t;
+//                 assert(length vars2 >= length t);
+//                 assert(length vars > length t);  
+//                 ()
+//             else let new_t = (remove_variable_from_assignment t (List.Tot.hd vars)) in 
+//                     let new_vars = (remove_var_from_list vars (List.Tot.hd vars)) in 
+//                         // assert((exists (n : nat_non_zero{List.Tot.contains n new_vars}). 
+//                         //         (is_variable_in_assignment t n = false
+//                         //         /\ (no_vars_in_t_outside_f' (remove_var_from_list new_vars n ) t))));
+//                         assert((exists (n : nat_non_zero{List.Tot.contains n vars}). 
+//             (is_variable_in_assignment new_t n = false
+//                 /\ (no_vars_in_t_outside_f' (remove_var_from_list vars n ) new_t))));
+//                         assert(
+//                             (exists (n : nat_non_zero{List.Tot.contains n new_vars}). 
+//                                 (is_variable_in_assignment new_t n = false 
+//                                 /\ (no_vars_in_t_outside_f' (remove_var_from_list new_vars n ) new_t))));
+//                         lemma_test_12 new_vars new_t;
+//                         ()
 
 let lemma_test_2 (t : truth_assignment) ( vars : list nat_non_zero{length vars = 1}) : Lemma
    (requires List.Tot.noRepeats vars) 
@@ -336,16 +327,16 @@ let get_literal_value (t: truth_assignment) (l: literal {is_variable_in_assignme
         | NotVar _ ->  let var_info = get_var_from_assignment t v in
                             not var_info.value 
 
-let lemma_test_19 (t : truth_assignment) (n : nat_non_zero{is_variable_in_assignment t n}) : Lemma
-    (ensures (forall 
-                (other_t : truth_assignment {forall (v : variable_info{List.Tot.contains v t}). (List.Tot.contains v other_t)}). 
-                (((get_var_from_assignment t n).value = (get_var_from_assignment other_t n).value)))) = ()
+// let lemma_test_19 (t : truth_assignment) (n : nat_non_zero{is_variable_in_assignment t n}) : Lemma
+//     (ensures (forall 
+//                 (other_t : truth_assignment {forall (v : variable_info{List.Tot.contains v t}). (List.Tot.contains v other_t)}). 
+//                 (((get_var_from_assignment t n).value = (get_var_from_assignment other_t n).value)))) = ()
 
-let lemma_test_18 (t : truth_assignment) (l : literal) : Lemma
- (requires is_variable_in_assignment t (get_literal_variable l) = true)
- (ensures (forall 
-                (other_t : truth_assignment {forall (v : variable_info{List.Tot.contains v t}). (List.Tot.contains v other_t)}). 
-                (get_literal_value t l = get_literal_value other_t l))) = ()
+// let lemma_test_18 (t : truth_assignment) (l : literal) : Lemma
+//  (requires is_variable_in_assignment t (get_literal_variable l) = true)
+//  (ensures (forall 
+//                 (other_t : truth_assignment {forall (v : variable_info{List.Tot.contains v t}). (List.Tot.contains v other_t)}). 
+//                 (get_literal_value t l = get_literal_value other_t l))) = ()
 
 let rec get_values_from_clause  
         (t: truth_assignment)  
@@ -358,175 +349,123 @@ let rec get_values_from_clause
                     let xs = List.Tot.tl c in
                     (get_literal_value t x) :: get_values_from_clause t xs 
 
-let rec lemma_test_17 (t : truth_assignment) (c : clause) : Lemma
-    (requires are_clause_vars_in_assignment t c)
-    (ensures (forall (other_t : truth_assignment
-                        {forall (v : variable_info{List.Tot.contains v t}). (List.Tot.contains v other_t)}).
-                    (List.Tot.contains true (get_values_from_clause t c) = List.Tot.contains true (get_values_from_clause other_t c))))
-    = 
-        if length c = 1 
-            then ()
-            else lemma_test_17 t (List.Tot.tl c)
+// let rec lemma_test_17 (t : truth_assignment) (c : clause) : Lemma
+//     (requires are_clause_vars_in_assignment t c)
+//     (ensures (forall (other_t : truth_assignment
+//                         {forall (v : variable_info{List.Tot.contains v t}). (List.Tot.contains v other_t)}).
+//                     //(List.Tot.contains true (get_values_from_clause t c) = List.Tot.contains true (get_values_from_clause other_t c))
+//                     (get_values_from_clause t c = get_values_from_clause other_t c)
+//                     ))
+//     =   
+//         lemma_test_20 t c;
+//         if length c > 1
+//         then
+//             let xs = L.tl c in
+//             assert(length xs > 0);
+//             assert(are_clause_vars_in_assignment t xs);
+//             lemma_test_17 t xs
+//         else ()
 
 let get_clause_value (t: truth_assignment) (c:clause {are_clause_vars_in_assignment t c}) 
         = let ress = List.Tot.contains true (get_values_from_clause t c) in
         ress
 
-let lemma_test_15 (t : truth_assignment) (c : clause) : Lemma
-    (requires (are_clause_vars_in_assignment t c))
-    (ensures 
-         (forall (other_t : truth_assignment 
-            { forall (v : variable_info{List.Tot.contains v t}). (List.Tot.contains v other_t)}). 
-                (get_clause_value other_t c = get_clause_value t c)) )
-    = lemma_test_17 t c;
-        ()
+// let lemma_test_15 (t : truth_assignment) (c : clause) : Lemma
+//     (requires (are_clause_vars_in_assignment t c))
+//     (ensures 
+//          (forall (other_t : truth_assignment 
+//             { forall (v : variable_info{List.Tot.contains v t}). (List.Tot.contains v other_t)}). 
+//                 (get_clause_value other_t c = get_clause_value t c)) )
+//     = lemma_test_17 t c;
+//         ()
 
 let is_clause_false_yet (t: truth_assignment) (c: clause) : (res: bool{
     res = true ==> 
     ((are_clause_vars_in_assignment t c)
         /\ (get_clause_value t c) = false) 
-        /\ (forall (other_t : truth_assignment { forall (v : variable_info{List.Tot.contains v t}). (List.Tot.contains v other_t)}). 
-            (get_clause_value other_t c = false))
+        ///\ (forall (other_t : truth_assignment { forall (v : variable_info{List.Tot.contains v t}). (List.Tot.contains v other_t)}). 
+        //    (get_clause_value other_t c = false))
             }) 
     = if (are_clause_vars_in_assignment t c) = false
         then false
         else let ress = not (get_clause_value t c) in
-            lemma_test_15 t c;
+            //lemma_test_15 t c;
             ress
 
-let rec exists_false_clause_yet (f : formula{length f > 0 }) (t : truth_assignment) : (res : bool {
-        (res = true) <==> (exists (c : clause{List.Tot.contains c f}). (is_clause_false_yet t c))}) =
-    if length f = 1
-        then is_clause_false_yet t (List.Tot.hd f)
-        else (is_clause_false_yet t (List.Tot.hd f)) || (exists_false_clause_yet (List.Tot.tl f) t)
+///NEW FUNCTIONS FOR CDCL
 
-let is_partial_solution (f:formula { length f > 0}) (t: truth_assignment) : (res : bool {
-        (res = false) <==> (exists (c : clause{List.Tot.contains c f}). (is_clause_false_yet t c))})=
-    if length t = 0 
-        then true
-        else not (exists_false_clause_yet f t)// (List.Tot.existsb (is_clause_false_yet t) f)
-
-let is_solution 
-             (f: formula  { length f > 0 })
-            (t: truth_assignment {
-                ((length (get_vars_in_formula f)) = length t)
-                /\
-                vars_in_truth_result f t  
-                })
-    = is_partial_solution f t 
-
-let get_truth_from_result (r: result{ Sat? r = true}) = match r with 
-    | Sat t -> t
-
-let lemma_test_14 (f : formula) (t : truth_assignment) : Lemma 
-    (requires length f > 0 /\ is_partial_solution f t = false)
-    (ensures (forall (other_t : truth_assignment{
-        (forall (v : variable_info{List.Tot.contains v t}). (List.Tot.contains v other_t))
-    }). (is_partial_solution f other_t = false)) ) = ()
-
-let rec get_next_element 
-    (l : list nat_non_zero) 
-    ( t : truth_assignment {exists (n : nat_non_zero{List.Tot.contains n l}). 
-        (is_variable_in_assignment t n = false)}) : 
-    (res : nat_non_zero{ is_variable_in_assignment t res = false /\ List.Tot.contains res l})
-    = if not (is_variable_in_assignment t (List.Tot.hd l))
-        then List.Tot.hd l
-        else get_next_element (List.Tot.tl l) t
-
-let rec sat_bkt'    (f: formula { length f > 0 }) 
-                    (t: truth_assignment {(no_vars_in_t_outside_f f t) })///\ is_partial_solution f t })
-    : Tot (res: result {
-        (Sat? res = true ==> 
-            ((length (get_truth_from_result res) = length ( get_vars_in_formula f)) 
-            /\ (vars_in_truth_result f (get_truth_from_result res)) 
-            /\ ( is_solution f (get_truth_from_result res) = true)))
-    /\  
-    ((NotSat? res = true) ==> 
-           ( forall (whole_t: truth_assignment
-                { 
-                    (forall (v : variable_info {(List.Tot.contains v t)}). ((List.Tot.contains v whole_t)))
-                /\ are_variables_in_truth_assignment f whole_t 
-                /\ length whole_t =  length ( get_vars_in_formula f)}). 
-                    is_solution f whole_t = false))
-        })  
-       (decreases ((length (get_vars_in_formula f)) - (length t)))  = 
-    if is_partial_solution f t
-    then if are_variables_in_truth_assignment f t
+let rec is_clause_true_yet (t : truth_assignment) ( c : clause) : (res : bool)
+    = 
+        if length c > 1
         then 
-            let answer = Sat t in
-            lemma_test_11 (get_vars_in_formula f) t;
-            answer
+            let temp_res = is_clause_true_yet t (L.tl c) in
+                if is_variable_in_assignment t (get_literal_variable (L.hd c))
+                then if get_literal_value t (L.hd c) 
+                        then true
+                        else is_clause_true_yet t (L.tl c)
+                else is_clause_true_yet t (L.tl c)
         else
-            let newVariable = get_next_element (get_vars_in_formula f) t in
-            let new_var_info_false = {value=false; variable=newVariable} in
-            lemma_test_9 (get_vars_in_formula f) t;
-            lemma_test_12 (get_vars_in_formula f) t;
-            let newT = add_var_to_truth t new_var_info_false in
-                let res_1 = sat_bkt' f newT in
-                if NotSat? res_1 = true  
-                    then 
-                        let new_var_info_true = {value=true; variable=newVariable} in
-                        assert(( forall (whole_t: truth_assignment{ 
-                                    (forall (v : variable_info {(List.Tot.contains v newT)}). ((List.Tot.contains v whole_t)))
-                                    /\ are_variables_in_truth_assignment f whole_t 
-                                    /\ length whole_t =  length ( get_vars_in_formula f)}). 
-                                is_solution f whole_t = false));
-                        let newT2 = add_var_to_truth t new_var_info_true in
-                            let res_2 = sat_bkt' f newT2 in
-                            assert((NotSat? res_2 = true) ==> 
-                            (forall (b : bool). 
-                                ( forall (whole_t: truth_assignment{ 
-                                    (forall (v : variable_info {
-                                        (List.Tot.contains v (add_var_to_truth t {value=b; variable=newVariable}))}). 
-                                        ((List.Tot.contains v whole_t)))
-                                    /\ are_variables_in_truth_assignment f whole_t 
-                                    /\ length whole_t =  length ( get_vars_in_formula f)}). 
-                                is_solution f whole_t = false)));
+            if is_variable_in_assignment t (get_literal_variable (L.hd c))
+            then get_literal_value t (L.hd c)
+            else false
 
-                            assert(count_variables_occurrence t newVariable = 0 /\ List.Tot.contains newVariable (get_vars_in_formula f));
+let rec add_uniq_literals_from_clause_to_list 
+    (vars: list literal {List.Tot.noRepeats vars /\ length vars > 0}) (c : clause) 
+    : Tot (res: list literal {List.Tot.noRepeats res /\ length res > 0
+    /\ (forall (var : literal{ List.Tot.contains var c}). (List.Tot.contains var res))
+    /\ (forall (var : literal {List.Tot.contains var vars}). (List.Tot.contains var res))
+    /\ length res <= length vars + length c
+    /\ length res >= length vars
+    }) 
+        (decreases (length c)) =
+        let x = List.Tot.hd c in
+        let xs = List.Tot.tl c in
+        if length xs = 0
+            then if List.Tot.contains x vars 
+                    then vars
+                    else let new_list =  List.Tot.append [x] vars in
+                        new_list
+            else
+                    if List.Tot.contains x vars 
+                        then let final_list = add_uniq_literals_from_clause_to_list vars xs in
+                            assert(List.Tot.contains x vars);
+                            final_list
+                        else add_uniq_literals_from_clause_to_list (x :: vars) xs
 
-                            assert(forall(whole_t : truth_assignment{
-                                (forall (v : variable_info{List.Tot.contains v t}). (List.Tot.contains v whole_t))
-                                /\ are_variables_in_truth_assignment f whole_t
-                                /\ length whole_t = length (get_vars_in_formula f)
-                            }). ( is_variable_in_assignment whole_t newVariable));
-                            res_2
-                    else res_1
-    else 
-    let ress = NotSat in
 
-    assert((exists (c: clause {List.Tot.contains c f}). (is_clause_false_yet t c = true)));
+let rec get_literals_in_formula ( f : formula)
+    : Tot (lits : list literal {
+        length f > 0 ==> length lits > 0
+        /\ L.noRepeats lits
+        /\ (forall (cl : clause{List.Tot.contains cl f}). (forall (var : literal{List.Tot.contains var cl}). (List.Tot.contains var lits)))
+        /\ (length lits <= get_total_formula_var_count f)
+    }) = if length f = 0
+        then []
+        else
+        if length f = 1
+            then
+                let some_var =  ( List.Tot.hd (List.Tot.hd f)) in
+                add_uniq_literals_from_clause_to_list [some_var] (List.Tot.hd f)
+            else
+                let tl_lits = get_literals_in_formula (List.Tot.tl f) in
+                    let result = add_uniq_literals_from_clause_to_list tl_lits (List.Tot.hd f) in
+                    assert(get_total_formula_var_count f = 
+                       get_total_formula_var_count (List.Tot.tl f) + length (List.Tot.hd f));
+                    assert(length result <= length tl_lits + length (List.Tot.hd f));
+                    assert(length result >= length tl_lits);
+                    result
 
-    assert((exists (c: clause {List.Tot.contains c f}). 
-        (forall (other_t : truth_assignment{
-            forall (v : variable_info{List.Tot.contains v t}). (List.Tot.contains v other_t)
-        }). (is_clause_false_yet other_t c = true))));
-
-    assert(forall (other_t : truth_assignment
-                        {forall (v : variable_info{List.Tot.contains v t}). (List.Tot.contains v other_t)}).
-                    (is_partial_solution f other_t = false));
-    ress
-
-let lemma_test_13 (f : formula { length f > 0}): Lemma 
-    (ensures is_partial_solution f empty_assignment ) = ()           
-
-let sat_bkt (f : formula{length f > 0}) : Tot (res: result {
-            ((NotSat? res = true) ==> 
-                (forall (some_t: truth_assignment
-                    { vars_in_truth_result f some_t   
-                    /\ (length (get_vars_in_formula f)) = (length some_t)}). (is_solution f some_t ) = false)) 
-            /\
-             (Sat? res = true ==> vars_in_truth_result f (get_truth_from_result res) 
-                    /\ (length (get_truth_from_result res) = (length (get_vars_in_formula f))) 
-                    /\  ( is_solution f (get_truth_from_result res)))
-}) =
-    let t = empty_assignment in
-        lemma_test_13 f;
-        sat_bkt' f t
-
-let main = let res = sat_bkt test3 in
-                if Sat? res = true
-                    then let mess = "True" in
-                        print_string mess
-                    else let mess = "False" in 
-                         print_string mess
+let rec get_unassigned_literals_from_clause (c : clause) ( t : truth_assignment) : (res : list literal{
+    (forall (lit : literal{L.contains lit res}). (is_variable_in_assignment t (get_literal_variable lit) = false))
+})
+    = 
+    if length c = 1
+    then
+        if is_variable_in_assignment t (get_literal_variable (L.hd c))
+        then [] 
+        else [(L.hd c)]
+    else
+        let x = L.hd c in
+        if is_variable_in_assignment t (get_literal_variable x)
+        then get_unassigned_literals_from_clause (L.tl c) t
+        else x :: get_unassigned_literals_from_clause (L.tl c ) t
