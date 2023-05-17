@@ -24,10 +24,11 @@ let sat_cdcl'   (f: formula { length f > 0 })
     //                 is_solution f whole_t = false))
          })  
        (decreases ((length (get_vars_in_formula f)) - (length t)))  = 
+    let all_lits = get_literals_in_formula f in
     let new_t_1 = propagate f t level in
         if exists_conflict f new_t_1
         then 
-            if new_t_1 = empty_assignment || level = 0
+            if level = 0
             then NotSat
             else
             ///ALREADY HAVE LEMMA SOMEWHERE FOR IF_IS_SOLUTION_FOR_BIGGER_FORMULA THEN SMALLER FORMULA IS ALSO SAT
@@ -35,7 +36,13 @@ let sat_cdcl'   (f: formula { length f > 0 })
                 if exists_unassigned_literal new_f new_t_2 
                 then
                     let lit = get_unassigned_literal new_f new_t_2 in
-                    let new_t_3 = assign_literal lit new_t_2 new_level in
+                    let new_t_3 = assign_literal_true lit new_t_2 new_level in
+                        // assert((exists (l : literal). 
+                        // (   L.contains l all_lits 
+                        //     /\ is_variable_in_assignment (get_literal_variable l)
+                        //     /\ get_literal_variable l = get_literal_variable lit
+                        //     /\ get_literal_value new_t_3 l = false ))
+                        //     ==> (L.contains (negate_lit lit) all_lits));
                         sat_cdcl' new_f new_t_3 new_level
                 else 
                     Sat new_t_2
@@ -43,7 +50,7 @@ let sat_cdcl'   (f: formula { length f > 0 })
             if exists_unassigned_literal f new_t_1 
             then
                 let lit = get_unassigned_literal new_f new_t_2 in
-                let new_t_2 = assign_literal lit new_t_1 level in
+                let new_t_2 = assign_literal_true lit new_t_1 level in
                     sat_cdcl' f new_t_2 (level + 1)
             else Sat new_t_1
 

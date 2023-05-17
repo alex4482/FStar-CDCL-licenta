@@ -341,7 +341,9 @@ let get_literal_value (t: truth_assignment) (l: literal {is_variable_in_assignme
 let rec get_values_from_clause  
         (t: truth_assignment)  
         (c:clause {are_clause_vars_in_assignment t c}) :
-        (res : list bool) =
+        (res : list bool{
+            (exists (b : bool{L.contains b res}). (b)) <==> (exists (l : literal{L.contains l c}). (get_literal_value t l))
+        }) =
         if length c = 1
             then [(get_literal_value t (List.Tot.hd c))]
             else 
@@ -366,7 +368,9 @@ let rec get_values_from_clause
 //             lemma_test_17 t xs
 //         else ()
 
-let get_clause_value (t: truth_assignment) (c:clause {are_clause_vars_in_assignment t c}) 
+let get_clause_value (t: truth_assignment) (c:clause {are_clause_vars_in_assignment t c}) : (res : bool{
+    (res = false) <==> (forall (l : literal{L.contains l c}). (get_literal_value t l = false))
+})
         = let ress = List.Tot.contains true (get_values_from_clause t c) in
         ress
 
@@ -383,6 +387,7 @@ let is_clause_false_yet (t: truth_assignment) (c: clause) : (res: bool{
     res = true ==> 
     ((are_clause_vars_in_assignment t c)
         /\ (get_clause_value t c) = false) 
+        /\ (forall (l : literal{L.contains l c}). (get_literal_value t l = false))
         ///\ (forall (other_t : truth_assignment { forall (v : variable_info{List.Tot.contains v t}). (List.Tot.contains v other_t)}). 
         //    (get_clause_value other_t c = false))
             }) 
@@ -394,7 +399,9 @@ let is_clause_false_yet (t: truth_assignment) (c: clause) : (res: bool{
 
 ///NEW FUNCTIONS FOR CDCL
 
-let rec is_clause_true_yet (t : truth_assignment) ( c : clause) : (res : bool)
+let rec is_clause_true_yet (t : truth_assignment) ( c : clause) : (res : bool {
+    res <==> (exists (l : literal{L.contains l c}). (is_variable_in_assignment t (get_literal_variable l) /\ get_literal_value t l))
+})
     = 
         if length c > 1
         then 
@@ -414,6 +421,8 @@ let rec add_uniq_literals_from_clause_to_list
     : Tot (res: list literal {List.Tot.noRepeats res /\ length res > 0
     /\ (forall (var : literal{ List.Tot.contains var c}). (List.Tot.contains var res))
     /\ (forall (var : literal {List.Tot.contains var vars}). (List.Tot.contains var res))
+    /\ (forall (var : literal{L.contains var res = false}). ((L.contains var vars = false) && (L.contains var c = false )))
+    /\ (forall (l : literal{L.contains l res}). (L.contains l vars || L.contains l c))
     /\ length res <= length vars + length c
     /\ length res >= length vars
     }) 
@@ -432,28 +441,52 @@ let rec add_uniq_literals_from_clause_to_list
                             final_list
                         else add_uniq_literals_from_clause_to_list (x :: vars) xs
 
+let rec exists_literal_in_formula (f : formula) (l : literal) :
+    (res : bool{ 
+        ((res = true) <==> (exists(c : clause{L.contains c f}). (L.contains l c)) )
+        /\ ((res = false) <==> (forall (c : clause{L.contains c f}). (L.contains l c = false)))}) =
+    if length f = 0 then false
+    else
+        if L.contains l (L.hd f)
+        then true
+        else exists_literal_in_formula (L.tl f) l
 
 let rec get_literals_in_formula ( f : formula)
-    : Tot (lits : list literal {
-        length f > 0 ==> length lits > 0
-        /\ L.noRepeats lits
-        /\ (forall (cl : clause{List.Tot.contains cl f}). (forall (var : literal{List.Tot.contains var cl}). (List.Tot.contains var lits)))
+    : (lits : list literal { 
+         (forall (l : literal{L.contains l lits}). (exists_literal_in_formula f l)) 
+         /\ (length f > 0 ==> length lits > 0)
+         /\ (L.noRepeats lits)
+        /\ (forall (cl : clause{List.Tot.contains cl f}). 
+                (forall (var : literal{List.Tot.contains var cl}). (List.Tot.contains var lits)))
         /\ (length lits <= get_total_formula_var_count f)
+        // /\ (forall (l : literal {L.contains l lits}). 
+        //          ((exists (c : clause{L.contains c f}). (L.contains l c))))
     }) = if length f = 0
         then []
         else
         if length f = 1
             then
                 let some_var =  ( List.Tot.hd (List.Tot.hd f)) in
-                add_uniq_literals_from_clause_to_list [some_var] (List.Tot.hd f)
+                let ress = add_uniq_literals_from_clause_to_list [some_var] (List.Tot.hd f) in
+                assert((forall (l : literal{L.contains l ress}). (exists_literal_in_formula f l)) );
+                //assert((~ (exists (l : literal{L.contains l ress}). (exists (c : clause {L.contains c f}). (L.contains l c)))));
+                ress
             else
-                let tl_lits = get_literals_in_formula (List.Tot.tl f) in
-                    let result = add_uniq_literals_from_clause_to_list tl_lits (List.Tot.hd f) in
+                let xs = L.tl f in
+                let tl_lits = get_literals_in_formula xs in
+                    assert((forall (l : literal{L.contains l tl_lits}). (exists_literal_in_formula xs l)) );
+                    let ress = add_uniq_literals_from_clause_to_list tl_lits (List.Tot.hd f) in
                     assert(get_total_formula_var_count f = 
-                       get_total_formula_var_count (List.Tot.tl f) + length (List.Tot.hd f));
-                    assert(length result <= length tl_lits + length (List.Tot.hd f));
-                    assert(length result >= length tl_lits);
-                    result
+                       get_total_formula_var_count xs + length (List.Tot.hd f));
+                    assert(length ress <= length tl_lits + length (List.Tot.hd f));
+                    assert(length ress >= length tl_lits);
+                    assert((forall (l : literal {L.contains l tl_lits}). (exists_literal_in_formula f l)));
+                    assert((forall (l : literal {L.contains l (L.hd f)}). (exists_literal_in_formula f l)));
+                    assert(forall (l : literal {L.contains l ress}). (L.contains l tl_lits || L.contains l (L.hd f)));
+                    assert(forall (l : literal {L.contains l tl_lits || L.contains l (L.hd f)}). 
+                        (exists_literal_in_formula f l));
+                    assert((forall (l : literal {L.contains l ress}). ((exists_literal_in_formula f l))));
+                    ress
 
 let rec get_unassigned_literals_from_clause (c : clause) ( t : truth_assignment) : (res : list literal{
     (forall (lit : literal{L.contains lit res}). (is_variable_in_assignment t (get_literal_variable lit) = false))
@@ -469,3 +502,46 @@ let rec get_unassigned_literals_from_clause (c : clause) ( t : truth_assignment)
         if is_variable_in_assignment t (get_literal_variable x)
         then get_unassigned_literals_from_clause (L.tl c) t
         else x :: get_unassigned_literals_from_clause (L.tl c ) t
+
+let negate_lit (l : literal) : (res : literal {res <> l /\ get_literal_variable res = get_literal_variable l})
+    = if Var? l
+        then NotVar (get_literal_variable l)
+        else Var (get_literal_variable l)
+
+let add_literal_to_list (lit : literal) ( lits : list literal) : (res : list literal{
+    (forall (l : literal{L.contains l lits}). (L.contains l res)) 
+    /\ (length res = length lits + 1)
+    /\ (L.contains lit res)
+    /\ (forall (l : literal{L.contains l res = false}). (L.contains l lits = false))
+}) = let ress = lit :: lits in
+    ress
+
+let rec remove_literal_from_list (lits : list literal) (lit : literal{L.contains lit lits}) 
+    : (res : list literal {
+        (forall (l : literal{L.contains l lits /\ l <> lit}). (L.contains l res))
+        /\ (length res = length lits - 1)
+        /\ (forall (l : literal{L.contains l res}). (L.contains l lits))
+    })
+    = let x = L.hd lits in
+        if x = lit 
+        then L.tl lits
+        else
+            let temp_res = (remove_literal_from_list (L.tl lits) lit) in
+            let ress = add_literal_to_list x temp_res in
+            assert(forall (l : literal{L.contains l temp_res}). (L.contains l (L.tl lits)));
+            assert(ress = (x :: temp_res));
+            assert(forall (l : literal{L.contains l temp_res}). (L.contains l lits));
+            ress
+
+let assign_literal_true 
+    (l : literal) 
+    ( t : truth_assignment{ is_variable_in_assignment t (get_literal_variable l) = false}) 
+    ( guess_level : nat) 
+    : (res : truth_assignment{
+        (is_variable_in_assignment res (get_literal_variable l))
+        /\ (forall (v : variable_info{L.contains v t}). (L.contains v res))
+        /\ (get_literal_value res l = true)
+    })
+    =
+    let new_var_info = {value = (Var? l); variable= (get_literal_variable l) ; level=guess_level} in
+    new_var_info :: t
