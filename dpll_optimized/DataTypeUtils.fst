@@ -469,6 +469,8 @@ let rec are_variables_in_truth_assignment'
             then 
                 let new_t = remove_variable_from_assignment t (L.hd vars) in
                 let result = are_variables_in_truth_assignment' xs new_t in
+
+                 [@@inline_let]
                 let v = get_var_from_assignment t (L.hd vars) in
                     lemma_vars_in_truth_with_extra_variable_helper_1 new_t xs v;
                     lemma_vars_in_truth_with_extra_variable new_t xs v;
@@ -581,13 +583,29 @@ let is_partial_solution (f:formula { length f > 0}) (t: truth_assignment) : (res
         else not (exists_false_clause_yet f t)
 
 let is_solution 
-             (f: formula  { length f > 0 })
+            (f: formula  { length f > 0 })
             (t: truth_assignment {
                 ((length (get_vars_in_formula f)) = length t)
                 /\
                 all_variables_are_in_truth_assignment f t  
                 })
     = is_partial_solution f t 
+
+let t1_is_sublist_of_t2 
+    (t1 : truth_assignment)
+    (t2 : truth_assignment)
+    = 
+    (forall (v : variable_info {(List.Tot.mem v t1)}). ((List.Tot.mem v t2)))
+
+let t_cant_be_solution_for_f  
+    (f : formula {length f > 0})
+    (t : truth_assignment)
+    = 
+    ( forall (whole_t: truth_assignment{ 
+                t1_is_sublist_of_t2 t whole_t
+                /\ are_variables_in_truth_assignment f whole_t 
+                /\ length whole_t =  length ( get_vars_in_formula f)}). 
+             (is_solution f whole_t = false)) 
 
 let get_truth_from_result (r: result{ Sat? r = true}) = match r with 
     | Sat t -> t
@@ -735,7 +753,6 @@ let rec get_lits_in_formula (f : formula )
                     assert(length result >= length tl_vars);
                     assert(forall (l : literal{L.mem l tl_vars}). (is_lit_in_formula f l));
                     assert(forall (l : literal{L.mem l (L.hd f)}). (is_lit_in_formula f l));
-                    //assert(forall (l : literal{L.mem l result}). (L.mem tl_vars \/ L.mem (L.hd f)));
                     assert(forall (l : literal{L.mem l result}). (is_lit_in_formula f l));
                     assert(L.noRepeats result);
                     assert(length result > 0);

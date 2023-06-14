@@ -12,39 +12,90 @@ open FStar.List.Tot
 module L = FStar.List.Tot
 module NT = FStar.List
 
-let add_lit_to_clause (c : clause) (l : literal) 
-    : (res : clause {
-        L.mem l res 
-        /\ (forall (l2  :literal {L.mem l2 c}). (L.mem l2 res))})
-    = l :: c
 
 let spaceSeparator = list_of_string " "
-let spaceString = " "
 let minusChar = hd (list_of_string "-")
 let pChar = hd (list_of_string "p")
 
-val powx : x:nat -> n:nat -> Tot nat
-let rec powx x n =
+let x0 = L.hd (list_of_string "0")
+let x1 = L.hd (list_of_string "1")
+let x2 = L.hd (list_of_string "2")
+let x3 = L.hd (list_of_string "3")
+let x4 = L.hd (list_of_string "4")
+let x5 = L.hd (list_of_string "5")
+let x6 = L.hd (list_of_string "6")
+let x7 = L.hd (list_of_string "7")
+let x8 = L.hd (list_of_string "8")
+let x9 = L.hd (list_of_string "9")
+
+
+
+
+let rec multiply (x1 : nat) (x2 : nat) : (res : nat {res > 0 <==> (x1 > 0 /\ x2 > 0)})
+    = 
+    if x1 = 0 || x2 = 0 then 0
+    else x2 + multiply (x1 - 1) x2
+
+let rec powx (x:nat) (n:nat) : (res : nat {x > 0 ==> res > 0})=
+    if x = 0 then 0 else
   match n with
   | 0 -> 1
-  | _ -> op_Multiply x (powx x (n - 1))
+  | _ -> 
+        let temp = powx x (n - 1) in
+        assert(temp > 0);
+        multiply x (powx x (n - 1))
 
-val stringToInt : list char -> ML nat
-let rec stringToInt (str: list char) = 
-    if length str = 0
-        then 
-            0
+let rec get_index_in_list (#a : eqtype ) (l : list a) (x : a {L.mem x l}) : (res : nat) =
+    let h = L.hd l in
+    if h = x then 0
+    else 1 + get_index_in_list (L.tl l) x
+
+
+let check_var_string ( l : list char) =
+    let res = L.mem x1 l
+                || L.mem x2 l 
+                || L.mem x3 l 
+                || L.mem x4 l 
+                || L.mem x5 l 
+                || L.mem x6 l 
+                || L.mem x7 l
+                || L.mem x8 l
+                || L.mem x9 l    in
+    res
+
+let char_to_int (c : char {L.mem c (list_of_string "0123456789") }) : (res : nat {
+    res > 0 <==> check_var_string [c]
+}) =
+    let res = get_index_in_list (list_of_string "0123456789") c in
+    res
+
+let rec string_to_int_helper (str: list char { length str > 0}) : ML (res : nat {
+    check_var_string str ==> res > 0
+})= 
+    let currentChar = hd str in
+        if L.mem currentChar (list_of_string "0123456789") = false
+        then failwith "variable contains invalid character"
         else
-            let remainingChars = tl str in
-                let powerOf10 = powx 10 (length remainingChars) in
-                    let lesserDigitsNumber = stringToInt remainingChars in
-                        assert(lesserDigitsNumber >= 0);
-                        let currentChar = hd str in
-                            let currentDigit = (int_of_char currentChar) in // - (int_of_char (hd (list_of_string "0"))) 
-                                assert(currentDigit >= 0);
-                                (op_Multiply currentDigit powerOf10) + lesserDigitsNumber
+            let currentDigit = char_to_int currentChar in
+                if length str = 1
+                then char_to_int currentChar
+                else
+                    let remainingChars = tl str in
+                    let powerOf10 = powx 10 (length remainingChars) in
+                    let lesserDigitsNumber = string_to_int_helper remainingChars in
+                    assert(powerOf10 > 0);
+                    let c_digit_with_zeros = multiply currentDigit powerOf10 in
+                    assert((powerOf10 > 0 /\ currentDigit > 0) ==> c_digit_with_zeros > 0);
+                    let ress = c_digit_with_zeros + lesserDigitsNumber in
+                    assert(check_var_string [currentChar] ==> currentDigit > 0);
+                    assert(currentDigit > 0 ==> c_digit_with_zeros > 0);
+                    ress
 
-
+let string_to_int (str: list char { 
+    length str > 0
+    /\ check_var_string str
+}) : ML (res : nat {res > 0})= 
+    string_to_int_helper str
 
 val getNumberOfClauses : fd_read -> ML( int & fd_read)
 let rec getNumberOfClauses (fileStream: fd_read)  = 
@@ -59,8 +110,11 @@ let rec getNumberOfClauses (fileStream: fd_read)  =
                         let lineParts = String.split spaceSeparator line in
                         let numberOfClausesStr = NT.last lineParts in
                         let numberOfVariables = NT.last (NT.init lineParts) in
-                        let numberOfClausesInt = stringToInt (list_of_string numberOfClausesStr) in
-                            numberOfClausesInt, fileStream 
+                        if check_var_string (list_of_string numberOfClausesStr) = false
+                        then failwith "number of clauses must be a number"
+                        else
+                            let numberOfClausesInt = string_to_int (list_of_string numberOfClausesStr) in
+                                numberOfClausesInt, fileStream 
                     else  
                         getNumberOfClauses fileStream 
     with 
@@ -75,11 +129,23 @@ let createVar (varString: string) =
         if headList = minusChar
             then
                 let varName = string_of_list ( tl charsList) in
-                    let var_integer = stringToInt (tl charsList) in
-                    NotVar (var_integer + 1)
+                    if check_var_string (tl charsList)
+                    then
+                        let var_integer = string_to_int (tl charsList) in
+                        NotVar var_integer
+                    else failwith "wrong variable input. only non null integers."
             else
-                let var_integer = stringToInt charsList in
-                Var (var_integer + 1)
+                if check_var_string charsList
+                then
+                    let var_integer = string_to_int charsList in
+                    Var var_integer
+                else failwith "wrong variable input. only non null integers."
+
+let add_lit_to_clause (c : clause) (l : literal) 
+    : (res : clause {
+        L.mem l res 
+        /\ (forall (l2  :literal {L.mem l2 c}). (L.mem l2 res))})
+    = l :: c
 
 val createClause : list string -> ML clause
 let rec createClause (variables: list string) = 

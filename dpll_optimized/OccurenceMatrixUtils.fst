@@ -110,6 +110,8 @@ let rec get_occurence_matrix_helper
                 (exists (oc_v : occurence_vector{L.mem oc_v ress}). (oc_v.lit = l))));
 
             assert(L.mem new_oc_v ress);
+
+            [@@inline_let]
             let h = L.hd lits in
             assert(new_oc_v.lit = h);
             assert(L.mem h lits);
@@ -262,8 +264,6 @@ let rec get_clauses_with_new_lits
                 assert((forall (c : clause {L.mem c f /\ (L.mem c ress = false)}). (any_lit_from_list_in_clause c lits = false)));
                 ress
 
-
-
 let is_partial_solution_optimized 
     (f : formula { length f > 0}) 
     (pre_dpll_t : truth_assignment { 
@@ -280,9 +280,7 @@ let is_partial_solution_optimized
         /\ L.mem (get_literal_variable new_l) (get_vars_in_formula f)
         /\ is_variable_in_assignment pre_dpll_t (get_literal_variable new_l)
         /\ get_literal_value pre_dpll_t new_l
-
         /\ t = (unit_clause_propagation f pre_dpll_t new_l )._1 
-
         /\ pre_dpll_t = add_var_to_truth (L.tl pre_dpll_t) {value = Var? new_l ; variable = (get_literal_variable new_l)}
     })
     (new_lits : list literal{
@@ -290,8 +288,7 @@ let is_partial_solution_optimized
         length new_lits > 0
         /\ ((forall (l : literal {L.mem l new_lits}). 
                 (is_variable_in_assignment (L.tl pre_dpll_t) (get_literal_variable l) = false
-                /\ 
-                is_variable_in_assignment t (get_literal_variable l))) )
+                /\ is_variable_in_assignment t (get_literal_variable l))) )
         /\ (forall (l : literal {
                 is_variable_in_assignment t (get_literal_variable l)
                 /\ (L.mem l (negate_lits_list new_lits) = false) 
@@ -317,7 +314,6 @@ let is_partial_solution_optimized
         then true
         else
             let smaller_f = get_clauses_with_new_lits f oc_matrix (negate_lits_list new_lits) in
-                let smaller_length = length smaller_f in
                 let not_res = exists_false_clause_yet smaller_f t in
 
                 assert(forall (var : variable_info{L.mem var pre_dpll_t}). (L.mem var t));

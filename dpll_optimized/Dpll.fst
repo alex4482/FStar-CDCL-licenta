@@ -157,22 +157,12 @@ let dpll (f : formula{length f > 0}) : Tot (res: result {
                 if NotSat? res_1 = true  
                 then 
                     let new_var_info_true = {value=true; variable=newVariable} in
-                        assert(( forall (whole_t: truth_assignment{ 
-                                (forall (v : variable_info {(List.Tot.mem v newT)}). ((List.Tot.mem v whole_t)))
-                                /\ are_variables_in_truth_assignment f whole_t 
-                                /\ length whole_t =  length ( get_vars_in_formula f)}). 
-                            is_solution f whole_t = false));
+                        assert(t_cant_be_solution_for_f f newT);
                     let newT2 = add_var_to_truth t new_var_info_true in
                     let res_2 = dpll' f newT2 oc_matrix in
                         assert((NotSat? res_2 = true) ==> 
                         (forall (b : bool). 
-                            ( forall (whole_t: truth_assignment{ 
-                                (forall (v : variable_info {
-                                    (List.Tot.mem v (add_var_to_truth t {value=b; variable=newVariable}))}). 
-                                    ((List.Tot.mem v whole_t)))
-                                /\ are_variables_in_truth_assignment f whole_t 
-                                /\ length whole_t =  length ( get_vars_in_formula f)}). 
-                            is_solution f whole_t = false)));
+                                (t_cant_be_solution_for_f f (add_var_to_truth t {value=b; variable=newVariable})) ));
 
                         assert(count_variables_occurrence t newVariable = 0 /\ List.Tot.mem newVariable (get_vars_in_formula f));
 
@@ -181,7 +171,28 @@ let dpll (f : formula{length f > 0}) : Tot (res: result {
                             /\ are_variables_in_truth_assignment f whole_t
                             /\ length whole_t = length (get_vars_in_formula f)
                         }). ( is_variable_in_assignment whole_t newVariable));
+                        
+                        assert(
+                            (Sat? res_2 = true ==> 
+                                ((length (get_truth_from_result res_2) = length ( get_vars_in_formula f)) 
+                                /\ (all_variables_are_in_truth_assignment f (get_truth_from_result res_2)) 
+                                /\ ( is_solution f (get_truth_from_result res_2) = true)))
+                        ); 
+                        assert( ((NotSat? res_2 = true) ==> t_cant_be_solution_for_f f t) );
+
                         res_2
-                else res_1
+                else 
+                    let ress = res_1 in 
+                    assert(Sat? ress);
+                    assert(
+                        (Sat? ress = true ==> all_variables_are_in_truth_assignment f (get_truth_from_result ress) 
+                            /\ (length (get_truth_from_result ress) = (length (get_vars_in_formula f))) 
+                            /\  ( is_solution f (get_truth_from_result ress)))
+                    );
+                    assert(all_variables_are_in_truth_assignment f (get_truth_from_result ress) 
+                            /\ (length (get_truth_from_result ress) = (length (get_vars_in_formula f))) 
+                            /\  ( is_solution f (get_truth_from_result ress))
+                    );
+                    ress
 
 
