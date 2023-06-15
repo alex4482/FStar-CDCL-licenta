@@ -1,36 +1,161 @@
 \chapter{Detalii de implementare}
 
 
-\section{Dividerea pe module?}
+\section{Despre FStar}
 
-rolul fiecarui fisier + cea mai importanta functie de acolo?
-
-link catre fisiere de input?
-
-\section{despre tipurile de date}
+Limbajul F* este un limbaj de programare orientat pe demonstratii ce poate fi folosit pentru uz general. Printre aspectele acestui limbaj se numara si faptul ca prezinta suport pentru programare functionala. De asemenea, este proiectat sa faca verificare formala a codului, astfel orice programator poate sa adauge functiilor specificatii in forma de pre-conditii, post-conditii, invarianti, pentru a putea asigura completitudinea codului.
 
 
-\section{cum functioneaza?}
 
 despre asserturi, putin cod efectiv, multe lemme/asserturi
 
 compara cate linii is in .ml fata de .fst
 
 
-\section{despre tipurile de date simple}
+\section{Structurile de date folosite}
+
+Pentru acest proiect am ales proiectarea unor structuri de date si colectii simple, pentru care au fost create functii ce implementeaza operatii generice.
+
+Conform definitiei, o formula este o multime de clauze, astfel implementarea are forma unei liste inlantuite de clauze.
+
+// adauga linia cu font fain formula = list clause
+
+O clauza, conform definitiei este o multime de literali, astfel este structurata ca o lista inlantuita de literali
+
+//adauga linia cu font fain type clause = list literal
+
+\newpage
+
+Un literal reprezinta o variabila a carui valoare de adevar poate fi negata, motiv pentru care tipul de data 'literal' este creat astfel, folosind 2 constructori 'Var' pentru a evidentia ca nu se neaga valoarea de adevar a variabilei, si 'NotVar' pentru a arata negatia variabilei.
+
+//type literal = 
+	| Var nat-non-zero
+	| NotVar nat-non-zero
+	
+Doi literali, 'Var x' si 'NotVar x' sunt considerati a nu fi egali, insa au variabilele egale.
+	
+Variabilele sunt reprezentate folosind numere naturale nenule, deoarece un format des intalnit al datelor de intrare pentru aceasta problema si care s-a considerat la conceperea proiectului reprezentau literalii folosind numere intregi nenule. Am ales literalii sa fie reprezentati prin 2 constructori alaturi de numere intregi strict pozitive pentru a evita verificari repetate in cod cu privire la semnul unei variabile oarecare si pentru a se putea face usor distinctia intre tipurile de literali.
+
+//type nat-non-zero = x : nat {x > 0}
+
+
+Pentru matricea de aparitie a clauzelor si literalilor, am folosit o structura de date intermediara care reprezinta o linie a matricei si este formata dintr-o pereche de 2 elemente, un literal si o lista inlantuita de clauze:.
+
+//type occurence-vector = {lit : literal ; clauses : list clause}
+
+Conditia acestui tip de date este ca lista 'clauses' trebuie sa contina toate clauzele in care apare literalul 'lit' din formula primita la inceperea programului, invariant care a fost scris astfel:
+//invariantul
+
+Matricea in sine este o lista inlantuite de 'occurence-vector', si trebuie mereu sa respecte conditia ca nu exista 2 elemente in lista a caror membrul 'lit' sa fie egal ca si valoare.
+
+//type occurence-matrix = list occurence-vector
+
+
+Rezultatul functiei ce verifica satisfiabilitatea unei formule este in sine un o structura de date simpla creata pentru aceasta problema, reprezentata prin 2 constructori, unul pentru situatia in care formula e nesatisfiabila si unul care contine o posibila combinatie de variabile pozitive si valori booleene ce reprezinta o solutie valida pentru formula. 
+
+//type result = Sat t | Unsat
+
+In aceasta lucrare, se va referi la o combinatie de variabile pozitive si valori booleene prin termenul 'truth-assignment' prescurtat 't' sau 'tau'.
+
+Acest tip de data 'truth\_assignment' reprezinta o lista inlantuita de elemente, structuri formate din doi parametri, unul 'value' ce reprezinta valoarea unei variabile si 'var' ce reprezinta in sine variabila.
+
+//type variable-info = \{value : bool ; var : nat\_not\_zero\}
+
+//type truth\_assignment = x : list variable\_info \{{truth\_assignment\_condition x\}
+
+
+Acest 'truth\_assignment' trebuie sa respecte conditia ca nu exista 2 elemente in lista care sa aibe aceeasi valoare a membrului 'var'. Invariantul a fost scris astfel simplificand conditia, si anume ca membrul 'var' al elementului din capul listei trebuie sa nu apara in oricare alt element din lista, iar daca submultimea 'tail\_t' formata din toate elementele lui 't' exceptia capului listei trebuie sa respecte aceeasi proprietate.
+
+//invariantul
+
+Structurile de date au fost alese a fi simple in detrimentul eficientei vitezei de executie a programului, pentru a putea analiza dificultatea si complexitatea mentinerii corectitudinii in implementarrea unui algoritm complet in limbajul F*. 
+
+
+
+\section{Modulele ce alcatuiesc programul}
+
+Separarea programului pe mai multe fisiere s-a realizat pentru a usura dezvoltarea si modificarea codului in etapa implementarii. De asemenea, orice schimbare intr-un fisier rezulta in re-verificarea acestuia la momentul compilarii, proces care devine cu atat mai indelungat cu cat fisierul prezinta mai multe functii si demonstratii complexe.
+
+Astfel modulele acestui program sunt:
+
+DataTypes - fisier unde s-au definit toate structurile de date explicate anterior, invariantul pentru cele ce aveau nevoie de unul, si anumite functii ajutatoare pentru a manipula tipurile de date tip colectii demonstrand in acelasi timp corectitudinea operatiilor efectuate pe colectiile respective. 
+
+Un exemplu de astfel de functie ar fi metoda
+'add\_var\_to\_truth\_assignment', al carei simplu scop este de a adauga un nou element in colectia 'truth\_assignment', insa care trebuie sa poata respecta urmatoarea post\_conditie:
+
+//exemplu post-conditie
+
+
+Modulul 'DataTypeUtils' contine un numar considerabil de metode ajutatoare, folosite in mai multe alte module ale proiectului si care trebuie deci sa fie disponibile intr-un singur loc. Printre aceste metode apar:
+\begin{itemize}
+	\item  functii de procesesare a parametrilor primiti;
+	
+	ex: \textit{get\_clause\_value }- returneaza valoarea de adevar a unei clauze considerand un 'truth\_assignment' primit ca parametru;
+	
+	\item \textit{lemme} care ajuta la asigurarea si demonstrarea corectitudinii programului;
+	
+	ex: \textit{lemma\_no\_vars\_in\_t\_outside\_f\_length\_compare} folosita pentru a arata ca daca un 'truth\_assignment' nu contine nici o variabila care nu este prezenta in formula 'f', atunci sigur lungimea variabilei 't' este mai mica sau egala cu numarul variabilelor distincte ce apar in formula 'f';
+	
+	//exemplu
+	
+	\item pre/post-conditii importante si relevante demonstrarii corectitudinii salvate in variabile globale, pentru a reduce cantitatea de cod repetat si pentru a putea generaliza functiile la nivel inalt, avand posibilitatea in viitor de a optimiza aspecte ale programului precum structurile de date, pentru care ar trebui modificate doar implementarea metodelor ce proceseaza aceste structuri;
+	
+	ex: \textit{t\_cant\_be\_solution\_for\_f}, folosit ca post-conditie care enunta ca orice 'truth\_assignment' ce contine toate variabilele formulei 'f' si pentru care parametrul 't' este o sub-multime a sa, nu este o solutie valida pentru 'f';
+	
+	//exemplu
+	
+	
+	\item predicate, functii care evalueaza daca anumiti parametrii respecta o anumita proprietate
+	
+	ex: \textit{is\_solution}, desi simplu, este unul din cei mai importanti predicati ai programului
+	
+	//exemplu
+	
+\end{itemize}
+
+
+Modulul DpllPropagation contine putine metode insa importante pentru demonstrate si dificil la randul lor de specificat si verificat. Aceste functii se ocupa cu pasul de propagare a clauzelor 'unit' din algoritmul DPLL.
+
+O mica parte insa cea mai importanta din specificarea metodei principale este:
+//aseaza mai frumos
+!!!
+ t1\_is\_sublist\_of\_t2 t (fst res)
+	/\ ((t\_cant\_be\_solution\_for\_f f t) <==> ( t\_cant\_be\_solution\_for\_f f (fst res)) )
+	/\ length res.\_1 >= length t
+	
+Post-conditiile enunta urmatoarele: 
+\begin{itemize}
+	\item  faptul ca tot ce e inclus in 'tau' primit ca parametru trebuie sa fie inclus si in 'tau' trimis ca rezultat; 
+	
+	\item lungimea 'tau'-ului rezultat trebuie sa fie macar egala cu lungimea 'tau'-ului primit, lucru care ajuta la asigurarea terminarii programului;
+	
+	\item 'tau'-ul primit ca parametru nu poate fi solutie pentru formula 'f' daca si numai daca 'tau'-ul rezultat nu poate fi solutie
+\end{itemize}
+
+Modulul 'OccurenceMatrix' contine functii necesare crearii, procesarii si accesarii matricei de aparitie a literalilor in clauzele formulei si de asemenea implementarea optimizata pentru metoda ce verifica daca un 'tau' oarecare este solutie partiala pentru formula data.
+
+Modulul 'Dpll' contine functia principala ce primeste o formula si ofera un rezultat, unde se specifica si verifica legatura intre valoarea rezultatului si formula.
+
+//exemplu cu post-conditia dpll
+
+Modulul 'InputFileParser' a fost conceput pentru a putea folosi formule diverse de diferite dimensiuni prin parsarea unor fisiere de intrare ce respecta un anumit format.
+
+//pune link in footer la site cu input files
+
+ Modulul 'ConvertorToString' este folosit pentru a converti orice obiect creat de program intr-un sir de caractere si mai ales pentru a se afisa rezultatul pe ecran sub o forma usoara de citit si inteles.
 
 
 \section{proofness / soundness / completeness / etc..}
 
 
-\section{Metrici orientative? / poate in concluzie?}
+\section{Metrici orientative}
 
 timp sa returneze sat
 
 timp sa dea unsat cam mult
 
 
-
+laptop specs
 500 secunde sa compileze, verifice si extraga cod pt toate fisierele
 
 datatypes - 8 secunde
