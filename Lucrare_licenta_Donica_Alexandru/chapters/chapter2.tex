@@ -5,9 +5,48 @@
 
 Limbajul F* este un limbaj de programare orientat pe demonstratii ce poate fi folosit pentru uz general. Printre aspectele acestui limbaj se numara si faptul ca prezinta suport pentru programare functionala. De asemenea, este proiectat sa faca verificare formala a codului, astfel orice programator poate sa adauge functiilor specificatii in forma de pre-conditii, post-conditii, invarianti, pentru a putea asigura completitudinea codului.
 
+\section{Completitudinea, corectitudinea si terminarea programului}
+
+\subsection{Completitudinea programului}
+
+Este dovedita completitudinea algoritmului DPLL pentru formula in forma normala conjunctiva (CNF), asa cum este el descris in Capitolul 1.
+
+Singura optimizare a algoritmului DPLL care a fost implementata se leaga de verificarea existentei unei clauze false la fiecare pas recursiv dupa etapa de 'unit\_propagation' si asignarea unei valori unui literal necunoscut. Mai exact, la fiecare pas avem o lista de literali de lungime cel putin 1 care au fost adaugati la solutie, dar acesti literali noi nu schimba valoarea clauzelor care nu contin nici unul din literalii din lista.
+
+Astfel aceasta optimizare se foloseste de o matrice de aparitie pentru fiecare literal din formula cate o lista cu toate clauzele in care apare respectivul literal. Se intersecteaza clauzele in care apar toti acesti literali asignati la pasul curent, iar cautarea unei clauze false se face doar peste aceasta multime, in loc de intreaga formula.
+
+\subsection{Corectitudinea programului}
+
+Pentru verificarea specificatiilor introduse de programator, se foloseste un SMT solver 
+
+//ADAUGA REF LA SMT SOLVER. 
+
+Cu toate acestea, unele conditii pot fi prea dificile de demonstrat intr-un punct anume al programului, unul din motivele pentru care limbajul F* ofera la dispozitia programatorilor  instructiuni ce simplifica misiunea de a demonstra si verifica proprietati si conditii scrise in program. De asemenea, in cadrul acestui proiect s-au folosit 'Lemme' pentru demonstrarea unor proprietati intre diferite tipuri de date ce respecta anumite conditii, si de asemenea instructiuni care ajuta 'SMT solver-ul' spunandu-i sa demonstreze intai proprietati intermediare.
+
+//exemplu lemma si assert si la ce au ajutat a demonstra
+
+Exemple asemanatoare se vor gasi si in sectiunile ce urmeaza.
+
+Dupa verificarea unui fisier '.fst' se va extrage, in proiectul acesta in fisiere tipice limbajului Ocaml, codul ce este folosit la formarea rezultatului si este eliminat codul ce ajuta la specificatii si demonstratiile unor proprietati. Cu cat validarile devin mai complexe, cu atat se poate observa diferenta mare de linii de cod dintre fisierele '.fst' si cele '.ml'.
+
+//exemplu raportul dintre nr lini
+
+\subsection{Terminarea programului}
+
+Cele mai importante proprietati pe care le respecta aceast 'SAT solver' sunt completitudinea algoritmului, corectitudinea implementarii si siguranta ca programul se va termina si va produce un rezultat.
+
+Terminarea programului si producerea unui rezultat trebuie sa fie o certitudine, indiferent de valoarea rezultatului. Limbajul FStar poate verifica, daca este specificat acest lucru, daca o functie/un program se va termina si va produce un rezultat indiferent de parametrii primiti. De asemenea poate verifica daca programul/functia ar produce acelasi rezultat daca ar fi apelata de mai multe ori cu aceeiasi parametrii.
+
+Programatorului i se ofera posibilitatea de a adnota functii folosind cuvantul "Tot" pentru a asigura ca la momentul compilarii se va incerca si demonstrarea faptului ca fiecare functie, mai ales cele recursive, se termina, produc un rezultat si mereu acelasi rezultat pentru aceleasi argumente. 
+
+//exemplu 'Tot'
+
+Toate metodele din modulele ce ajuta la formarea rezultatului algoritmului DPLL sunt 'functii totale', fie folosind adnotarea 'Tot' in signatura functiei, fie prin absenta oricarei adnotari, efectul 'Tot' fiind cel implicit. Succesul compilarii programului inseamna ca acesta se termina si fiecare input are asociat un singur rezultat. In cazul in care o formula are mai multe solutii, modul in care a fost implementat algoritmul va decide care din acele solutii se va returna.
+
+
 \section{Structurile de date folosite}
 
-Pentru acest proiect am ales proiectarea unor structuri de date si colectii simple, pentru care au fost create functii ce implementeaza operatii generice.
+Pentru acest proiect s-a ales proiectarea unor structuri de date si colectii simple, pentru care au fost create functii ce implementeaza operatii generice.
 
 Conform definitiei, o formula este o multime de clauze, astfel implementarea are forma unei liste inlantuite de clauze.
 
@@ -16,8 +55,6 @@ Conform definitiei, o formula este o multime de clauze, astfel implementarea are
 O clauza, conform definitiei este o multime de literali, astfel este structurata ca o lista inlantuita de literali
 
 //adauga linia cu font fain type clause = list literal
-
-\newpage
 
 Un literal reprezinta o variabila a carui valoare de adevar poate fi negata, motiv pentru care tipul de data 'literal' este creat astfel, folosind 2 constructori 'Var' pentru a evidentia ca nu se neaga valoarea de adevar a variabilei, si 'NotVar' pentru a arata negatia variabilei.
 
@@ -32,7 +69,7 @@ Variabilele sunt reprezentate folosind numere naturale nenule, deoarece un forma
 //type nat-non-zero = x : nat {x > 0}
 
 
-Pentru matricea de aparitie a clauzelor si literalilor, am folosit o structura de date intermediara care reprezinta o linie a matricei si este formata dintr-o pereche de 2 elemente, un literal si o lista inlantuita de clauze:.
+Pentru matricea de aparitie a clauzelor si literalilor, s-a folosit o structura de date intermediara care reprezinta o linie a matricei si este formata dintr-o pereche de 2 elemente, un literal si o lista inlantuita de clauze:.
 
 //type occurence-vector = {lit : literal ; clauses : list clause}
 
@@ -107,18 +144,19 @@ Modulul 'DataTypeUtils' contine un numar considerabil de metode ajutatoare, folo
 \end{itemize}
 
 
-Modulul DpllPropagation contine putine metode insa importante pentru demonstrate si dificil la randul lor de specificat si verificat. Aceste functii se ocupa cu pasul de propagare a clauzelor 'unit' din algoritmul DPLL.
+Modulul DpllPropagation conține puține metode însă importante pentru demonstrate si dificil la rândul lor de specificat si verificat. Aceste funcții se ocupă cu pasul de propagare a clauzelor 'unit' din algoritmul DPLL.
 
-O mica parte insa cea mai importanta din specificarea metodei principale este:
-//aseaza mai frumos
-!!!
+O mica parte însa cea mai importanta din specificarea metodei principale este:
+
+//aseaza exemplul mai frumos
+
  t1\_is\_sublist\_of\_t2 t (fst res)
 	/\ ((t\_cant\_be\_solution\_for\_f f t) <==> ( t\_cant\_be\_solution\_for\_f f (fst res)) )
 	/\ length res.\_1 >= length t
 	
-Post-conditiile enunta urmatoarele: 
+Post-condițiile enunță următoarele: 
 \begin{itemize}
-	\item  faptul ca tot ce e inclus in 'tau' primit ca parametru trebuie sa fie inclus si in 'tau' trimis ca rezultat; 
+	\item  faptul ca tot ce e inclus in 'tau' primit ca parametru trebuie sa fie existent si in 'tau' trimis ca rezultat; 
 	
 	\item lungimea 'tau'-ului rezultat trebuie sa fie macar egala cu lungimea 'tau'-ului primit, lucru care ajuta la asigurarea terminarii programului;
 	
@@ -138,15 +176,9 @@ Modulul 'InputFileParser' a fost conceput pentru a putea folosi formule diverse 
  Modulul 'ConvertorToString' este folosit pentru a converti orice obiect creat de program intr-un sir de caractere si mai ales pentru a se afisa rezultatul pe ecran sub o forma usoara de citit si inteles.
 
 
-\section{proofness / soundness / completeness / etc..}
 
 
-Pentru verificarea specificatiilor introduse de programator, se foloseste un SMT solver//ADAUGA REF LA SMT SOLVER. Cu toate acestea, unele conditii pot fi prea dificile de demonstrat intr-un punct anume al programului, unul din motivele pentru care limbajul F* ofera la dispozitia programatorului instructiuni ce fac mai simpla misiunea de a demonstra si verifica proprietati si conditii scrise in program. De asemenea, in cadrul acestui proiect s-au folosit 'Lemme' pentru demonstrarea unor proprietati intre diferite tipuri de date ce respecta anumite conditii, si de asemenea instructiuni care ajuta 'SMT solver-ul' spunandu-i sa demonstreze intai proprietati intermediare.
 
-//exemplu lemma si assert si la ce au ajutat a demonstra
-
-Dupa verificarea unui fisier '.fst' se va extrage, in proiectul acesta in fisiere tipice limbajului Ocaml, codul ce este folosit la formarea rezultatului si este eliminat codul ce ajuta la specificatii si demonstratiile unor proprietati. Cu cat validarile devin mai complexe, cu atat se poate observa diferenta mare de linii de cod dintre fisierele '.fst' si cele '.ml'.
-//raportul dintre nr linii?
 
 \section{Metrici orientative}
 
@@ -186,12 +218,17 @@ Dispozitivul pe care s-a facut aceasta contorizare avea urmatoarele specificatii
 \section{Posibile optimizari}
 
 Multi 'SAT solveri' moderi implementeaza algoritmul CDCL (Conflict-Driven-Clause-Learning) care, pe langa pasii din algoritmul DPLL, adauga un pas nou de invatare si eficientizeaza saltul inapoi in momentul in care se gaseste o solutie falsa.
+
 //ADAUGA REFERINTA LA CDCL
 
 Un alt rafinament pe langa imbunatatirea algoritmului implementat poate fi eficientizarea structurilor de date folosite, pentru a reduce complexitatea timp a operatiilor ce se repeta cel mai des.
 
-O problema ce poate aparea si in implementarea algoritmul DPLL dar si cea a algoritmului mai complex CDCL, este o metoda/euristica ineficienta de a alege o noua variabila pentru a i se asigna o valoare, si insasi valoarea care sa i se asocieze. Un exemplu ar fi metoda VSIDS, care se bazeaza pe asocierea unui scor pentru fiecare variabila, scor care se schimba daca variabila apare intr-un conflict. //ADAUGA REFERINTA LA VSIDS SAU ALTE EURISTICI
+O problema ce poate aparea si in implementarea algoritmul DPLL dar si cea a algoritmului mai complex CDCL, este o metoda/euristica ineficienta de a alege o noua variabila pentru a i se asigna o valoare, si insasi valoarea care sa i se asocieze. Un exemplu ar fi metoda VSIDS, care se bazeaza pe asocierea unui scor pentru fiecare variabila, scor care se schimba daca variabila apare intr-un conflict. 
+
+//ADAUGA REFERINTA PT MAI MULTE INFORMATII LA VSIDS SAU ALTE EURISTICI
 
 O alta optimizare se poate implementa prin paralelizarea calculelor si impartirea ramurilor/solutiilor ce trebuie explorate.
 
 O mica imbunatatire din perspectiva limbajului de programare de aceasta data poate fi detectarea instructiunilor ce au rolul de a ajuta demonstrarea unor proprietati insa ajung pe parcursul dezvoltarii programului sa devina redundante, iar eliminarea lor ar putea reduce putin timpii de validare/compilare.
+
+De asemenea, mai exista varianta de a simplifica problema pe care algoritmul trebuie sa o rezolve, iar analizand fiecare clauza in parte poate duce la identificarea unor clauze si literali redundanti, care pot fi eliminati din formula primita fara a schimba completitudinea si corectitudinea rezultatului final.

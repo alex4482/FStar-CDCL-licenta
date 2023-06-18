@@ -1,2 +1,56 @@
+
+
 \chapter{Algoritmul DPLL (Davis-Putnam-Logemann-Loveland)}
+
+Algoritmul DPLL pentru rezolvarea problemei SAT este considerat o optimizare a metodei de backtracking si sta la baza crearii a multor 'SAT solveri' moderni.
+
+Acest algoritm a fost demonstrat sa aibe proprietatea ca pentru orice formula care se poate scrie in forma normala conjunctiva (CNF), va returna o solutie valida daca aceasta exista, si va specifica mereu ca nu exista daca formula este intr-adevar nesatisfiabila.
+
+//ref la o resursa
+Optimizarea cea mai importanta pe care acest algoritm o aduce metodei backtracking este 'propagarea clauzelor unit', unde o 'clauza unit' este o clauza ce nu contine nici un literal cu valoarea True si care contine un singur literal neasignat inca. 
+
+Astfel, la fiecare pas recursiv, se cauta fiecare clauza 'unit' si se asigneaza o valoare variabilei ramase astfel incat literalul din clauza respectiva sa aibe valoarea True. Motivul pentru care aceasta metoda functioneaza este ca daca s-ar asigna cealalta valoare de adevar unui astfel de literal, valoarea de adevar a clauzei respective ar fi \textit{False}, deci solutia ar fi invalida.
+
+\newpage
+
+Algoritmul DPLL, modificat sa corespunda implementarii acestui proiect proiectului.
+
+//enter pseudocod DPLL
+\iffalse
+\begin{algorithm}
+	\KwIn{formula : f \{ length f $\ge$ 1 \} }
+	\KwOut{ result : r \{ (r is (Sat tau) $\implies$ calculate\_formula\_value f tau = true ) 
+	\newline $\land$ (r is Unsat $\implies$ $\forall$ truth\_assignment : tau . \newline calculate\_formula\_value f tau = false) \} } 
+	
+	$tau \gets [ ~ ] $ \newline
+	\While{$length ~ t  $}{
+	
+	$new\_var \gets get\_unassigned\_variable f tau$ \newline
+	$new\_var\_value \gets assign\_value ~ new\_var$ \newline
+	$tau \gets tau[ new\_var : new\_var\_value ]$ \newline
+		read current\;
+		\eIf{understand}{
+			go to next section\;
+			current section becomes this one\;
+		}{
+			go back to the beginning of current section\;
+		}
+	}
+	\caption{How to write algorithms}
+\end{algorithm}
+\fi
+
+
+Exemplu: formula ce contine 5 clauze, numerotate de la $c_1$ la $c_5$ si 6 variabile numerotate de la $ x_1 $ la $x_6$
+
+( $\neg x_1 \lor x_3 \lor x_4 $) $\land$
+($\neg x_2 \lor \neg x_3 \lor x_5$) $\land$
+($x_1 \lor \neg x_2$) $\land$
+($x_4  \lor \neg x_5$) $\land$
+($x_1 \lor \neg x_4 \lor \neg x_6$)
+
+Implementarea acestui proiect ar incepe cautarea unei solutii asignand unei variabile noi o valoare oarecare, mai exact, variabilei $x_1$ valoarea \textit{False}. Urmeaza etapa de unit propagation, in care se faseste clauza $c_3$ a fi clauza unitara, si se asigneaza variabilei $x_2$ valoarea \textit{False}.
+Apoi, recursiv, se ia logica de la capat cu datele noi obtinute. Se va gasi primul literal neasignat $x_3$ si i se va acorda valoarea \textit{False}. In etapa de propagare a clauzelor unitare se gaseste prima clauza ce contine 2 literali cu valoare falsa si variabila $x_4$, care va primi valoarea \textit{True}. Tot in etapa de propagare a clauzelor unitare, se gaseste acum clauza $c_5$, unde singurul literal ramas este $\neg x_6$, si deci variabila $x_6$ va primi valoarea \textit{False}. Astfel toate clauzele au valoarea true, iar variabila $x_5$ poate avea orice valoare de adevar. Deci s-a gasit o solutie valida si formula este satisfiabila.
+
+$x_1 = False ;~ x_2 = False ;~ x_3 = False ;~ x_4 = True ; ~x_5 = orice ;~ x_6 = False$
 

@@ -1,27 +1,24 @@
 \chapter*{Introducere} 
 \addcontentsline{toc}{chapter}{Introducere}
 
-detalii despre problema sat
+Problema satisfiabilitatii booleene (SAT) se regaseste in multe ramuri ale domeniului informaticii, precum in verificarea de software si hardware, in domeniul criptografiei si securitatii sau optimizarea si analiza altor programe.
 
-conexiuni cu probleme reale
+%//https://en.wikipedia.org/wiki/Cook%E2%80%93Levin_theorem
 
-solvere create pana acum
+'SAT' este considerata prima problema ce a fost demonstrata a fi NP-completa, motiv pentru care este importanta dezvoltarea unor programe care sa poata gasi o solutie cat mai rapid, eficient si sigur. 
 
-probleme care apar la aceste solvere
+In ziua de astazi exista si inca se dezvolta si optimizeaza 'SAT solveri' eficienti, cum ar fi
 
-importanta verificarii solverelor
+//exemple moderne
 
-acest solver implementeaza alg DPLL
+Algoritmul DPLL este una din primele optimizari eficiente folosita in rezolvarea problemei SAT. Este considerat a fi un punct de plecare fundamental pentru dezvoltarea unui 'SAT solver' eficient, stand la baza multor 'SAT solveri' moderni.
 
-descriere la alg DPLL
+Insa chiar si o implementare a unui algoritm demonstrat a fi eficient si complet poate produce erori sau rezultate gresite, iar unul din motivele pentru care apar aceste erori este eroarea umana a programatorului, a carei frecventa poate creste impreuna cu complexitatea algoritmului ce trebuie implementat. Pentru ca este imposibil de testat un 'SAT solver' pe toate datele de intrare existente si de reparat 'solver-ul' respectiv pe baza testelor efectuate, s-au conceput programe care sa verifice ca implementarea in sine a algoritmului este lipsita de erori.
 
-verificare formala
+Limbajul de programare F* (FStar) pune la dispozitie un astfel de sistem care in momentul compilarii executa o verificare formala a programului in functie de specificatiile introduse de programator. Acest sistem ajuta la depistarea bug-urilor, prevenirea erorilor, si ofera o siguranta mai mare ca programul este corect implementat si nu va prezenta rezultate false sau gresite.
 
-fstar - limbaj de programare si verificare
- foloseste z3 smt solver
- 
-ce presupune un solver verificat
+Astfel, am ales sa implementez algoritmul DPLL folosind limbajul de programare FStar, pentru a evidentia cum arata parcursul crearii si verificarii unui 'SAT solver' in acest limbaj si cum se poate extinde din punct de vedere al eficientizarii.
 
-de ce acest solver e verificat si in ce mod de catre fstar
+Aceasta lucrare va prezenta in continuare o implementare a algoritmului DPLL folosind limbajul FStar. Vor fi prezentate detalii despre algoritmul DPLL, despre limbajul de programare folosit, detalii de implementare cu exemple de cod si motivele pentru care 'SAT solver-ul' rezultat este complet, corect si produce mereu un rezultat.
 
 
