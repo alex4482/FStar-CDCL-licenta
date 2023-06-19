@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.6.13)  18 JUN 2023 04:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.6.13)  19 JUN 2023 05:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -115,8 +115,32 @@ Package tocbibind Info: The document has chapter divisions on input line 50.
 
 Package tocbibind Note: Using chapter style headings, unless overridden.
 
-) (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+) (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
+\lst@mode=\count199
+\lst@gtempboxa=\box51
+\lst@token=\toks20
+\lst@length=\count266
+\lst@currlwidth=\dimen152
+\lst@column=\count267
+\lst@pos=\count268
+\lst@lostspace=\dimen153
+\lst@width=\dimen154
+\lst@newlines=\count269
+\lst@lineno=\count270
+\lst@maxwidth=\dimen155
+(C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
+\c@lstnumber=\count271
+\lst@skipnumbers=\count272
+\lst@framebox=\box52
+)
+(C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
+File: listings.cfg 2023/02/27 1.9 listings configuration
+))
+Package: listings 2023/02/27 1.9 (Carsten Heinz)
+(C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
 Package: hyperref 2023-02-07 v7.00v Hypertext links for LaTeX
+
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
 )
@@ -166,11 +190,11 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count199
+\c@section@level=\count273
 )
-\@linkdim=\dimen152
-\Hy@linkcounter=\count266
-\Hy@pagecounter=\count267
+\@linkdim=\dimen156
+\Hy@linkcounter=\count274
+\Hy@pagecounter=\count275
  (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
 File: pd1enc.def 2023-02-07 v7.00v Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -181,7 +205,7 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/generic/etexcmds\etexcmds.sty
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count268
+\Hy@SavedSpaceFactor=\count276
  (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
 File: puenc.def 2023-02-07 v7.00v Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -195,14 +219,14 @@ Package hyperref Info: Plain pages OFF on input line 4192.
 Package hyperref Info: Backreferencing OFF on input line 4197.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4425.
-\c@Hy@tempcnt=\count269
+\c@Hy@tempcnt=\count277
 
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
 \Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4763.
-\XeTeXLinkMargin=\dimen153
+\XeTeXLinkMargin=\dimen157
 
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
@@ -212,9 +236,9 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count270
-\Field@Width=\dimen154
-\Fld@charsize=\dimen155
+\Fld@menulength=\count278
+\Field@Width=\dimen158
+\Fld@charsize=\dimen159
 Package hyperref Info: Hyper figures OFF on input line 6042.
 Package hyperref Info: Link nesting OFF on input line 6047.
 Package hyperref Info: Hyper index ON on input line 6050.
@@ -227,9 +251,9 @@ Package hyperref Info: PDF/A mode OFF on input line 6072.
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count271
-\c@Item=\count272
-\c@Hfootnote=\count273
+\Hy@abspage=\count279
+\c@Item=\count280
+\c@Hfootnote=\count281
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
@@ -240,8 +264,8 @@ Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
 kage
 with kernel methods
 )
-\Fld@listcount=\count274
-\c@bookmark@seq@number=\count275
+\Fld@listcount=\count282
+\c@bookmark@seq@number=\count283
 
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfil
 echeck.sty
@@ -262,22 +286,22 @@ Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
  (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
 Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
 )
-\c@ALC@unique=\count276
-\c@ALC@line=\count277
-\c@ALC@rem=\count278
-\c@ALC@depth=\count279
+\c@ALC@unique=\count284
+\c@ALC@line=\count285
+\c@ALC@rem=\count286
+\c@ALC@depth=\count287
 \ALC@tlm=\skip51
 \algorithmicindent=\skip52
 )
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/algorithm2e\algorithm2e
 .sty
 Package: algorithm2e 2017/07/18 v5.2 algorithms environments
-\c@AlgoLine=\count280
+\c@AlgoLine=\count288
 \algocf@hangindent=\skip53
 
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/ifoddpage\ifoddpage.sty
 Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
-\c@checkoddpage=\count281
+\c@checkoddpage=\count289
 ) (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/tools\xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 )
@@ -292,33 +316,33 @@ Package: relsize 2013/03/29 ver 4.1
 \skiplength=\skip59
 \algomargin=\skip60
 \skipalgocfslide=\skip61
-\algowidth=\dimen156
-\inoutsize=\dimen157
-\inoutindent=\dimen158
-\interspacetitleruled=\dimen159
-\interspacealgoruled=\dimen160
-\interspacetitleboxruled=\dimen161
+\algowidth=\dimen160
+\inoutsize=\dimen161
+\inoutindent=\dimen162
+\interspacetitleruled=\dimen163
+\interspacealgoruled=\dimen164
+\interspacetitleboxruled=\dimen165
 \algocf@ruledwidth=\skip62
-\algocf@inoutbox=\box51
-\algocf@inputbox=\box52
+\algocf@inoutbox=\box53
+\algocf@inputbox=\box54
 \AlCapSkip=\skip63
 \AlCapHSkip=\skip64
 \algoskipindent=\skip65
-\algocf@nlbox=\box53
-\algocf@hangingbox=\box54
-\algocf@untilbox=\box55
+\algocf@nlbox=\box55
+\algocf@hangingbox=\box56
+\algocf@untilbox=\box57
 \algocf@skipuntil=\skip66
-\algocf@capbox=\box56
+\algocf@capbox=\box58
 \algocf@lcaptionbox=\skip67
 \algoheightruledefault=\skip68
 \algoheightrule=\skip69
 \algotitleheightruledefault=\skip70
 \algotitleheightrule=\skip71
-\c@algocfline=\count282
-\c@algocfproc=\count283
-\c@algocf=\count284
-\algocf@algoframe=\box57
-\algocf@algobox=\box58
+\c@algocfline=\count290
+\c@algocfproc=\count291
+\c@algocf=\count292
+\algocf@algoframe=\box59
+\algocf@algobox=\box60
 )
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
 Package: amsmath 2022/04/08 v2.17n AMS math features
@@ -330,61 +354,61 @@ Package: amstext 2021/08/26 v2.01 AMS text
 
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks20
-\ex@=\dimen162
+\@emptytoks=\toks21
+\ex@=\dimen166
 ))
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen163
+\pmbraise@=\dimen167
 )
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count285
+\inf@bad=\count293
 LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count286
-\leftroot@=\count287
+\uproot@=\count294
+\leftroot@=\count295
 LaTeX Info: Redefining \overline on input line 399.
 LaTeX Info: Redefining \colon on input line 410.
-\classnum@=\count288
-\DOTSCASE@=\count289
+\classnum@=\count296
+\DOTSCASE@=\count297
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
-\Mathstrutbox@=\box59
-\strutbox@=\box60
+\Mathstrutbox@=\box61
+\strutbox@=\box62
 LaTeX Info: Redefining \big on input line 722.
 LaTeX Info: Redefining \Big on input line 723.
 LaTeX Info: Redefining \bigg on input line 724.
 LaTeX Info: Redefining \Bigg on input line 725.
-\big@size=\dimen164
+\big@size=\dimen168
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count290
+\macc@depth=\count298
 LaTeX Info: Redefining \bmod on input line 905.
 LaTeX Info: Redefining \pmod on input line 910.
 LaTeX Info: Redefining \smash on input line 940.
 LaTeX Info: Redefining \relbar on input line 970.
 LaTeX Info: Redefining \Relbar on input line 971.
-\c@MaxMatrixCols=\count291
+\c@MaxMatrixCols=\count299
 \dotsspace@=\muskip17
-\c@parentequation=\count292
-\dspbrk@lvl=\count293
-\tag@help=\toks21
-\row@=\count294
-\column@=\count295
-\maxfields@=\count296
-\andhelp@=\toks22
-\eqnshift@=\dimen165
-\alignsep@=\dimen166
-\tagshift@=\dimen167
-\tagwidth@=\dimen168
-\totwidth@=\dimen169
-\lineht@=\dimen170
-\@envbody=\toks23
+\c@parentequation=\count300
+\dspbrk@lvl=\count301
+\tag@help=\toks22
+\row@=\count302
+\column@=\count303
+\maxfields@=\count304
+\andhelp@=\toks23
+\eqnshift@=\dimen169
+\alignsep@=\dimen170
+\tagshift@=\dimen171
+\tagwidth@=\dimen172
+\totwidth@=\dimen173
+\lineht@=\dimen174
+\@envbody=\toks24
 \multlinegap=\skip73
 \multlinetaggap=\skip74
-\mathdisplay@stack=\toks24
+\mathdisplay@stack=\toks25
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
 )
@@ -392,36 +416,36 @@ LaTeX Info: Redefining \] on input line 2954.
 Package: centernot 2016/05/16 v1.4 Centers the not symbol horizontally (HO)
 )
 LaTeX Font Info:    Trying to load font information for OT1+ppl on input line 3
-2.
+3.
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
 tex.def
 File: l3backend-pdftex.def 2023-03-30 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count297
-\l__pdf_internal_box=\box61
+\l__color_backend_stack_int=\count305
+\l__pdf_internal_box=\box63
 ) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -461,17 +485,17 @@ LaTeX Font Info:    ... okay on input line 32.
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count298
-\scratchdimen=\dimen171
-\scratchbox=\box62
-\nofMPsegments=\count299
-\nofMParguments=\count300
-\everyMPshowfont=\toks25
-\MPscratchCnt=\count301
-\MPscratchDim=\dimen172
-\MPnumerator=\count302
-\makeMPintoPDFobject=\count303
-\everyMPtoPDFconversion=\toks26
+\scratchcounter=\count306
+\scratchdimen=\dimen175
+\scratchbox=\box64
+\nofMPsegments=\count307
+\nofMParguments=\count308
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count309
+\MPscratchDim=\dimen176
+\MPnumerator=\count310
+\makeMPintoPDFobject=\count311
+\everyMPtoPDFconversion=\toks27
 )
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
 ase.sty
@@ -483,7 +507,8 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 32.
+\c@lstlisting=\count312
+Package hyperref Info: Link coloring OFF on input line 33.
  (main.out) (main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
@@ -510,13 +535,13 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.41     \input{front/declaration1}
+l.42     \input{front/declaration1}
                                     [1] (front/declaration2.tex)
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.42     \input{front/declaration2}
+l.43     \input{front/declaration2}
                                     [2] (main.toc)
 \tf@toc=\write4
 \openout4 = `main.toc'.
@@ -524,147 +549,255 @@ l.42     \input{front/declaration2}
  (chapters/motivation.tex
 [1
 
+]) (chapters/introduction.tex [2
+
 ]
-Underfull \hbox (badness 1275) in paragraph at lines 6--8
-\OT1/ppl/m/n/12 fo-lo-sind al-go-ritmi sim-pli. []Ins[]a un 'SAT sol-ver' com-p
-lex creat pen-tru pro-cesa
+Underfull \hbox (badness 1975) in paragraph at lines 4--5
+[]\OT1/ppl/m/n/12 Problema sa-tis-fi-a-bi-li-ta-tii bo-o-le-ene (SAT) se re-ga-
+seste in multe ra-muri ale
  []
 
-) (chapters/introduction.tex [2
 
-] [3
+Underfull \hbox (badness 1968) in paragraph at lines 11--12
+\OT1/ppl/m/n/12 pro-ble-mei SAT. Este con-si-de-rat a fi un punct de ple-care f
+un-damen-tal pen-tru
+ []
+
+
+Underfull \hbox (badness 1460) in paragraph at lines 15--16
+\OT1/ppl/m/n/12 mo-men-tul com-pi-la-rii exe-cuta o ve-ri-fi-care for-mala a pr
+o-gra-mu-lui in func-tie de
+ []
+
+
+Underfull \hbox (badness 3158) in paragraph at lines 15--16
+\OT1/ppl/m/n/12 pre-ve-ni-rea ero-ri-lor, si ofera o si-gu-ranta mai mare ca pr
+o-gra-mul este co-rect
+ []
+
+[3
 
 ]) (chapters/chapter1.tex [4]
 Capitolul 1.
-[5
 
-]) (chapters/chapter2.tex [6]
-Capitolul 2.
-
-Overfull \hbox (4.41801pt too wide) in paragraph at lines 8--8
-[]\OT1/ppl/b/n/17.28 Completitudinea, co-rec-ti-tu-di-nea si ter-mi-na-rea pro-
-gra-
+Underfull \hbox (badness 1681) in paragraph at lines 9--10
+[]\OT1/ppl/m/n/12 Optimizarea cea mai im-por-tanta pe care acest al-go-ritm o a
+duce me-to-dei
  []
 
 
-Overfull \hbox (19.9023pt too wide) in paragraph at lines 14--15
-\OT1/ppl/m/n/12 ri-fi-ca-rea exis-ten-tei unei cla-uze false la fi-e-care pas r
-e-cur-siv dupa etapa de 'unit[]propagation'
+Overfull \hbox (4.06384pt too wide) in paragraph at lines 13--14
+[]\OT1/ppl/m/n/12 Urmeaza pseudo-codul me-to-dei re-cur-sive 'dpll', for-mu-lat
+a dupa al-go-rit-mul DPLL
  []
 
-[7
-
-] [8] [9]
-LaTeX Font Info:    Trying to load font information for OMS+ppl on input line 9
-2.
-
+LaTeX Font Info:    Trying to load font information for OMS+ppl on input line 1
+8.
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omsppl.fd
 File: omsppl.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ppl/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 92.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 18.
 
-[10]
+[5
+
+] [6]) (chapters/chapter2.tex [7]
+Capitolul 2.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\newline' on input line 8.
+
+
+Overfull \hbox (27.1384pt too wide) in paragraph at lines 16--16
+\OT1/ppl/m/n/12 verificarea exis-ten-tei unei cla-uze false la fi-e-care pas re
+-cur-siv dupa etapa de \OT1/ppl/m/it/12 'unit[]propagation'\OT1/ppl/m/n/12 . 
+ []
+
+[8
+
+]
+LaTeX Font Info:    Font shape `OMS/ppl/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 36.
+ [9] [10]
+LaTeX Font Info:    Trying to load font information for OML+ppl on input line 8
+1.
+
+(C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omlppl.fd
+File: omlppl.fd 
+)
+LaTeX Font Info:    Font shape `OML/ppl/m/n' in size <12> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 81.
+
+Overfull \hbox (41.56094pt too wide) in paragraph at lines 86--87
+[][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[11]
 LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 1
-21.
+14.
  (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ppl.fd
 File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
 )
-[11]
-Overfull \hbox (34.4207pt too wide) in paragraph at lines 133--134
+[12]
+Overfull \hbox (41.56094pt too wide) in paragraph at lines 147--148
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (27.1608pt too wide) in paragraph at lines 151--153
+[][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (19.96072pt too wide) in paragraph at lines 166--167
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (365.56424pt too wide) in paragraph at lines 168--169
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][] 
+ []
+
+
+Overfull \hbox (48.76102pt too wide) in paragraph at lines 174--175
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[13]
+Overfull \hbox (27.1608pt too wide) in paragraph at lines 194--195
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[14]
+Overfull \hbox (358.36417pt too wide) in paragraph at lines 223--224
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (5.56058pt too wide) in paragraph at lines 238--239
+[][][][][][][][][][][][][][][] 
+ []
+
+[15]
+Overfull \hbox (34.93527pt too wide) in paragraph at lines 271--272
+[][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[16]
+Overfull \hbox (34.4207pt too wide) in paragraph at lines 280--281
 []\OT1/ppl/m/n/12 ex: \OT1/ppl/m/it/12 t[]cant[]be[]solution[]for[]f\OT1/ppl/m/
 n/12 , fo-lo-sit ca post-conditie care enunta ca orice 'truth[]assignment'
  []
 
-
-Overfull \hbox (27.23549pt too wide) in paragraph at lines 153--156
-[]\OT1/ppl/m/n/12 t1[]is[]sublist[]of[]t2 t (fst res) / ((t[]cant[]be[]solution
-[]for[]f f t) <==> ( t[]cant[]be[]solution[]for[]f
- []
-
-[12]
-Underfull \hbox (badness 10000) in paragraph at lines 190--192
-
+[17]
+Overfull \hbox (120.76175pt too wide) in paragraph at lines 342--343
+[][][][][][][][][][][][][][][][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 193--205
-
+Overfull \hbox (221.56277pt too wide) in paragraph at lines 346--347
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 193--205
+[18]
+Underfull \hbox (badness 10000) in paragraph at lines 366--368
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 206--208
+Underfull \hbox (badness 10000) in paragraph at lines 369--381
 
  []
 
-[13] [14]) (chapters/chapter3.tex [15]
+
+Underfull \hbox (badness 10000) in paragraph at lines 369--381
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 382--384
+
+ []
+
+[19] [20]) (chapters/chapter3.tex [21]
 Capitolul 3.
-[16
+[22
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 34--36
+Underfull \hbox (badness 10000) in paragraph at lines 33--35
 
  []
 
-<images//opam_necesary_packages.png, id=187, 641.39626pt x 414.348pt>
+<images//opam_necesary_packages.png, id=395, 641.39626pt x 414.348pt>
 File: images//opam_necesary_packages.png Graphic file (type png)
 <use images//opam_necesary_packages.png>
 Package pdftex.def Info: images//opam_necesary_packages.png  used on input line
- 37.
+ 36.
 (pdftex.def)             Requested size: 455.24411pt x 294.10062pt.
 
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 37--39
+Overfull \hbox (28.45274pt too wide) in paragraph at lines 36--38
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 37--39
+Underfull \hbox (badness 10000) in paragraph at lines 36--38
 
  []
 
 
-Overfull \hbox (3.63118pt too wide) in paragraph at lines 40--41
+Overfull \hbox (3.63118pt too wide) in paragraph at lines 39--40
 []\OT1/ppl/m/n/12 La fi-na-lul aces-tor pasi, fo-lo-sind ter-mi-na-lul Cy-gwin 
 si in-struc-tiu-nile de ti-pul 'make'
  []
 
-[17 <./images//opam_necesary_packages.png>]) (chapters/conclusions.tex [18])
-(chapters/bibliography.tex [19
+[23 <./images//opam_necesary_packages.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 56--58
 
-]) [20
+ []
+
+<images//unsat-sat-result-execute-example.png, id=402, 720.89325pt x 429.40425p
+t>
+File: images//unsat-sat-result-execute-example.png Graphic file (type png)
+<use images//unsat-sat-result-execute-example.png>
+Package pdftex.def Info: images//unsat-sat-result-execute-example.png  used on 
+input line 59.
+(pdftex.def)             Requested size: 364.19667pt x 216.93587pt.
+) (chapters/conclusions.tex [24 <./images//unsat-sat-result-execute-example.png
+>]) (chapters/bibliography.tex [25
+
+]
+Overfull \hbox (9.71338pt too wide) in paragraph at lines 13--14
+\OT1/ppl/m/n/12 https://www.borealisai.com/research-blogs/tutorial-9-sat-solver
+s-i-introduction-
+ []
+
+) [26
 
 ] (main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: E72243AD2F7EDD8919F3A75B252EB30E;3225.
- )
-(\end occurred inside a group at level 1)
-
-### simple group (level 1) entered at line 94 ({)
-### bottom level 
+ ) 
 Here is how much of TeX's memory you used:
- 11983 strings out of 476331
- 197142 string characters out of 5787765
- 1863660 words of memory out of 5000000
- 32149 multiletter control sequences out of 15000+600000
- 537812 words of font info for 96 fonts, out of 8000000 for 9000
+ 13817 strings out of 476331
+ 222365 string characters out of 5787765
+ 1895660 words of memory out of 5000000
+ 33784 multiletter control sequences out of 15000+600000
+ 540274 words of font info for 101 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,8n,76p,797b,572s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/alexd/AppData/Local/Programs/MiKTeX/fonts/type1/publi
-c/amsfonts/cm/cmmi12.pfb><C:/Users/alexd/AppData/Local/Programs/MiKTeX/fonts/ty
-pe1/public/amsfonts/cm/cmr12.pfb><C:/Users/alexd/AppData/Local/Programs/MiKTeX/
-fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/alexd/AppData/Local/Programs/
-MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/alexd/AppData/Local/
-Programs/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/alexd/AppData/Loc
-al/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/alexd/AppData/
-Local/Programs/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (24 pages, 226994 bytes).
+ 75i,16n,76p,797b,1939s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/alexd/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmmi12.pfb><C:/Users/alexd/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmr12.pfb><C:/Users/alexd/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmr8.pfb><C:/Users/alexd/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmsy10.pfb><C:/Users/alexd/AppData/Local/Programs/MiKTe
+X/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/alexd/AppData/Local/Programs/Mi
+KTeX/fonts/type1/urw/palatino/uplbi8a.pfb><C:/Users/alexd/AppData/Local/Program
+s/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/alexd/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on main.pdf (30 pages, 311626 bytes).
 PDF statistics:
- 249 PDF objects out of 1000 (max. 8388607)
- 42 named destinations out of 1000 (max. 500000)
- 155 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 500 PDF objects out of 1000 (max. 8388607)
+ 222 named destinations out of 1000 (max. 500000)
+ 160 words of extra memory for PDF output out of 10000 (max. 10000000)
 

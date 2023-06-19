@@ -3,100 +3,206 @@
 
 \section{Despre FStar}
 
-Limbajul F* este un limbaj de programare orientat pe demonstratii ce poate fi folosit pentru uz general. Printre aspectele acestui limbaj se numara si faptul ca prezinta suport pentru programare functionala. De asemenea, este proiectat sa faca verificare formala a codului, astfel orice programator poate sa adauge functiilor specificatii in forma de pre-conditii, post-conditii, invarianti, pentru a putea asigura completitudinea codului.
+Limbajul F* este un limbaj de programare orientat pe demonstratii ce poate fi \newline folosit pentru uz general. Printre aspectele acestui limbaj se numara si faptul ca \newline prezinta suport pentru programare functionala. De asemenea, este proiectat sa faca verificare formala a codului, astfel orice programator poate sa adauge functiilor \newline specificatii in forma de pre-conditii, post-conditii, invarianti, pentru a putea asigura completitudinea codului.
 
-\section{Completitudinea, corectitudinea si terminarea programului}
+\section{Completitudinea, corectitudinea si  \newline terminarea programului}
+
+Cele mai importante proprietati pe care le respecta aceast 'SAT solver' sunt \newline completitudinea algoritmului, corectitudinea implementarii si siguranta ca programul se va termina si va produce un rezultat.
 
 \subsection{Completitudinea programului}
 
 Este dovedita completitudinea algoritmului DPLL pentru formula in forma normala conjunctiva (CNF), asa cum este el descris in Capitolul 1.
 
-Singura optimizare a algoritmului DPLL care a fost implementata se leaga de verificarea existentei unei clauze false la fiecare pas recursiv dupa etapa de 'unit\_propagation' si asignarea unei valori unui literal necunoscut. Mai exact, la fiecare pas avem o lista de literali de lungime cel putin 1 care au fost adaugati la solutie, dar acesti literali noi nu schimba valoarea clauzelor care nu contin nici unul din literalii din lista.
-
-Astfel aceasta optimizare se foloseste de o matrice de aparitie pentru fiecare literal din formula cate o lista cu toate clauzele in care apare respectivul literal. Se intersecteaza clauzele in care apar toti acesti literali asignati la pasul curent, iar cautarea unei clauze false se face doar peste aceasta multime, in loc de intreaga formula.
+Singura optimizare a algoritmului DPLL care a fost implementata se leaga de  \newline verificarea existentei unei clauze false la fiecare pas recursiv dupa etapa de \textit{'unit\_propagation'}. \newpage Mai exact, la fiecare pas exista o lista de literali de lungime cel putin 1 care au fost  \newline adaugati la solutie, dar acesti literali noi nu schimba valoarea clauzelor care nu contin nici unul din literalii din lista.
+ 
+Astfel aceasta optimizare se foloseste de o matrice de aparitie pentru fiecare literal din formula cate o lista cu toate clauzele in care apare respectivul literal.  \newline  Se intersecteaza clauzele in care apar toti acesti literali asignati la pasul curent, iar  \newline  cautarea unei clauze false se face doar peste aceasta multime, in loc de intreaga  \newline  formula.
 
 \subsection{Corectitudinea programului}
 
-Pentru verificarea specificatiilor introduse de programator, se foloseste un SMT solver 
+Pentru verificarea specificatiilor introduse de programator, se foloseste un SMT solver numit Z3 \footnote{https://en.wikipedia.org/wiki/Z3\_Theorem\_Prover}.
+Cu toate acestea, unele conditii pot fi prea dificile de demonstrat intr-un punct anume al programului, unul din motivele pentru care limbajul F* ofera la dispozitia programatorilor  instructiuni ce simplifica misiunea de a demonstra si \newline  verifica proprietati si conditii scrise in program. Recurente in cadrul acestui proiect sunt structurile 'Lemma' si instructiunile 'assert' care ajuta la demonstrarea unor proprietati intre diferite tipuri de date ce respecta anumite conditii, si ajuta 'SMT solver-ul' spunandu-i sa demonstreze intai proprietati intermediare.
 
-//ADAUGA REF LA SMT SOLVER. 
+Exemplu 'lemma':
+\begin{lstlisting}[
+	basicstyle= \small, %or \small or \footnotesize etc.
+	]
+let rec lemma_values_from_clause_same_for_all_supra_set_of_t
+(t : truth_assignment) 
+(c : clause) 
+: Lemma
+(requires are_clause_vars_in_assignment t c)
+(ensures 
+	(forall (other_t : truth_assignment
+		{forall (v : variable_info{L.mem v t}). 
+			(L.mem v other_t)}).
+		(L.mem true (get_values_from_clause t c) 
+		= L.mem true (get_values_from_clause other_t c)))
+)
+= 
+if length c = 1 
+then ()
+else lemma_values_from_clause_same_for_all_supra_set_of_t t (L.tl c)
 
-Cu toate acestea, unele conditii pot fi prea dificile de demonstrat intr-un punct anume al programului, unul din motivele pentru care limbajul F* ofera la dispozitia programatorilor  instructiuni ce simplifica misiunea de a demonstra si verifica proprietati si conditii scrise in program. De asemenea, in cadrul acestui proiect s-au folosit 'Lemme' pentru demonstrarea unor proprietati intre diferite tipuri de date ce respecta anumite conditii, si de asemenea instructiuni care ajuta 'SMT solver-ul' spunandu-i sa demonstreze intai proprietati intermediare.
+\end{lstlisting}
 
-//exemplu lemma si assert si la ce au ajutat a demonstra
+Aceasta lemma ajuta la demonstrarea faptului ca pentru orice clauza \textit{c}, ai carei literali au o valoare asignata in multimea \textit{t}, atunci valoarea de adevar a clauzei \textit{c} in corespondenta cu multimea \textit{t} va fi egala cu valoarea de adevar a lui \textit{c} in corespondenta cu orice multime care este supra-set pentru \textit{t}.
+
+Exemplu instructiune 'assert':
+\begin{lstlisting}[]
+assert(L.noRepeats ress);
+
+\end{lstlisting}
+
+Aceasta simpla instructiune ajuta a arata faptul ca la momentul verificarii acestei instructiuni, lista 'ress' nu contine elemente duplicate.
 
 Exemple asemanatoare se vor gasi si in sectiunile ce urmeaza.
 
-Dupa verificarea unui fisier '.fst' se va extrage, in proiectul acesta in fisiere tipice limbajului Ocaml, codul ce este folosit la formarea rezultatului si este eliminat codul ce ajuta la specificatii si demonstratiile unor proprietati. Cu cat validarile devin mai complexe, cu atat se poate observa diferenta mare de linii de cod dintre fisierele '.fst' si cele '.ml'.
-
-//exemplu raportul dintre nr lini
+Dupa verificarea unui fisier '.fst' se va extrage, in fisiere tipice limbajului Ocaml, codul ce este folosit la formarea rezultatului si este eliminat codul ce ajuta la \newline specificatii si demonstratiile unor proprietati. Cu cat validarile devin mai complexe, cu atat se poate observa diferenta mare de linii de cod dintre fisierele '.fst' si cele '.ml'.
+De exemplu, modulul 'DpllPropagation' contine multe instructiuni ce ajuta la verificare, in total ajungand la $\approx$600 de linii fisierul, insa corespondendul modul Ocaml extras din cel FStar, are $\approx$100 linii, insemnand ca s-au eliminat cele $\approx$500 linii care contribuiau la verificarea modulului.
 
 \subsection{Terminarea programului}
-
-Cele mai importante proprietati pe care le respecta aceast 'SAT solver' sunt completitudinea algoritmului, corectitudinea implementarii si siguranta ca programul se va termina si va produce un rezultat.
 
 Terminarea programului si producerea unui rezultat trebuie sa fie o certitudine, indiferent de valoarea rezultatului. Limbajul FStar poate verifica, daca este specificat acest lucru, daca o functie/un program se va termina si va produce un rezultat indiferent de parametrii primiti. De asemenea poate verifica daca programul/functia ar produce acelasi rezultat daca ar fi apelata de mai multe ori cu aceeiasi parametrii.
 
 Programatorului i se ofera posibilitatea de a adnota functii folosind cuvantul "Tot" pentru a asigura ca la momentul compilarii se va incerca si demonstrarea faptului ca fiecare functie, mai ales cele recursive, se termina, produc un rezultat si mereu acelasi rezultat pentru aceleasi argumente. 
 
-//exemplu 'Tot'
+\newpage
 
 Toate metodele din modulele ce ajuta la formarea rezultatului algoritmului DPLL sunt 'functii totale', fie folosind adnotarea 'Tot' in signatura functiei, fie prin absenta oricarei adnotari, efectul 'Tot' fiind cel implicit. Succesul compilarii programului inseamna ca acesta se termina si fiecare input are asociat un singur rezultat. In cazul in care o formula are mai multe solutii, modul in care a fost implementat algoritmul va decide care din acele solutii se va returna.
 
 
+Acesta este un exemplu de declaratie a unei functii ce contine cuvantul cheie "Tot":
+
+\begin{lstlisting}[]
+
+let rec are_variables_in_truth_assignment' 
+(vars: list nat_non_zero { 
+	L.noRepeats vars 
+	/\ length vars > 0 }
+) 
+(t: truth_assignment) 
+: Tot 
+(res : bool { 
+	((all_variables_are_in_truth_assignment' vars t ) <==> res) }
+) 
+(decreases length vars)
+
+\end{lstlisting}
+
+Se observa faptul ca metoda este recursiva si ca este nevoie de a specifica modul in care dimensiunea parametrilor scade astfel incat la un moment dat va ajunge intr-un punct minim in care functia nu se va mai apela pe sine, mai exact prin ultima linie prefixata de cuvantul cheie \textit{decreases}.
+
 \section{Structurile de date folosite}
 
-Pentru acest proiect s-a ales proiectarea unor structuri de date si colectii simple, pentru care au fost create functii ce implementeaza operatii generice.
+S-a ales proiectarea unor structuri de date si colectii simple, pentru care au fost create functii ce implementeaza operatii generice.
 
 Conform definitiei, o formula este o multime de clauze, astfel implementarea are forma unei liste inlantuite de clauze.
 
-// adauga linia cu font fain formula = list clause
+\begin{lstlisting}[]
+	type formula = f : list clause 
+	\end{lstlisting}
 
-O clauza, conform definitiei este o multime de literali, astfel este structurata ca o lista inlantuita de literali
+O clauza este o multime de literali, de aceea structura ei apare ca o lista inlantuita de literali.
 
-//adauga linia cu font fain type clause = list literal
+\begin{lstlisting}[]
+	type clause = c : list literal { length  c > 0} 
+\end{lstlisting}
 
 Un literal reprezinta o variabila a carui valoare de adevar poate fi negata, motiv pentru care tipul de data 'literal' este creat astfel, folosind 2 constructori 'Var' pentru a evidentia ca nu se neaga valoarea de adevar a variabilei, si 'NotVar' pentru a arata negatia variabilei.
 
-//type literal = 
-	| Var nat-non-zero
-	| NotVar nat-non-zero
-	
+\begin{lstlisting}[]
+type literal = 
+	| Var : a: nat_non_zero -> literal
+	| NotVar : a: nat_non_zero -> literal
+\end{lstlisting}
+
 Doi literali, 'Var x' si 'NotVar x' sunt considerati a nu fi egali, insa au variabilele egale.
 	
-Variabilele sunt reprezentate folosind numere naturale nenule, deoarece un format des intalnit al datelor de intrare pentru aceasta problema si care s-a considerat la conceperea proiectului reprezentau literalii folosind numere intregi nenule. Am ales literalii sa fie reprezentati prin 2 constructori alaturi de numere intregi strict pozitive pentru a evita verificari repetate in cod cu privire la semnul unei variabile oarecare si pentru a se putea face usor distinctia intre tipurile de literali.
+Variabilele sunt reprezentate folosind numere naturale nenule, deoarece un  \newline format des intalnit al datelor de intrare pentru aceasta problema si care s-a considerat la conceperea proiectului reprezentau literalii folosind numere intregi nenule. Am ales literalii sa fie reprezentati prin 2 constructori alaturi de numere intregi strict pozitive pentru a evita verificari repetate in cod cu privire la semnul unei variabile oarecare si pentru a se putea face usor distinctia intre tipurile de literali.
 
-//type nat-non-zero = x : nat {x > 0}
+\begin{lstlisting}[]
+let nat_non_zero = x:int{x > 0}
+\end{lstlisting}
 
+Pentru matricea de aparitie a clauzelor si literalilor, s-a folosit o structura de date intermediara care reprezinta o linie a matricei si este formata dintr-o pereche de 2 \newline elemente, un literal si o lista inlantuita de clauze.
 
-Pentru matricea de aparitie a clauzelor si literalilor, s-a folosit o structura de date intermediara care reprezinta o linie a matricei si este formata dintr-o pereche de 2 elemente, un literal si o lista inlantuita de clauze:.
+\begin{lstlisting}[]
+type aux_occurence_vector = 
+	{lit : literal ; clauses : list clause }
 
-//type occurence-vector = {lit : literal ; clauses : list clause}
+type occurence_vector = oc_v : aux_occurence_vector
+		{length oc_v.clauses > 0 
+		/\ (forall (c : clause{L.mem c oc_v.clauses}). 
+			(L.mem oc_v.lit c))}
+\end{lstlisting}
 
-Conditia acestui tip de date este ca lista 'clauses' trebuie sa contina toate clauzele in care apare literalul 'lit' din formula primita la inceperea programului, invariant care a fost scris astfel:
-//invariantul
+Conditia acestui tip de date este ca lista 'clauses' trebuie sa contina toate clauzele in care apare literalul 'lit' din formula primita la inceperea programului.
 
 Matricea in sine este o lista inlantuite de 'occurence-vector', si trebuie mereu sa respecte conditia ca nu exista 2 elemente in lista a caror membrul 'lit' sa fie egal ca si valoare.
 
-//type occurence-matrix = list occurence-vector
+\begin{lstlisting}[]
+let rec occurence_matrix_condition 
+	(oc_matrix : list occurence_vector) = 
+	(   length oc_matrix > 0 
+		==> 
+	(forall (ocv : occurence_vector{L.mem ocv (L.tl oc_matrix)}). 
+		(ocv.lit <> (L.hd oc_matrix).lit))
+	)
+	/\ (length oc_matrix > 0 ==> 
+		occurence_matrix_condition (List.Tot.tl oc_matrix))
 
+type occurrence_matrix = oc_matrix : list occurence_vector{
+	occurence_matrix_condition oc_matrix 
+}
+\end{lstlisting}
 
-Rezultatul functiei ce verifica satisfiabilitatea unei formule este in sine un o structura de date simpla creata pentru aceasta problema, reprezentata prin 2 constructori, unul pentru situatia in care formula e nesatisfiabila si unul care contine o posibila combinatie de variabile pozitive si valori booleene ce reprezinta o solutie valida pentru formula. 
+Urmeaza un fragment in care se afiseaza conditiile care trebuie sa fie respectate intre formula 'f' si matricea de aparitie a formulei notata in aceasta functie cu 'res'.
 
-//type result = Sat t | Unsat
+\begin{lstlisting}[]
+	
+	let get_occurence_matrix 
+	(f : formula {length f > 0}) 
+	: (res : occurrence_matrix{
+	length res = length (get_lits_in_formula f)
+	/\ (forall (l : literal{L.mem l (get_lits_in_formula f)}). 
+		(is_lit_in_occurence_matrix res l))
+	/\ (forall (oc_v : occurence_vector{L.mem oc_v res}). 		(L.mem oc_v.lit (get_lits_in_formula f)) )
+	/\ (forall (oc_v : occurence_vector {L.mem oc_v res}). 
+		(forall (c : clause {L.mem c oc_v.clauses}). 
+			(L.mem c f)))
+	/\ (forall (oc_v : occurence_vector {L.mem oc_v res}). 
+		(forall (c : clause {
+			L.mem c f /\ (L.mem c oc_v.clauses = false)}). 
+			(L.mem oc_v.lit c = false)))})
+	
+\end{lstlisting}
 
-In aceasta lucrare, se va referi la o combinatie de variabile pozitive si valori booleene prin termenul 'truth-assignment' prescurtat 't' sau 'tau'.
+Rezultatul functiei ce verifica satisfiabilitatea unei formule este in sine un o structura de date simpla creata pentru aceasta problema, reprezentata prin doi constructori, unul pentru situatia in care formula e nesatisfiabila si unul care contine o posibila combinatie de variabile pozitive si valori booleene ce reprezinta o solutie valida pentru formula. 
+\begin{lstlisting}[]
+type result =
+	| NotSat
+	| Sat : a: truth_assignment{ length a > 0} -> result
 
-Acest tip de data 'truth\_assignment' reprezinta o lista inlantuita de elemente, structuri formate din doi parametri, unul 'value' ce reprezinta valoarea unei variabile si 'var' ce reprezinta in sine variabila.
+\end{lstlisting}
 
-//type variable-info = \{value : bool ; var : nat\_not\_zero\}
+In aceasta lucrare, se va referi la o combinatie de variabile pozitive si valori \newline booleene prin termenul 'truth-assignment' prescurtat 't' sau 'tau'.
 
-//type truth\_assignment = x : list variable\_info \{{truth\_assignment\_condition x\}
+Tipul de data 'truth\_assignment' reprezinta o lista inlantuita de elemente, structuri formate din doi parametri, unul 'value' ce reprezinta valoarea unei variabile si 'var' ce reprezinta in sine variabila.
 
+\begin{lstlisting}[]
+type variable_info = {value: bool; variable: nat_non_zero}
 
-Acest 'truth\_assignment' trebuie sa respecte conditia ca nu exista 2 elemente in lista care sa aibe aceeasi valoare a membrului 'var'. Invariantul a fost scris astfel simplificand conditia, si anume ca membrul 'var' al elementului din capul listei trebuie sa nu apara in oricare alt element din lista, iar daca submultimea 'tail\_t' formata din toate elementele lui 't' exceptia capului listei trebuie sa respecte aceeasi proprietate.
+type truth_assignment = ta : list variable_info { ta_contition ta }
+\end{lstlisting}
 
-//invariantul
+Acest 'truth\_assignment' trebuie sa respecte conditia ca nu exista 2 elemente in lista care sa aibe aceeasi valoare a membrului 'var'. Invariantul a fost scris astfel simplificand conditia, si anume ca membrul 'var' al elementului din capul listei trebuie sa nu apara in oricare alt element din lista, iar daca submultimea 'tail\_t' formata din toate elementele lui 't' cu exceptia capului listei trebuie sa respecte aceeasi proprietate.
+
+\begin{lstlisting}[]
+let rec ta_contition (ta : list variable_info) = 
+(forall (var : variable_info {List.Tot.mem var ta}). 
+	(count_variables_occurrence ta var.variable = 1 ))
+	/\ (length ta > 0 ==> ta_contition (List.Tot.tl ta))
+
+\end{lstlisting}
 
 Structurile de date au fost alese a fi simple in detrimentul eficientei vitezei de executie a programului, pentru a putea analiza dificultatea si complexitatea mentinerii corectitudinii in implementarrea unui algoritm complet in limbajul F*. 
 
@@ -104,43 +210,101 @@ Structurile de date au fost alese a fi simple in detrimentul eficientei vitezei 
 
 \section{Modulele ce alcatuiesc programul}
 
-Separarea programului pe mai multe fisiere s-a realizat pentru a usura dezvoltarea si modificarea codului in etapa implementarii. De asemenea, orice schimbare intr-un fisier rezulta in re-verificarea acestuia la momentul compilarii, proces care devine cu atat mai indelungat cu cat fisierul prezinta mai multe functii si demonstratii complexe.
+Separarea programului pe mai multe fisiere s-a realizat pentru a usura \newline dezvoltarea si modificarea codului in etapa implementarii. De asemenea, orice \newline schimbare intr-un fisier rezulta in re-verificarea acestuia la momentul compilarii,\newline proces care devine cu atat mai indelungat cu cat fisierul prezinta mai multe functii si demonstratii complexe.
 
-Astfel modulele acestui program sunt:
-
-DataTypes - fisier unde s-au definit toate structurile de date explicate anterior, invariantul pentru cele ce aveau nevoie de unul, si anumite functii ajutatoare pentru a manipula tipurile de date tip colectii demonstrand in acelasi timp corectitudinea operatiilor efectuate pe colectiile respective. 
+Astfel, modulele acestui program sunt: \newline
+$\bullet$ DataTypes - fisier unde s-au definit toate structurile de date explicate anterior, \newline invariantul pentru cele ce aveau nevoie de unul, si anumite functii ajutatoare pentru a manipula tipurile de date tip colectii demonstrand in acelasi timp corectitudinea \newline operatiilor efectuate pe colectiile respective. 
 
 Un exemplu de astfel de functie ar fi metoda
-'add\_var\_to\_truth\_assignment', al carei simplu scop este de a adauga un nou element in colectia 'truth\_assignment', insa care trebuie sa poata respecta urmatoarea post\_conditie:
+\textit{'add\_var\_to\_truth\_assignment'}, al carei simplu scop este de a adauga un nou element in colectia \textit{'truth\_assignment'}, insa care trebuie sa poata respecta urmatoarea post\_conditie.
 
-//exemplu post-conditie
+\begin{lstlisting}[]
 
+let add_var_to_truth (t : truth_assignment) (var : variable_info {count_variables_occurrence t var.variable = 0}) 
+: Tot 
+(res : truth_assignment  {
+is_variable_in_assignment res var.variable
+/\ List.Tot.mem var res
+/\ count_variables_occurrence res var.variable = 1
+/\ (length res = length t + 1) 
+/\ (forall (v : variable_info {
+	List.Tot.mem v res /\ v <> var}). (List.Tot.mem v t))
+/\ (forall (v : variable_info {
+	(List.Tot.mem v t)}). ((List.Tot.mem v res)))
+/\ (forall (v: variable_info {
+	List.Tot.mem v res = false}). 
+	((List.Tot.mem v t = false)))
+/\ (forall (l : literal{ 
+	is_variable_in_assignment t (get_literal_variable l) }). 
+	(is_variable_in_assignment res (get_literal_variable l)
+/\ get_literal_value t l = get_literal_value res l))  
 
-Modulul 'DataTypeUtils' contine un numar considerabil de metode ajutatoare, folosite in mai multe alte module ale proiectului si care trebuie deci sa fie disponibile intr-un singur loc. Printre aceste metode apar:
+\end{lstlisting}
+
+ Pe scurt, sustine ca noua lista trebuie sa contina toate elementele din multimea veche, sa aibe lungimea cu 1 mai mare doar decat lista initiala, iar toate variabilele prezenta in lista initiala au aceeasi valoare in ambele multimi.
+
+Modulul 'DataTypeUtils' contine un numar considerabil de metode ajutatoare, folosite in mai multe module ale proiectului si care trebuie deci sa fie disponibile intr-un singur loc. Printre aceste metode apar:
 \begin{itemize}
 	\item  functii de procesesare a parametrilor primiti;
 	
-	ex: \textit{get\_clause\_value }- returneaza valoarea de adevar a unei clauze considerand un 'truth\_assignment' primit ca parametru;
+	ex: \textit{get\_clause\_value }- returneaza valoarea de adevar a unei clauze considerand un \textit{'truth\_assignment'} primit ca parametru;
 	
 	\item \textit{lemme} care ajuta la asigurarea si demonstrarea corectitudinii programului;
 	
 	ex: \textit{lemma\_no\_vars\_in\_t\_outside\_f\_length\_compare} folosita pentru a arata ca daca un 'truth\_assignment' nu contine nici o variabila care nu este prezenta in formula 'f', atunci sigur lungimea variabilei 't' este mai mica sau egala cu numarul variabilelor distincte ce apar in formula 'f';
 	
-	//exemplu
+	\begin{lstlisting}[]
+
+let rec lemma_no_vars_in_t_outside_f_length_compare
+(vars: list nat_non_zero) 
+(t : truth_assignment) 
+: Lemma
+(requires 
+	L.noRepeats vars 
+	/\ (no_variables_outside_f_are_in_t' vars t)
+)
+(ensures length t <= length vars ) 
+(decreases (length t)) = 
+if length t = 0
+then let l = length vars in ()
+else let new_t = 
+	(remove_variable_from_assignment t (L.hd t).variable) in
+let new_vars = 
+	(remove_var_from_list vars (L.hd t).variable) in
+lemma_no_vars_in_t_outside_f_length_compare new_vars new_t
+
+	\end{lstlisting}
 	
-	\item pre/post-conditii importante si relevante demonstrarii corectitudinii salvate in variabile globale, pentru a reduce cantitatea de cod repetat si pentru a putea generaliza functiile la nivel inalt, avand posibilitatea in viitor de a optimiza aspecte ale programului precum structurile de date, pentru care ar trebui modificate doar implementarea metodelor ce proceseaza aceste structuri;
+	\item pre/post-conditii importante si relevante demonstrarii corectitudinii salvate in variabile globale, pentru a reduce cantitatea de cod repetat si pentru a putea \newline generaliza functiile la nivel inalt, avand posibilitatea in viitor de a optimiza \newline aspecte ale programului precum structurile de date, pentru care ar trebui \newline modificate doar implementarea metodelor ce proceseaza aceste structuri;
 	
 	ex: \textit{t\_cant\_be\_solution\_for\_f}, folosit ca post-conditie care enunta ca orice 'truth\_assignment' ce contine toate variabilele formulei 'f' si pentru care parametrul 't' este o sub-multime a sa, nu este o solutie valida pentru 'f';
 	
-	//exemplu
+	\textit{t\_cant\_be\_solution\_for\_f}:
+	
+	\begin{lstlisting}
+ (forall (whole_t: truth_assignment{ 
+	t1_is_sublist_of_t2 t whole_t
+	/\ are_variables_in_truth_assignment f whole_t 
+	/\ length whole_t 
+		=  length ( get_vars_in_formula f)}). 
+	(is_solution f whole_t = false)) 
+	\end{lstlisting}
 	
 	
 	\item predicate, functii care evalueaza daca anumiti parametrii respecta o anumita proprietate
 	
-	ex: \textit{is\_solution}, desi simplu, este unul din cei mai importanti predicati ai programului
+	ex: \textit{is\_solution}, desi simplu, este unul din cei mai importanti predicati ai \newline programului; acesta sustine ca daca un \textit{'tau'} contine toate variabilele din formula 'f', atunci este solutie doar daca este solutie partiala, adica daca nu exista clauze false.
 	
-	//exemplu
-	
+	\begin{lstlisting}
+let is_solution 
+(f: formula  { length f > 0 })
+(t: truth_assignment {
+	((length (get_vars_in_formula f)) = length t)
+	/\ all_variables_are_in_truth_assignment f t  
+})
+= is_partial_solution f t 
+	\end{lstlisting}
+
 \end{itemize}
 
 
@@ -148,11 +312,13 @@ Modulul DpllPropagation conține puține metode însă importante pentru demonst
 
 O mica parte însa cea mai importanta din specificarea metodei principale este:
 
-//aseaza exemplul mai frumos
+\begin{lstlisting}[]
+	t1_is_sublist_of_t2 t (fst res)
+	/\ ((t_cant_be_solution_for_f f t) <==> (    
+		t_cant_be_solution_for_f f (fst res)) )
+ 	/\ length res._1 >= length t
 
- t1\_is\_sublist\_of\_t2 t (fst res)
-	/\ ((t\_cant\_be\_solution\_for\_f f t) <==> ( t\_cant\_be\_solution\_for\_f f (fst res)) )
-	/\ length res.\_1 >= length t
+\end{lstlisting}
 	
 Post-condițiile enunță următoarele: 
 \begin{itemize}
@@ -165,19 +331,29 @@ Post-condițiile enunță următoarele:
 
 Modulul 'OccurenceMatrix' contine functii necesare crearii, procesarii si accesarii matricei de aparitie a literalilor in clauzele formulei si de asemenea implementarea optimizata pentru metoda ce verifica daca un 'tau' oarecare este solutie partiala pentru formula data.
 
-Modulul 'Dpll' contine functia principala ce primeste o formula si ofera un rezultat, unde se specifica si verifica legatura intre valoarea rezultatului si formula.
+Modulul 'Dpll' contine functia principala ce primeste o formula si ofera un \newline rezultat, unde se specifica si verifica legatura intre valoarea rezultatului si formula.
 
-//exemplu cu post-conditia dpll
+\begin{lstlisting}[]
 
-Modulul 'InputFileParser' a fost conceput pentru a putea folosi formule diverse de diferite dimensiuni prin parsarea unor fisiere de intrare ce respecta un anumit format.
+: Tot (res: result {
+(Sat? res = true ==> 
+	((length (get_truth_from_result res) = 
+		length ( get_vars_in_formula f)) 
+	/\ (all_variables_are_in_truth_assignment f (get_truth_from_result res)) 
+/\ ( is_solution f (get_truth_from_result res) = true)))
+/\ ((NotSat? res = true) ==> 
+	( forall (whole_t: truth_assignment{ 
+	(forall (v : variable_info {(List.Tot.mem v pre_dpll_t)}). ((List.Tot.mem v whole_t)))
+	/\ are_variables_in_truth_assignment f whole_t 
+	/\ length whole_t =  length ( get_vars_in_formula f)}). 
+	is_solution f whole_t = false))
+})  
 
-//pune link in footer la site cu input files
+\end{lstlisting}
+
+Modulul 'InputFileParser' a fost conceput pentru a putea folosi formule diverse de diferite dimensiuni prin parsarea unor fisiere de intrare ce respecta un anumit format. \footnote{https://people.sc.fsu.edu/~jburkardt/data/cnf/cnf.html}
 
  Modulul 'ConvertorToString' este folosit pentru a converti orice obiect creat de program intr-un sir de caractere si mai ales pentru a se afisa rezultatul pe ecran sub o forma usoara de citit si inteles.
-
-
-
-
 
 
 \section{Metrici orientative}
@@ -203,7 +379,7 @@ Compilatorul a avut nevoie de aproximativ 500 de secunde pentru verificarea fisi
 \end{tabular}
 \newline\newline
 
-Se observa faptul ca fisierele ce contin mai multe linii de cod pentru procesarea datelor si mai putine ce necesita demonstrarea unor proprietati simple, au nevoie de mai putin timp pentru a se verifica si complila. In schimb, fisierele care au foarte putine linii de cod ce contribuie la formarea rezultatului si ajung sa fie extrase in fisierele '.ml', dar multe proprietati mai complexe a caror demonstratie trebuie verificata, necesita mult mai mult timp de compilare.
+Analizand codul sursa, se observa ca fisierele ce contin mai multe linii de cod pentru procesarea datelor si mai putine ce necesita demonstrarea unor proprietati simple, au nevoie de mai putin timp pentru a se verifica si complila. In schimb, fisierele care au foarte putine linii de cod ce contribuie la formarea rezultatului si ajung sa fie extrase in fisierele '.ml', dar multe proprietati mai complexe a caror demonstratie trebuie verificata, necesita mult mai mult timp de compilare.
 \newline
 
 Dispozitivul pe care s-a facut aceasta contorizare avea urmatoarele specificatii:
@@ -217,17 +393,17 @@ Dispozitivul pe care s-a facut aceasta contorizare avea urmatoarele specificatii
 
 \section{Posibile optimizari}
 
-Multi 'SAT solveri' moderi implementeaza algoritmul CDCL (Conflict-Driven-Clause-Learning) care, pe langa pasii din algoritmul DPLL, adauga un pas nou de invatare si eficientizeaza saltul inapoi in momentul in care se gaseste o solutie falsa.
-
-//ADAUGA REFERINTA LA CDCL
+Multi 'SAT solveri' moderi implementeaza algoritmul CDCL (Conflict-Driven-Clause-Learning) \footnote{https://www.cs.princeton.edu/~zkincaid/courses/fall18/readings/SATHandbook-CDCL.pdf}
+ care, pe langa pasii din algoritmul DPLL, adauga un pas nou de invatare si eficientizeaza saltul inapoi in momentul in care se gaseste o solutie falsa.
 
 Un alt rafinament pe langa imbunatatirea algoritmului implementat poate fi eficientizarea structurilor de date folosite, pentru a reduce complexitatea timp a operatiilor ce se repeta cel mai des.
 
-O problema ce poate aparea si in implementarea algoritmul DPLL dar si cea a algoritmului mai complex CDCL, este o metoda/euristica ineficienta de a alege o noua variabila pentru a i se asigna o valoare, si insasi valoarea care sa i se asocieze. Un exemplu ar fi metoda VSIDS, care se bazeaza pe asocierea unui scor pentru fiecare variabila, scor care se schimba daca variabila apare intr-un conflict. 
-
-//ADAUGA REFERINTA PT MAI MULTE INFORMATII LA VSIDS SAU ALTE EURISTICI
+O problema ce poate aparea si in implementarea algoritmul DPLL dar si cea a algoritmului mai complex CDCL, este o metoda/euristica ineficienta de a alege o noua variabila pentru a i se asigna o valoare, si insasi valoarea care sa i se asocieze. Un exemplu ar fi metoda VSIDS 
+\footnote{https://mk.cs.msu.ru/images/1/1f/SAT\_SMT\_Vijay\_Ganesh\_HVC2015.pdf}, care se bazeaza pe asocierea unui scor pentru fiecare variabila, scor care se schimba daca variabila apare intr-un conflict. 
 
 O alta optimizare se poate implementa prin paralelizarea calculelor si impartirea ramurilor/solutiilor ce trebuie explorate.
+
+\newpage
 
 O mica imbunatatire din perspectiva limbajului de programare de aceasta data poate fi detectarea instructiunilor ce au rolul de a ajuta demonstrarea unor proprietati insa ajung pe parcursul dezvoltarii programului sa devina redundante, iar eliminarea lor ar putea reduce putin timpii de validare/compilare.
 
