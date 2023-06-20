@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.6.13)  19 JUN 2023 05:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.6.13)  20 JUN 2023 03:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -552,27 +552,21 @@ l.43     \input{front/declaration2}
 ]) (chapters/introduction.tex [2
 
 ]
-Underfull \hbox (badness 1975) in paragraph at lines 4--5
-[]\OT1/ppl/m/n/12 Problema sa-tis-fi-a-bi-li-ta-tii bo-o-le-ene (SAT) se re-ga-
-seste in multe ra-muri ale
- []
-
-
-Underfull \hbox (badness 1968) in paragraph at lines 11--12
-\OT1/ppl/m/n/12 pro-ble-mei SAT. Este con-si-de-rat a fi un punct de ple-care f
-un-damen-tal pen-tru
+Underfull \hbox (badness 1983) in paragraph at lines 4--5
+[]\OT1/ppl/m/n/12 Problema sa-tis-fi-a-bi-lit[]a[]ii bo-o-le-ene (SAT) se reg[]
+ase[]te []^^Pn multe ra-muri ale
  []
 
 
 Underfull \hbox (badness 1460) in paragraph at lines 15--16
-\OT1/ppl/m/n/12 mo-men-tul com-pi-la-rii exe-cuta o ve-ri-fi-care for-mala a pr
-o-gra-mu-lui in func-tie de
+\OT1/ppl/m/n/12 mo-men-tul com-pil[]arii exe-cut[]a o ve-ri-fi-care for-mal[]a 
+a pro-gra-mu-lui in func[]ie de
  []
 
 
 Underfull \hbox (badness 3158) in paragraph at lines 15--16
-\OT1/ppl/m/n/12 pre-ve-ni-rea ero-ri-lor, si ofera o si-gu-ranta mai mare ca pr
-o-gra-mul este co-rect
+\OT1/ppl/m/n/12 pre-ve-ni-rea ero-ri-lor, si ofer[]a o siguran[][]a mai mare c[
+]a pro-gra-mul este co-rect
  []
 
 [3
@@ -581,14 +575,20 @@ o-gra-mul este co-rect
 Capitolul 1.
 
 Underfull \hbox (badness 1681) in paragraph at lines 9--10
-[]\OT1/ppl/m/n/12 Optimizarea cea mai im-por-tanta pe care acest al-go-ritm o a
-duce me-to-dei
+[]\OT1/ppl/m/n/12 Optimizarea cea mai im-por-tant[]a pe care acest al-go-ritm o
+ aduce me-to-dei
  []
 
 
-Overfull \hbox (4.06384pt too wide) in paragraph at lines 13--14
-[]\OT1/ppl/m/n/12 Urmeaza pseudo-codul me-to-dei re-cur-sive 'dpll', for-mu-lat
-a dupa al-go-rit-mul DPLL
+Underfull \hbox (badness 3601) in paragraph at lines 11--12
+\OT1/ppl/m/n/12 va-loare va-ri-a-bi-lei r[]amase, ast-fel []^^Pnc[]at li-te-ra-
+lul din cla-uza res-pec-tiv[]a s[]a aibe
+ []
+
+
+Overfull \hbox (1.20798pt too wide) in paragraph at lines 13--14
+[]\OT1/ppl/m/n/12 Urmeaz[]a pseudo-codul me-to-dei re-cur-sive '\OT1/ppl/m/it/1
+2 dpll\OT1/ppl/m/n/12 ', for-mu-lat[]a dup[]a al-go-rit-mul DPLL
  []
 
 LaTeX Font Info:    Trying to load font information for OMS+ppl on input line 1
@@ -601,7 +601,14 @@ LaTeX Font Info:    Font shape `OMS/ppl/m/n' in size <12> not available
 
 [5
 
-] [6]) (chapters/chapter2.tex [7]
+] [6]
+Overfull \hbox (0.88554pt too wide) in paragraph at lines 65--67
+\OT1/ppl/m/n/12 va-ri-a-bi-lei $\OML/cmm/m/it/12 x[]$ \OT1/ppl/m/n/12 va-loa-re
+a \OT1/ppl/m/it/12 False\OT1/ppl/m/n/12 . Apoi, re-cur-siv, se ia lo-gica de la
+ cap[]at cu da-tele noi ob[]inute.
+ []
+
+) (chapters/chapter2.tex [7]
 Capitolul 2.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
@@ -609,162 +616,137 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 
 Overfull \hbox (27.1384pt too wide) in paragraph at lines 16--16
-\OT1/ppl/m/n/12 verificarea exis-ten-tei unei cla-uze false la fi-e-care pas re
--cur-siv dupa etapa de \OT1/ppl/m/it/12 'unit[]propagation'\OT1/ppl/m/n/12 . 
+\OT1/ppl/m/n/12 verificarea existen[]ei unei cla-uze false la fi-e-care pas re-
+cur-siv dup[]a etapa de \OT1/ppl/m/it/12 'unit[]propagation'\OT1/ppl/m/n/12 . 
  []
 
 [8
 
 ]
-LaTeX Font Info:    Font shape `OMS/ppl/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 36.
+LaTeX Font Info:    Font shape `OMS/ppl/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 34.
  [9] [10]
-LaTeX Font Info:    Trying to load font information for OML+ppl on input line 8
-1.
+Overfull \hbox (18.02982pt too wide) in paragraph at lines 71--72
+\OT1/ppl/m/n/12 oric[]arei ad-not[]ari, efec-tul 'Tot' fi-ind cel im-pli-cit. S
+uc-ce-sul com-pil[]arii pro-gra-mu-lui []^^Pnseamn[]a
+ []
 
+LaTeX Font Info:    Trying to load font information for OML+ppl on input line 8
+3.
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omlppl.fd
 File: omlppl.fd 
 )
+LaTeX Font Info:    Font shape `OML/ppl/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 83.
 LaTeX Font Info:    Font shape `OML/ppl/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 81.
-
-Overfull \hbox (41.56094pt too wide) in paragraph at lines 86--87
-[][][][][][][][][][][][][][][][][][][][] 
- []
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 109.
 
 [11]
 LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 1
-14.
+16.
  (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ppl.fd
 File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
 )
 [12]
-Overfull \hbox (41.56094pt too wide) in paragraph at lines 147--148
-[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (27.1608pt too wide) in paragraph at lines 151--153
-[][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (19.96072pt too wide) in paragraph at lines 166--167
-[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (365.56424pt too wide) in paragraph at lines 168--169
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][] 
- []
-
-
-Overfull \hbox (48.76102pt too wide) in paragraph at lines 174--175
+Overfull \hbox (12.76065pt too wide) in paragraph at lines 185--186
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 [13]
-Overfull \hbox (27.1608pt too wide) in paragraph at lines 194--195
+Overfull \hbox (27.1608pt too wide) in paragraph at lines 207--208
 [][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[14]
-Overfull \hbox (358.36417pt too wide) in paragraph at lines 223--224
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+[14] [15]
+Overfull \hbox (70.19296pt too wide) in paragraph at lines 273--275
+\OT1/ppl/m/it/12 lemma[]no[]vars[]in[]t[]outside[]f[]length[]compare \OT1/ppl/m
+/n/12 fo-lo-sit[]a pen-tru a arata c[]a dac[]a un 'truth[]assignment'
  []
 
 
-Overfull \hbox (5.56058pt too wide) in paragraph at lines 238--239
-[][][][][][][][][][][][][][][] 
- []
-
-[15]
-Overfull \hbox (34.93527pt too wide) in paragraph at lines 271--272
-[][][][][][][][][][][][][][][][][][][][] 
- []
-
-[16]
-Overfull \hbox (34.4207pt too wide) in paragraph at lines 280--281
+Overfull \hbox (34.4207pt too wide) in paragraph at lines 302--303
 []\OT1/ppl/m/n/12 ex: \OT1/ppl/m/it/12 t[]cant[]be[]solution[]for[]f\OT1/ppl/m/
 n/12 , fo-lo-sit ca post-conditie care enunta ca orice 'truth[]assignment'
  []
 
+[16]
+Overfull \hbox (38.02306pt too wide) in paragraph at lines 333--334
+[]$\OMS/cmsy/m/n/12 ^^O$ \OT1/ppl/m/n/12 Mo-du-lul Dpll-Pro-pa-ga-tion con[]ine
+ pu[]ine me-tode []^^Pns[]a im-por-tante pen-tru demonstra[]ie,
+ []
+
 [17]
-Overfull \hbox (120.76175pt too wide) in paragraph at lines 342--343
+Overfull \hbox (24.76077pt too wide) in paragraph at lines 364--365
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (24.76077pt too wide) in paragraph at lines 365--366
 [][][][][][][][][][][][][][][][] 
  []
 
-
-Overfull \hbox (221.56277pt too wide) in paragraph at lines 346--347
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
 [18]
-Underfull \hbox (badness 10000) in paragraph at lines 366--368
+Underfull \hbox (badness 10000) in paragraph at lines 389--391
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 369--381
-
+[19]
+Overfull \hbox (4.45798pt too wide) in paragraph at lines 435--436
+\OT1/ppl/m/n/12 cien-ti-za-rea struc-tu-ri-lor de date fo-lo-site, pen-tru a re
+-duce com-ple-xi-ta-tea timp a opera[]iilor
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 369--381
-
+Overfull \hbox (4.36307pt too wide) in paragraph at lines 440--441
+[]\OT1/ppl/m/n/12 O alta op-ti-mi-zare ce se poate im-ple-menta este pa-ra-le-l
+i-za-rea cal-cu-le-lor []i []^^Pmp[]ar[]irea
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 382--384
-
- []
-
-[19] [20]) (chapters/chapter3.tex [21]
+) (chapters/chapter3.tex [20]
 Capitolul 3.
-[22
+[21
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 33--35
+Underfull \hbox (badness 10000) in paragraph at lines 31--33
 
  []
 
-<images//opam_necesary_packages.png, id=395, 641.39626pt x 414.348pt>
+<images//opam_necesary_packages.png, id=392, 641.39626pt x 414.348pt>
 File: images//opam_necesary_packages.png Graphic file (type png)
 <use images//opam_necesary_packages.png>
 Package pdftex.def Info: images//opam_necesary_packages.png  used on input line
- 36.
+ 34.
 (pdftex.def)             Requested size: 455.24411pt x 294.10062pt.
 
-Overfull \hbox (28.45274pt too wide) in paragraph at lines 36--38
+Overfull \hbox (28.45274pt too wide) in paragraph at lines 34--36
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 36--38
+Underfull \hbox (badness 10000) in paragraph at lines 34--36
 
  []
 
 
-Overfull \hbox (3.63118pt too wide) in paragraph at lines 39--40
-[]\OT1/ppl/m/n/12 La fi-na-lul aces-tor pasi, fo-lo-sind ter-mi-na-lul Cy-gwin 
-si in-struc-tiu-nile de ti-pul 'make'
+Overfull \hbox (3.63118pt too wide) in paragraph at lines 37--38
+[]\OT1/ppl/m/n/12 La fi-na-lul aces-tor pa[]i, fo-lo-sind ter-mi-na-lul Cy-gwin
+ []i instruc[]iunile de ti-pul 'make'
  []
 
-[23 <./images//opam_necesary_packages.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 56--58
+[22 <./images//opam_necesary_packages.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 54--56
 
  []
 
-<images//unsat-sat-result-execute-example.png, id=402, 720.89325pt x 429.40425p
+<images//unsat-sat-result-execute-example.png, id=399, 720.89325pt x 429.40425p
 t>
 File: images//unsat-sat-result-execute-example.png Graphic file (type png)
 <use images//unsat-sat-result-execute-example.png>
 Package pdftex.def Info: images//unsat-sat-result-execute-example.png  used on 
-input line 59.
+input line 57.
 (pdftex.def)             Requested size: 364.19667pt x 216.93587pt.
-) (chapters/conclusions.tex [24 <./images//unsat-sat-result-execute-example.png
->]) (chapters/bibliography.tex [25
+) (chapters/conclusions.tex [23 <./images//unsat-sat-result-execute-example.png
+>]) (chapters/bibliography.tex [24
 
 ]
 Overfull \hbox (9.71338pt too wide) in paragraph at lines 13--14
@@ -772,32 +754,33 @@ Overfull \hbox (9.71338pt too wide) in paragraph at lines 13--14
 s-i-introduction-
  []
 
-) [26
+) [25
 
 ] (main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: E72243AD2F7EDD8919F3A75B252EB30E;3225.
+(rerunfilecheck)             Checksum: E624890E4817C16C73B3A8DAB3C45D9E;3231.
  ) 
 Here is how much of TeX's memory you used:
- 13817 strings out of 476331
- 222365 string characters out of 5787765
- 1895660 words of memory out of 5000000
- 33784 multiletter control sequences out of 15000+600000
- 540274 words of font info for 101 fonts, out of 8000000 for 9000
+ 13814 strings out of 476331
+ 222330 string characters out of 5787765
+ 1898660 words of memory out of 5000000
+ 33783 multiletter control sequences out of 15000+600000
+ 538915 words of font info for 98 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,16n,76p,797b,1939s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,18n,76p,797b,1305s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/alexd/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
-cmmi12.pfb><C:/Users/alexd/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmr12.pfb><C:/Users/alexd/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/amsfonts/cm/cmr8.pfb><C:/Users/alexd/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/public/amsfonts/cm/cmsy10.pfb><C:/Users/alexd/AppData/Local/Programs/MiKTe
-X/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/alexd/AppData/Local/Programs/Mi
-KTeX/fonts/type1/urw/palatino/uplbi8a.pfb><C:/Users/alexd/AppData/Local/Program
-s/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/alexd/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (30 pages, 311626 bytes).
+cmmi10.pfb><C:/Users/alexd/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmmi12.pfb><C:/Users/alexd/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmr12.pfb><C:/Users/alexd/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/alexd/AppData/Local/Programs/MiKTe
+X/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/alexd/AppData/Local/Progr
+ams/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/alexd/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/urw/palatino/uplbi8a.pfb><C:/Users/alexd/AppData/Loca
+l/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/alexd/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on main.pdf (29 pages, 330221 bytes).
 PDF statistics:
- 500 PDF objects out of 1000 (max. 8388607)
- 222 named destinations out of 1000 (max. 500000)
+ 501 PDF objects out of 1000 (max. 8388607)
+ 221 named destinations out of 1000 (max. 500000)
  160 words of extra memory for PDF output out of 10000 (max. 10000000)
 

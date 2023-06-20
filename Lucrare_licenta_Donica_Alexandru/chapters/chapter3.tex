@@ -1,63 +1,58 @@
-\chapter{Pasi necesari pentru a reproduce}
+\chapter{Pași necesari pentru a reproduce}
 
-Informatii despre replicarea conditiilor necesare executiei programului scris folosind F* se pot gasi pe pagina de github a limbajului F*. \footnote{https://github.com/FStarLang/FStar/blob/master/INSTALL.md}
+Informații despre replicarea condițiilor necesare execuției programului scris folosind F* se pot găsi pe pagina de github a limbajului F*. \footnote{https://github.com/FStarLang/FStar/blob/master/INSTALL.md}
 
-In sectiunea urmatoare se prezinta pasii care au fost luati pentru crearea \newline mediului in care s-a dezvoltat 'SAT solver-ul'. Instructiunile urmatoare sunt \newline compatibile cu sistemul de operare Windows, verificat cu versiunile 10/11. 
+În secțiunea următoare se prezintă pașii care au fost luați pentru crearea \newline mediului în care s-a dezvoltat 'SAT solver-ul'. Instrucțiunile următoare sunt \newline compatibile cu sistemul de operare Windows, verificat cu versiunile 10/11. 
 
 \section{Programe si resurse necesare}
 
-Urmatoarele aplicatii/programe/resurse trebuie descarcate de la locatia specificata fiecareia in fisierul 'INSTALL.md' gasit pe pagina de github a limbajului FStar.
+Următoarele aplicații/programe/resurse trebuie descărcate de la locația specificată fiecăreia în fișierul 'INSTALL.md' găsit pe pagina de github a limbajului FStar.
 
 \begin{itemize}
- \item OCaml - necesar compilarii si executarii fisierelor OCaml (.ml), care rezulta in urma compilarii fisierelor FStar (.fst)
+ \item OCaml - necesar compilării și executării fișierelor OCaml (.ml), care rezultă în urma compilării fișierelor FStar (.fst)
 	(versiune folosita - 4.14.0)
- \item opam - folosit pentru a instala pachetele necesare compilarii fisierelor specifice limbajului de programare OCaml 
+ \item opam - folosit pentru a instala pachetele necesare compilării fișierelor specifice limbajului de programare OCaml 
  
- (versiunea folosita pentru lucrare - 2.0.10)
- \item cygwin - ofera posibilitatea compilarii si executarii a programelor tipice \newline sistemelor de operare Unix si Linux, ceea ce include suport pentru fisiere \newline  'Makefile' 
- (versiunea folosita pentru lucrare - 3.4.6)
- \item Z3 - folosit pentru a valida fisierele ce contin programe scrise folosind F*
+ (versiunea folosită pentru lucrare - 2.0.10)
+ \item cygwin - oferă posibilitatea compilării si executării a programelor tipice \newline sistemelor de operare Unix si Linux, ceea ce include suport pentru fișiere \newline  'Makefile' 
+ (versiunea folosită pentru lucrare - 3.4.6)
+ \item Z3 - folosit pentru a valida fișierele ce conțin programe scrise folosind F*
  
-
- 
- (arhiva folosita pentru Windows - z3-4.8.5-x64-win.zip)
+ (arhiva folosită pentru Windows - z3-4.8.5-x64-win.zip)
 \end{itemize}
 
 \newpage
 
 
-Dupa descarcarea/instalarea acestor resurse, trebuie clonata ramura 'master' a proiectului FStar pe dispozitivul local. (locatia clonei pe dispozitivul folosit pentru acest proiect: "D:/fstar", versiunea  - F* 2023.04.26~dev )
+După descărcarea/instalarea acestor resurse, trebuie clonată ramura 'master' a proiectului FStar pe dispozitivul local. (locația clonei pe dispozitivul folosit pentru acest proiect: "D:/fstar", versiunea  - F* 2023.04.26~dev )
 
-Trebuie adaugate path-urile absolute catre ".../fstar/bin" si ".../z3-win/bin" in variabila 'Path' a sistemului.
+Trebuie adăugate path-urile absolute către ".../fstar/bin" si ".../z3-win/bin" in variabila 'Path' a sistemului.
 
-Dupa instalarea programului 'opam', trebuie instalate mai anumite pachete de date. Minimul necesar de pachete se poate gasi si pe instructiunile de instalare gasite la link-ul de mai sus, insa pentru a avea la dispozitie toate resursele din proiectul FStar descarcat fara erori, sunt necesare urmatoarele pachete: 
+După instalarea programului 'opam', trebuie instalate anumite pachete de date. Minimul necesar de pachete se poate găsi si pe instrucțiunile de instalare găsite la link-ul de mai sus, însă pentru a avea la dispoziție toate resursele din proiectul FStar descarcat fără erori, sunt necesare următoarele pachete: 
 \newline
 
 \includegraphics[width=1\textwidth]{opam_necesary_packages.png}
 \newline
 
-La finalul acestor pasi, folosind terminalul Cygwin si instructiunile de tipul 'make' in folder-ul 'fstar', ar trebui sa functioneze verificarea si executarea oricaror fisiere surse scrise in F*, fisiere proprii sau exemple ce faceau deja parte din proiect.
+La finalul acestor pași, folosind terminalul Cygwin și instrucțiunile de tipul 'make' in folder-ul 'fstar', ar trebui să funcționeze verificarea și executarea oricăror fișiere surse scrise in F*, fișiere proprii sau exemple ce făceau deja parte din proiect.
 
 \newpage
 
 \section{Executarea solver-ului SAT}
 
-Sursele corespunzatoare proiectului prezentat se gasesc la:
+Sursele corespunzătoare proiectului prezentat se găsesc la:
 \href{https://github.com/alex4482/FStar-DPLL-licenta/tree/main/dpll_optimized}{FStar-DPLL github}.
 
-Aceste surse trebuie descarcate, salvate intr-un folder in proiectul 'fstar'. \newline Fisierul 'Makefile' trebuie modificat, astfel incat variabila 'FSTAR-HOME'  sa faca \newline referire folder-ul 'fstar'. Acelasi pas trebuie facut pentru fisieru 'Makefile' din \newline folder-ul 'output'.
+Aceste surse trebuie descărcate, salvate într-un folder in proiectul 'fstar'. \newline Fișierul 'Makefile' trebuie modificat, astfel încât variabila 'FSTAR-HOME'  să facă \newline referire spre folder-ul 'fstar'. Același pas trebuie făcut pentru fișieru 'Makefile' din \newline folder-ul 'output'.
 
-Apoi, in terminalul cygwin deschis in folder-ul proiectului DPLL-FStar, trebuie executata comanda 'make', la finalul careia in folder-ul 'output' vor aparea pentru \newline fiecare fisier sursa '.fst' cate un fisier '.ml' care contin codul Ocaml extras din sursele FStar. De asemenea in folder-ul 'output' se va afla executabilul "Main.exe".
+Apoi, în terminalul cygwin deschis în folder-ul proiectului DPLL-FStar, trebuie executată comanda 'make', la finalul căreia în folder-ul 'output' vor apărea pentru \newline fiecare fișier sursă '.fst', câte un fișier '.ml', iar acestea conțin codul Ocaml extras din sursele FStar. De asemenea în folder-ul 'output' se va afla executabilul "Main.exe".
 
-Pentru a recompila si regenera fisierul "Main.exe", trebuie sters cel anterior creat, daca a fost creat.
+Pentru a recompila si regenera fișierul "Main.exe", trebuie șters cel anterior creat, dacă a fost creat.
 
-Imediat dupa pornirea programului "Main.exe", trebuie introdus de la tastatura calea relativa catre un fisier de input. Cateva fisiere de input exista in folder-ul \newline "input-files" si orice alt fisier de intrare trebuie sa respecte acea structura pentru ca parsarea datelor implementata sa functioneze.
+Imediat după pornirea programului "Main.exe", trebuie introdus de la tastatură calea relativă către un fișier de input. Câteva fișiere de input există în folder-ul \newline "input-files" și orice alt fișier de intrare trebuie să respecte acea structură pentru ca parsarea implementată a datelor să funcționeze.
 
-La finalul unei astfel de executii, va aparea mesaj la consola cu rezultatul obtinut, fie ca formula data este nesatisfiabila, fie ca e satisfiabila si alaturi o varianta de raspuns ce contine variabilele formulei si valorile lor booleene astfel incat fiecare clauza a formulei sa aibe valoarea de adevar true.
+La finalul unei astfel de execuții, va apărea mesaj la consolă cu rezultatul obținut, fie că formula dată este nesatisfiabilă, fie că e satisfiabilă si alături o variantă de răspuns ce conține variabilele formulei si valorile lor booleene astfel încât fiecare clauză a formulei să aibe valoarea de adevăr \textit{true}.
 \newline
 
 \includegraphics[width=0.8\textwidth]{unsat-sat-result-execute-example.png}
 
-%\newline
-%\includegraphics[width=0.3\textwidth]{unsat-result-execute-example.png}
-%\newline

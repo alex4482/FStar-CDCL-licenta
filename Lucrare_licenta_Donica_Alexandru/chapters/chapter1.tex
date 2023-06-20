@@ -2,21 +2,21 @@
 
 \chapter{Algoritmul DPLL (Davis-Putnam-Logemann-Loveland)}
 
-Algoritmul DPLL pentru rezolvarea problemei SAT este considerat o optimizare a metodei de backtracking si sta la baza crearii a multor 'SAT solveri' moderni.
+Algoritmul DPLL pentru rezolvarea problemei SAT este considerat o optimizare a metodei de backtracking și stă la baza creării a multor 'SAT solveri' moderni.
 
-Acest algoritm a fost demonstrat sa aibe proprietatea ca pentru orice formula care se poate scrie in forma normala conjunctiva (CNF), va returna o solutie valida daca aceasta exista, si va specifica mereu ca nu exista daca formula este intr-adevar nesatisfiabila.
+În cadrul acestui algoritm a fost demonstrată proprietatea ca pentru orice formulă care se poate scrie în formă normală conjunctivă (CNF), se va returna o soluție validă dacă aceasta există, și se va specifica mereu când nu există dacă formula este într-adevăr nesatisfiabilă.
 
-Optimizarea cea mai importanta pe care acest algoritm o aduce metodei \linebreak backtracking este 'propagarea clauzelor unit', unde o 'clauza unit' este o clauza ce nu contine nici un literal cu valoarea \textit{True} si care contine un singur literal neasignat inca. 
+Optimizarea cea mai importantă pe care acest algoritm o aduce metodei \linebreak backtracking este 'propagarea clauzelor unit', unde o 'clauză unit' este o clauză ce nu conține nici un literal cu valoarea \textit{ True } și care conține un singur literal neasignat încă. 
 
-Astfel, la fiecare pas recursiv, se cauta fiecare clauza 'unit' si se asigneaza o \linebreak valoare variabilei ramase astfel incat literalul din clauza respectiva sa aibe valoarea True. Motivul pentru care aceasta metoda functioneaza este ca daca s-ar asigna \linebreak cealalta valoare de adevar unui astfel de literal, valoarea de adevar a clauzei respective ar fi \textit{False}, deci solutia ar fi invalida.
+Astfel, la fiecare pas recursiv, se caută fiecare clauză 'unit' și se asignează o \linebreak valoare variabilei rămase, astfel încât literalul din clauza respectivă să aibe \linebreak valoarea \textit{ True }. Motivul pentru care această metodă funcționează este că dacă s-ar asigna cealaltă valoare de adevăr unui astfel de literal, valoarea de adevăr a clauzei respective ar fi \textit{False}, deci soluția ar fi invalidă.
 
-Urmeaza pseudo-codul metodei recursive 'dpll', formulata dupa algoritmul DPLL modificat sa corespunda implementarii acestui proiect proiectului.
+Urmează pseudo-codul metodei recursive '\textit{dpll}', formulată după algoritmul DPLL modificat sa corespundă implementării acestui proiect.
 
 
 \iftrue
 \begin{algorithm}
 	\KwIn{formula : f \{ length f $\ge$ 1 \} ; \linebreak truth\_assignment : tau\{ length tau $\leq$ length f $\land$ is\_partial\_solution f tau \}}
-	\KwOut{ result : r \{ (r is (Sat tau) $\implies$ \textit{calculate\_formula\_value} f tau = true ) 
+	\KwOut{ result : r \{ (r is (Sat tau) $\implies$ \textit{calculate\_formula\_value} f tau =  True  ) 
 	\newline $\land$ (r is Unsat $\implies$ $\forall$ truth\_assignment : t . \newline \textit{calculate\_formula\_value} f ta = false) \} } 
 	
 	
@@ -35,15 +35,15 @@ Urmeaza pseudo-codul metodei recursive 'dpll', formulata dupa algoritmul DPLL mo
 	$\land$ is\_clause\_false c tau\_2 }
 	}
 	{
-		\textit{tau\_2} $\gets$\textit{ tau[ new\_var : True]}
-	 \newline	...aceeiasi pasi ca pana acum, dar cu noul \textit{tau\_2} ,si returneaza \textit{NotSat} in block-ul \textit{if-then} corespondent...
+		\textit{tau\_2} $\gets$\textit{ tau[ new\_var : True ]}
+	 \newline	...aceeiasi pasi ca pana acum, dar cu noul \textit{tau\_2} ,și returneaza \textit{NotSat} în block-ul \textit{if-then} corespondent...
 	}
 	\Else{
 		\textit{res} $\gets$ \textit{dpll\_recursiv f tau\_2} \newline
 		\If{\textit{res is NotSat}}
 		{
-			\textit{tau\_2} $\gets$\textit{ tau[ new\_var : True]}
-			 \newline	...aceeiasi pasi ca pana acum, dar cu noul \textit{tau\_2} ,si returneaza \textit{NotSat} in block-ul \textit{if-then} corespondent...
+			\textit{tau\_2} $\gets$\textit{ tau[ new\_var : True ]}
+			 \newline	...aceeiasi pasi ca pana acum, dar cu noul \textit{tau\_2} ,si returneaza \textit{NotSat} în block-ul \textit{if-then} corespondent...
 		}
 		\Else{\Return{res}}
 	}
@@ -54,7 +54,7 @@ Urmeaza pseudo-codul metodei recursive 'dpll', formulata dupa algoritmul DPLL mo
 \newpage
 
 
-Exemplu: formula ce contine 5 clauze, numerotate de la $c_1$ la $c_5$ si 6 variabile numerotate de la $ x_1 $ la $x_6$
+Exemplu: formulă ce conține 5 clauze, numerotate de la $c_1$ la $c_5$ și 6 variabile numerotate de la $ x_1 $ la $x_6$
 
 ( $\neg x_1 \lor x_3 \lor x_4 $) $\land$
 ($\neg x_2 \lor \neg x_3 \lor x_5$) $\land$
@@ -62,8 +62,8 @@ Exemplu: formula ce contine 5 clauze, numerotate de la $c_1$ la $c_5$ si 6 varia
 ($x_4  \lor \neg x_5$) $\land$
 ($x_1 \lor \neg x_4 \lor \neg x_6$)
 
-Implementarea acestui proiect ar incepe cautarea unei solutii asignand unei variabile noi o valoare oarecare, mai exact, variabilei $x_1$ valoarea \textit{False}. Urmeaza etapa de unit propagation, in care se gaseste clauza $c_3$ a fi clauza unitara, si se asigneaza variabilei $x_2$ valoarea \textit{False}.
-Apoi, recursiv, se ia logica de la capat cu datele noi obtinute. Se va gasi primul literal neasignat $x_3$ si i se va acorda valoarea \textit{False}. In etapa de propagare a clauzelor unitare se gaseste prima clauza ce contine 2 literali cu valoare falsa si variabila $x_4$, care va primi valoarea \textit{True}. Tot in etapa de propagare a clauzelor unitare, se gaseste acum clauza $c_5$, unde singurul literal ramas este $\neg x_6$, si deci variabila $x_6$ va primi valoarea \textit{False}. Astfel toate clauzele au valoarea true, iar variabila $x_5$ poate avea orice valoare de adevar. Deci s-a gasit o solutie valida si formula este satisfiabila.
+Implementarea acestui proiect ar începe căutarea unei soluții asignând unei variabile noi o valoare oarecare, mai exact, variabilei $x_1$ valoarea \textit{False}. Urmează etapa de unit propagation, în care se găsește clauza $c_3$ a fi clauză unitară, și se asignează \linebreak variabilei $x_2$ valoarea \textit{False}.
+Apoi, recursiv, se ia logica de la capăt cu datele noi obținute. Se va găsi primul literal neasignat $x_3$ și i se va acorda valoarea \textit{False}. În etapa de propagare a clauzelor unitare se găsește prima clauză ce conține 2 literali cu valoare falsă și variabila $x_4$, care va primi valoarea \textit{ True }. Tot în etapa de propagare a clauzelor unitare, se găsește acum clauza $c_5$, unde singurul literal rămas este $\neg x_6$, și deci variabila $x_6$ va primi valoarea \textit{False}. Astfel toate clauzele au valoarea \textit{True}, iar variabila $x_5$ poate avea orice valoare de adevăr. Deci s-a găsit o soluție validă și formula este satisfiabilă.
 
-$x_1 = False ;~ x_2 = False ;~ x_3 = False ;~ x_4 = True ; ~x_5 = orice ;~ x_6 = False$
+$x_1 = False ;~ x_2 = False ;~ x_3 = False ;~ x_4 =  True  ; ~x_5 = orice ;~ x_6 = False$
 

@@ -9,11 +9,11 @@
 \contentsline {subsection}{\numberline {2.2.2}Corectitudinea programului}{9}{subsection.2.2.2}%
 \contentsline {subsection}{\numberline {2.2.3}Terminarea programului}{10}{subsection.2.2.3}%
 \contentsline {section}{\numberline {2.3}Structurile de date folosite}{11}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Modulele ce alcatuiesc programul}{15}{section.2.4}%
+\contentsline {section}{\numberline {2.4}Modulele ce alcatuiesc programul}{14}{section.2.4}%
 \contentsline {section}{\numberline {2.5}Metrici orientative}{19}{section.2.5}%
-\contentsline {section}{\numberline {2.6}Posibile optimizari}{20}{section.2.6}%
-\contentsline {chapter}{\numberline {3}Pasi necesari pentru a reproduce}{22}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Programe si resurse necesare}{22}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Executarea solver-ului SAT}{24}{section.3.2}%
-\contentsline {chapter}{Concluzii}{25}{chapter*.4}%
-\contentsline {chapter}{Bibliografie}{26}{chapter*.5}%
+\contentsline {section}{\numberline {2.6}Posibile optimizări}{20}{section.2.6}%
+\contentsline {chapter}{\numberline {3}Pași necesari pentru a reproduce}{21}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Programe si resurse necesare}{21}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Executarea solver-ului SAT}{23}{section.3.2}%
+\contentsline {chapter}{Concluzii}{24}{chapter*.4}%
+\contentsline {chapter}{Bibliografie}{25}{chapter*.5}%
