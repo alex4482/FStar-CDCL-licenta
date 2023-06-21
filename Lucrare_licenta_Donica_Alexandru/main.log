@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.6.13)  20 JUN 2023 03:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.6.13)  21 JUN 2023 00:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -416,7 +416,7 @@ LaTeX Info: Redefining \] on input line 2954.
 Package: centernot 2016/05/16 v1.4 Centers the not symbol horizontally (HO)
 )
 LaTeX Font Info:    Trying to load font information for OT1+ppl on input line 3
-3.
+4.
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
@@ -428,24 +428,24 @@ File: l3backend-pdftex.def 2023-03-30 L3 backend support: PDF output (pdfTeX)
 ) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 33.
-LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 34.
+LaTeX Font Info:    ... okay on input line 34.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -508,7 +508,7 @@ fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 \c@lstlisting=\count312
-Package hyperref Info: Link coloring OFF on input line 33.
+Package hyperref Info: Link coloring OFF on input line 34.
  (main.out) (main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
@@ -530,26 +530,14 @@ een already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.35 \end{titlepage}
-                     [1]) (front/declaration1.tex)
-pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
-een already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.42     \input{front/declaration1}
-                                    [1] (front/declaration2.tex)
-pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
-een already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.43     \input{front/declaration2}
-                                    [2] (main.toc)
+                     [1]) (main.toc)
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
- (chapters/motivation.tex
-[1
+ (chapters/motivation.tex [1
 
-]) (chapters/introduction.tex [2
+])
+(chapters/introduction.tex [2
 
 ]
 Underfull \hbox (badness 1983) in paragraph at lines 4--5
@@ -558,15 +546,21 @@ ase[]te []^^Pn multe ra-muri ale
  []
 
 
-Underfull \hbox (badness 1460) in paragraph at lines 15--16
-\OT1/ppl/m/n/12 mo-men-tul com-pil[]arii exe-cut[]a o ve-ri-fi-care for-mal[]a 
-a pro-gra-mu-lui in func[]ie de
+Underfull \hbox (badness 10000) in paragraph at lines 6--7
+[]\OT1/ppl/m/n/12 'SAT' este con-si-de-rat[]a prima pro-blema ce a fost de-mon-
+strat[]a a fi
  []
 
 
-Underfull \hbox (badness 3158) in paragraph at lines 15--16
-\OT1/ppl/m/n/12 pre-ve-ni-rea ero-ri-lor, si ofer[]a o siguran[][]a mai mare c[
-]a pro-gra-mul este co-rect
+Underfull \hbox (badness 1466) in paragraph at lines 15--16
+\OT1/ppl/m/n/12 mo-men-tul com-pil[]arii exe-cut[]a o ve-ri-fi-care for-mal[]a 
+a pro-gra-mu-lui []^^Pn func[]ie de
+ []
+
+
+Underfull \hbox (badness 3029) in paragraph at lines 15--16
+\OT1/ppl/m/n/12 pre-ve-ni-rea ero-ri-lor, []ai ofer[]a o siguran[][]a mai mare 
+c[]a pro-gra-mul este co-rect
  []
 
 [3
@@ -580,9 +574,9 @@ Underfull \hbox (badness 1681) in paragraph at lines 9--10
  []
 
 
-Underfull \hbox (badness 3601) in paragraph at lines 11--12
+Underfull \hbox (badness 3547) in paragraph at lines 11--12
 \OT1/ppl/m/n/12 va-loare va-ri-a-bi-lei r[]amase, ast-fel []^^Pnc[]at li-te-ra-
-lul din cla-uza res-pec-tiv[]a s[]a aibe
+lul din cla-uza res-pec-tiv[]a s[]a aib[]a
  []
 
 
@@ -601,14 +595,7 @@ LaTeX Font Info:    Font shape `OMS/ppl/m/n' in size <12> not available
 
 [5
 
-] [6]
-Overfull \hbox (0.88554pt too wide) in paragraph at lines 65--67
-\OT1/ppl/m/n/12 va-ri-a-bi-lei $\OML/cmm/m/it/12 x[]$ \OT1/ppl/m/n/12 va-loa-re
-a \OT1/ppl/m/it/12 False\OT1/ppl/m/n/12 . Apoi, re-cur-siv, se ia lo-gica de la
- cap[]at cu da-tele noi ob[]inute.
- []
-
-) (chapters/chapter2.tex [7]
+] [6]) (chapters/chapter2.tex [7]
 Capitolul 2.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
@@ -626,78 +613,78 @@ cur-siv dup[]a etapa de \OT1/ppl/m/it/12 'unit[]propagation'\OT1/ppl/m/n/12 .
 LaTeX Font Info:    Font shape `OMS/ppl/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 34.
  [9] [10]
-Overfull \hbox (18.02982pt too wide) in paragraph at lines 71--72
+Overfull \hbox (18.02982pt too wide) in paragraph at lines 72--73
 \OT1/ppl/m/n/12 oric[]arei ad-not[]ari, efec-tul 'Tot' fi-ind cel im-pli-cit. S
 uc-ce-sul com-pil[]arii pro-gra-mu-lui []^^Pnseamn[]a
  []
 
 LaTeX Font Info:    Trying to load font information for OML+ppl on input line 8
-3.
+4.
 (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omlppl.fd
 File: omlppl.fd 
 )
 LaTeX Font Info:    Font shape `OML/ppl/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 83.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 84.
 LaTeX Font Info:    Font shape `OML/ppl/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 109.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 110.
 
 [11]
 LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 1
-16.
+17.
  (C:\Users\alexd\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ppl.fd
 File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
 )
 [12]
-Overfull \hbox (12.76065pt too wide) in paragraph at lines 185--186
+Overfull \hbox (12.76065pt too wide) in paragraph at lines 186--187
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 [13]
-Overfull \hbox (27.1608pt too wide) in paragraph at lines 207--208
+Overfull \hbox (27.1608pt too wide) in paragraph at lines 208--209
 [][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 [14] [15]
-Overfull \hbox (70.19296pt too wide) in paragraph at lines 273--275
+Overfull \hbox (70.19296pt too wide) in paragraph at lines 274--276
 \OT1/ppl/m/it/12 lemma[]no[]vars[]in[]t[]outside[]f[]length[]compare \OT1/ppl/m
 /n/12 fo-lo-sit[]a pen-tru a arata c[]a dac[]a un 'truth[]assignment'
  []
 
 
-Overfull \hbox (34.4207pt too wide) in paragraph at lines 302--303
+Overfull \hbox (34.4207pt too wide) in paragraph at lines 303--304
 []\OT1/ppl/m/n/12 ex: \OT1/ppl/m/it/12 t[]cant[]be[]solution[]for[]f\OT1/ppl/m/
-n/12 , fo-lo-sit ca post-conditie care enunta ca orice 'truth[]assignment'
+n/12 , fo-lo-sit ca post-condi[]ie care enun[][]a ca orice 'truth[]assignment'
  []
 
 [16]
-Overfull \hbox (38.02306pt too wide) in paragraph at lines 333--334
+Overfull \hbox (38.02306pt too wide) in paragraph at lines 334--335
 []$\OMS/cmsy/m/n/12 ^^O$ \OT1/ppl/m/n/12 Mo-du-lul Dpll-Pro-pa-ga-tion con[]ine
  pu[]ine me-tode []^^Pns[]a im-por-tante pen-tru demonstra[]ie,
  []
 
 [17]
-Overfull \hbox (24.76077pt too wide) in paragraph at lines 364--365
+Overfull \hbox (24.76077pt too wide) in paragraph at lines 365--366
 [][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (24.76077pt too wide) in paragraph at lines 365--366
+Overfull \hbox (24.76077pt too wide) in paragraph at lines 366--367
 [][][][][][][][][][][][][][][][] 
  []
 
 [18]
-Underfull \hbox (badness 10000) in paragraph at lines 389--391
+Underfull \hbox (badness 10000) in paragraph at lines 390--392
 
  []
 
 [19]
-Overfull \hbox (4.45798pt too wide) in paragraph at lines 435--436
+Overfull \hbox (4.45798pt too wide) in paragraph at lines 436--437
 \OT1/ppl/m/n/12 cien-ti-za-rea struc-tu-ri-lor de date fo-lo-site, pen-tru a re
 -duce com-ple-xi-ta-tea timp a opera[]iilor
  []
 
 
-Overfull \hbox (4.36307pt too wide) in paragraph at lines 440--441
+Overfull \hbox (4.36307pt too wide) in paragraph at lines 441--442
 []\OT1/ppl/m/n/12 O alta op-ti-mi-zare ce se poate im-ple-menta este pa-ra-le-l
 i-za-rea cal-cu-le-lor []i []^^Pmp[]ar[]irea
  []
@@ -711,7 +698,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 31--33
 
  []
 
-<images//opam_necesary_packages.png, id=392, 641.39626pt x 414.348pt>
+<images//opam_necesary_packages.png, id=385, 641.39626pt x 414.348pt>
 File: images//opam_necesary_packages.png Graphic file (type png)
 <use images//opam_necesary_packages.png>
 Package pdftex.def Info: images//opam_necesary_packages.png  used on input line
@@ -738,7 +725,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 54--56
 
  []
 
-<images//unsat-sat-result-execute-example.png, id=399, 720.89325pt x 429.40425p
+<images//unsat-sat-result-execute-example.png, id=392, 720.89325pt x 429.40425p
 t>
 File: images//unsat-sat-result-execute-example.png Graphic file (type png)
 <use images//unsat-sat-result-execute-example.png>
@@ -758,16 +745,16 @@ s-i-introduction-
 
 ] (main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: E624890E4817C16C73B3A8DAB3C45D9E;3231.
+(rerunfilecheck)             Checksum: 5A29D3E6E22271513E2B0B462D9D3AA0;3237.
  ) 
 Here is how much of TeX's memory you used:
- 13814 strings out of 476331
- 222330 string characters out of 5787765
+ 13802 strings out of 476331
+ 221917 string characters out of 5787765
  1898660 words of memory out of 5000000
- 33783 multiletter control sequences out of 15000+600000
+ 33777 multiletter control sequences out of 15000+600000
  538915 words of font info for 98 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,18n,76p,797b,1305s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,18n,76p,756b,1305s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/alexd/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmmi10.pfb><C:/Users/alexd/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmmi12.pfb><C:/Users/alexd/AppData/Local/Programs/MiKTeX/fonts/type1/p
@@ -778,9 +765,9 @@ ams/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Users/alexd/AppData/Local/Pr
 ograms/MiKTeX/fonts/type1/urw/palatino/uplbi8a.pfb><C:/Users/alexd/AppData/Loca
 l/Programs/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Users/alexd/AppData/L
 ocal/Programs/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (29 pages, 330221 bytes).
+Output written on main.pdf (27 pages, 326441 bytes).
 PDF statistics:
- 501 PDF objects out of 1000 (max. 8388607)
+ 495 PDF objects out of 1000 (max. 8388607)
  221 named destinations out of 1000 (max. 500000)
  160 words of extra memory for PDF output out of 10000 (max. 10000000)
 
