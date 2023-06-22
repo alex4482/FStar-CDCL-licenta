@@ -49,7 +49,6 @@ let rec dpll'   (f: formula { length f > 0 })
         })  
        (decreases ((length (get_vars_in_formula f)) - (length pre_dpll_t)))  = 
     lemma_no_vars_in_t_outside_f_length_compare (get_vars_in_formula f) pre_dpll_t;
-    //assert(length (get_vars_in_formula f) >= length pre_dpll_t);
     let recent_var = get_most_recent_var_added pre_dpll_t in
     let t_lits = unit_clause_propagation f pre_dpll_t recent_var in
     let t = fst t_lits in

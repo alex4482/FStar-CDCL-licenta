@@ -8,8 +8,6 @@ open FStar.Pervasives.Native
 module L = FStar.List.Tot
 module T = FStar.Pervasives.Native
 
-////////////functions for unit clause propagation
-
 let is_unit_clause (c : clause) ( t : truth_assignment) : (res : bool {
     (res) <==> (
         (length (get_unassigned_literals_from_clause c t) = 1) 
@@ -22,24 +20,45 @@ let is_unit_clause (c : clause) ( t : truth_assignment) : (res : bool {
     then true
     else false
 
-let rec exists_unit_clause (f : formula) ( t : truth_assignment) : (res : bool{
-    (res <==> (exists (c : clause{L.mem c f}). (is_unit_clause c t)))
+let is_unit_clause_info (c : clause) ( t : truth_assignment) : (res : (literal * bool) {
+    (res._2) <==> (
+        (length (get_unassigned_literals_from_clause c t) = 1) 
+        /\ (res._1 = (L.hd (get_unassigned_literals_from_clause c t)))
+        /\ is_variable_in_assignment t (get_literal_variable res._1) = false
+        /\ L.mem res._1 c
+        /\ (forall (l : literal{L.mem l c /\ l <> (L.hd (get_unassigned_literals_from_clause c t))}).
+            (is_variable_in_assignment t (get_literal_variable l)))
+        /\ (is_clause_true_yet t c = false)
+        /\ (forall (l : literal{L.mem l c /\ l <> res._1}). (is_variable_in_assignment t (get_literal_variable l)))
+        )
 }) =
-    if length f = 0 then false
+    let xs = get_unassigned_literals_from_clause c t in
+    if length xs = 1 && (is_clause_true_yet t c = false)
+    then 
+        let ress = (T.Mktuple2 (L.hd xs) true) in
+        ress
+    else T.Mktuple2 (Var 1) false
+
+let rec exists_unit_clause (f : formula) ( t : truth_assignment) : (res : (literal & bool & clause) {
+    (res._2 <==> (
+        L.mem res._3 f
+        /\ (is_unit_clause_info res._3 t)._2
+        /\ L.mem res._1 res._3
+        /\ (forall (l : literal{L.mem l res._3 /\ l <> res._1}). (is_variable_in_assignment t (get_literal_variable l)))
+        /\ L.mem (get_literal_variable res._1) (get_vars_in_formula f) 
+        /\ (is_variable_in_assignment t (get_literal_variable res._1) = false) 
+    ))
+}) =
+    if length f = 0 
+    then 
+        Mktuple3 (Var 1) false [(Var 1)]
     else let x = L.hd f in
-        if is_unit_clause x t
-        then true
+        let info = is_unit_clause_info x t in
+        if snd info
+        then Mktuple3 (fst info) true (x)
         else exists_unit_clause (L.tl f) t
 
-let rec get_unit_clause (f : formula{length f > 0}) ( t : truth_assignment {exists_unit_clause f t}) 
-    : (res : clause{is_unit_clause res t /\ L.mem res f}) =
-    if length f = 1 then L.hd f
-    else let x = L.hd f in
-        if is_unit_clause x t
-        then x
-        else get_unit_clause (L.tl f) t
-
-let get_unassigned_literal_in_unit_clause (c : clause) ( t : truth_assignment{is_unit_clause c t}) 
+let get_unassigned_literal_in_unit_clause (c : clause) ( t : truth_assignment{(is_unit_clause_info c t)._2}) 
     : (res : literal{
         L.mem res c 
         /\ (forall (l : literal{L.mem l c /\ l <> res}). (is_variable_in_assignment t (get_literal_variable l)))
@@ -110,12 +129,16 @@ let lemma_dpll_helper_1 (t : truth_assignment) ( c : clause) : Lemma
 let negate_var_info (v : variable_info) : (res :variable_info {res.value = not v.value /\ v.variable=res.variable})
     = {value = (not v.value) ; variable = v.variable}
 
-let propagate_unit_clause 
+let propagate_unit_clause
     (f : formula) 
     ( cl : clause{L.mem cl f}) 
-    (t: truth_assignment {is_unit_clause cl t /\ no_variables_outside_f_are_in_t f t}) 
+    (t: truth_assignment {(is_unit_clause_info cl t)._2 /\ no_variables_outside_f_are_in_t f t}) 
+    (x : literal {
+        L.mem x cl
+        /\ (forall (l : literal{L.mem l cl /\ l <> x}). (is_variable_in_assignment t (get_literal_variable l)))
+        /\ (is_variable_in_assignment t (get_literal_variable x) = false)})
     : (res : (truth_assignment * literal){
-        is_unit_clause cl res._1 = false
+        (is_unit_clause_info cl res._1)._2 = false
         /\ is_clause_true_yet res._1 cl
         /\ (length res._1 = length t + 1)
         /\ t1_is_sublist_of_t2 t (fst res) 
@@ -136,7 +159,6 @@ let propagate_unit_clause
             }). (get_literal_value t l = get_literal_value res._1 l))
     })
     =
-    let x = get_unassigned_literal_in_unit_clause cl t in
         let x_variable = get_literal_variable x in
         let ress = assign_literal_true_in_truth t x in
         
@@ -314,10 +336,15 @@ let rec unit_clause_propagation_helper
     }) 
         (decreases (length (get_vars_in_formula f) - (length t)))
     =
-    if exists_unit_clause f t
+    let exists_result = exists_unit_clause f t in
+    let exists_unit_clause_bool = exists_result._2 in
+    if exists_unit_clause_bool
     then 
-        let x = get_unit_clause f t in
-        let new_t = propagate_unit_clause f x t in
+        let new_lit = exists_result._1 in
+        let unit_clause = exists_result._3 in
+
+        let new_t = propagate_unit_clause f unit_clause t new_lit in
+        
         assert(no_variables_outside_f_are_in_t f new_t._1);
         lemma_no_vars_in_t_outside_f_length_compare (get_vars_in_formula f) new_t._1;
         assert(length new_t._1 <= length (get_vars_in_formula f));
@@ -547,21 +574,23 @@ let unit_clause_propagation
     /\ (forall (l : literal {L.mem l res._2}). (get_literal_value res._1 l))
     /\ (forall (l : literal{L.mem l res._2}). ((L.mem (negate_lit l) res._2 = false)))
     /\ (forall (c : clause {
-        L.mem c f /\ (exists (l : literal{L.mem l res._2}). (L.mem l c))
+            L.mem c f /\ (exists (l : literal{L.mem l res._2}). (L.mem l c))
         }). 
         (is_clause_true_yet res._1 c)) 
     /\ (forall (l : literal {
-        is_variable_in_assignment res._1 (get_literal_variable l) 
-        /\ (L.mem l res._2 = false)
-        /\ (L.mem l (negate_lits_list res._2) = false)
-        }).
-            (is_variable_in_assignment t (get_literal_variable l)))
+            is_variable_in_assignment res._1 (get_literal_variable l) 
+            /\ (L.mem l res._2 = false)
+            /\ (L.mem l (negate_lits_list res._2) = false)
+            }).
+            (is_variable_in_assignment t (get_literal_variable l))
+        )
     /\ (forall (l : literal {L.mem l res._2}).
             (L.mem (get_literal_variable l) (get_vars_in_formula f)))
 
     /\ (forall (l : literal {
-        is_variable_in_assignment t (get_literal_variable l)
-    }). (get_literal_value t l = get_literal_value res._1 l))
+            is_variable_in_assignment t (get_literal_variable l)
+            }). (get_literal_value t l = get_literal_value res._1 l)
+        )
 
     /\ (L.mem new_l res._2)
     }) 

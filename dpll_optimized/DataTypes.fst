@@ -25,7 +25,7 @@ let rec count_variables_occurrence (vars: list variable_info) (v : nat_non_zero)
             /\ ((List.Tot.mem {value=true ; variable=v} vars ==> (List.Tot.mem {value=false; variable=v} vars = false)))
             /\ (List.Tot.mem {value=false ; variable=v} vars ==> (List.Tot.mem {value=true; variable=v} vars = false)) )
         /\ (res = 0 <==> ((List.Tot.mem {value=true; variable=v} vars = false)
-                        /\ (List.Tot.mem {value=false; variable=v} vars = false)) )// (forall (var : variable_info {List.Tot.mem var vars}). (var.variable <> v)))
+                        /\ (List.Tot.mem {value=false; variable=v} vars = false)) )
         /\ (res > 0 <==> ((exists (var: variable_info {List.Tot.mem var vars}). (var.variable = v)) 
                         ) )
      }) = if length vars = 0 
@@ -40,7 +40,8 @@ let rec count_variables_occurrence (vars: list variable_info) (v : nat_non_zero)
 let rec ta_contition (ta : list variable_info) 
     = (forall (var : variable_info {List.Tot.mem var ta}). 
             ( count_variables_occurrence ta var.variable = 1 
-            ) )
+            ) 
+        )
         /\ (length ta > 0 ==> ta_contition (List.Tot.tl ta))
 
 type truth_assignment = ta : list variable_info { ta_contition ta }

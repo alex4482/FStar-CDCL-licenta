@@ -67,8 +67,9 @@ let rec clause_to_string (c : clause) =
             let xs_str = clause_to_string (L.tl c) in
             concat "  /\\  " [x_str ; xs_str]
 
-let rec formula_to_string (f : formula{length f > 0}) : (res : string)
+let rec formula_to_string (f : formula) : (res : string)
     = 
+    if length f = 0 then "length 0 formula" else
     let x = L.hd f in
     let x_str = clause_to_string x in
         if length f = 1

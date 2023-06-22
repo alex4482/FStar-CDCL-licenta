@@ -15,7 +15,7 @@ let negate_lit (l : literal)
     | Var x -> NotVar x
     | NotVar x -> Var x
 
-let rec negate_lits_list (lits : list literal ) : (res : list literal {
+let rec negate_lits_list (lits : list literal ) : Tot (res : list literal {
     (forall (l : literal{L.mem l lits}). ( L.mem (negate_lit l) res))
     /\ (forall (l : literal{L.mem l res}). ( L.mem (negate_lit l) lits))
     /\ length lits = length res
@@ -111,7 +111,7 @@ let rec get_vars_in_formula (f : formula )
 
 
 let all_variables_are_in_truth_assignment' (vars: list nat_non_zero { L.noRepeats vars }) (t: truth_assignment) 
-        : Tot (res : Type0) (decreases length vars) =
+        : Tot (res : Type0) =
             ( 
             (forall (var : nat_non_zero {L.mem var vars}). (is_variable_in_assignment t var))
             )
@@ -586,8 +586,7 @@ let is_solution
             (f: formula  { length f > 0 })
             (t: truth_assignment {
                 ((length (get_vars_in_formula f)) = length t)
-                /\
-                all_variables_are_in_truth_assignment f t  
+                /\ all_variables_are_in_truth_assignment f t  
                 })
     = is_partial_solution f t 
 

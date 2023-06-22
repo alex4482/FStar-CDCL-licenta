@@ -1,6 +1,7 @@
 module InputFileParser
 
 open DataTypes
+open ConvertorToString
 
 open FStar.All
 open FStar.IO
@@ -97,7 +98,7 @@ let string_to_int (str: list char {
 }) : ML (res : nat {res > 0})= 
     string_to_int_helper str
 
-val getNumberOfClauses : fd_read -> ML( int & fd_read)
+val getNumberOfClauses : fd_read -> ML( nat & fd_read)
 let rec getNumberOfClauses (fileStream: fd_read)  = 
     try
         let line = read_line fileStream in
@@ -194,12 +195,16 @@ let rec readInputFormula (fileStream: fd_read) (numberOfClausesLeft: int) =
                         let newClause = createClause variables in
                           newClause :: (readInputFormula fileStream (numberOfClausesLeft - 1) )
     with
-    | _ -> []
+    | EOF -> []
+    | _ -> failwith "error at read input formula"
 
 
 val getInput : string -> ML formula
 let getInput (fileName: string ) = 
     let fileStream = open_read_file fileName in
         let numberOfClauses, fileStream' = getNumberOfClauses fileStream in
-            readInputFormula fileStream' numberOfClauses
+            let f = readInputFormula fileStream' numberOfClauses in
+            if length f = 0
+            then failwith (concat " - " ["error" ; (int_to_string numberOfClauses)])
+            else f
 

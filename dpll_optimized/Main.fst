@@ -10,15 +10,16 @@ open FStar.IO
 open FStar.List.Tot
 open FStar.String
 
+
 let main = 
     let file_name = input_line () in
     let input_formula = getInput file_name in
+    let formula_str = formula_to_string input_formula in
     if (FStar.List.Tot.length input_formula = 0)
     then 
-        print_string "formula has length 0"
+        print_string formula_str
     else 
         let res = dpll input_formula in
-        let formula_str = formula_to_string input_formula in
             if Sat? res 
             then 
                 let truth_str = truth_to_string (get_truth_from_result res) in 
