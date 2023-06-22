@@ -10,12 +10,12 @@ Problema satisfiabilității booleene (SAT) se regăsește în multe ramuri ale 
 
 Algoritmul DPLL reprezintă una din primele optimizări eficiente folosite în \linebreak rezolvarea problemei SAT. Este considerat a fi un punct de plecare fundamental pentru \linebreak dezvoltarea unui 'SAT solver' eficient, stând la baza multor solveri moderni.
 
-Însă chiar și o implementare a unui algoritm demonstrat a fi eficient și complet poate produce erori sau rezultate greșite, iar unul din motivele pentru care apar aceste erori este eroarea umana a programatorului, a cărei frecvență poate crește împreună cu complexitatea algoritmului ce trebuie implementat. Pentru că testarea unui 'SAT solver' nu poate garanta absența erorilor, s-au conceput programe care sa verifice că implementarea în sine a algoritmului este lipsită de erori și matematic corectă.
+Însă chiar și o implementare a unui algoritm demonstrat a fi eficient și că acoperă fiecare caz posibil poate produce erori sau rezultate greșite, iar unul din motivele pentru care apar aceste erori este eroarea umana a programatorului, a cărei frecvență poate crește împreună cu complexitatea algoritmului ce trebuie implementat. Pentru că testarea unui 'SAT solver' nu poate garanta absența erorilor, s-au conceput programe care sa verifice că implementarea în sine a algoritmului este lipsită de erori și matematic corectă.
 
 Limbajul de programare F* (FStar) pune la dispoziție un astfel de sistem care în momentul compilării execută o verificare formală a programului în funcție de \linebreak specificațiile introduse de programator. Acest sistem ajută la depistarea bug-urilor, prevenirea erorilor, ăi oferă o siguranță mai mare că programul este corect \linebreak implementat și nu va prezenta rezultate false sau greșite.
 
 Astfel, am ales sa implementez algoritmul DPLL folosind limbajul de programare FStar, pentru a evidenția cum arată parcursul creării și verificării unui 'SAT solver' în acest limbaj și cum se poate extinde din punct de vedere al eficientizării.
 
-Această lucrare va prezenta în continuare o implementare a algoritmului DPLL folosind limbajul FStar. Vor fi prezentate detalii despre algoritmul DPLL, despre limbajul de programare folosit, detalii de implementare cu exemple de cod și motivele pentru care 'SAT solver-ul' rezultat este complet, corect și produce mereu un rezultat.
+Această lucrare va prezenta în continuare o implementare a algoritmului DPLL folosind limbajul FStar. Vor fi prezentate detalii despre algoritmul DPLL, despre limbajul de programare folosit, detalii de implementare cu exemple de cod și motivele pentru care 'SAT solver-ul' obținut este corect și produce mereu un rezultat.
 
 

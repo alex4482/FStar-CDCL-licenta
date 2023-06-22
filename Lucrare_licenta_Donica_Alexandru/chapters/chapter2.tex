@@ -3,15 +3,15 @@
 
 \section{Despre FStar}
 
-Limbajul F* este un limbaj de programare orientat pe demonstrații ce poate fi \newline folosit pentru uz general. Printre aspectele acestui limbaj se numără și faptul că \newline prezintă suport pentru programare funcționala. De asemenea, este proiectat să execute o verificare formală a codului, astfel orice programator poate să adauge funcțiilor \newline specificații sub formă de pre-condiții, post-condiții, invarianți, pentru a putea asigura completitudinea codului.
+Limbajul F* este un limbaj de programare orientat pe demonstrații ce poate fi \newline folosit pentru uz general. Printre aspectele acestui limbaj se numără și faptul că \newline prezintă suport pentru programare funcționala. De asemenea, este proiectat să execute o verificare formală a codului, astfel orice programator poate să adauge funcțiilor \newline specificații sub formă de pre-condiții, post-condiții, invarianți, pentru a putea asigura corectitudinea codului.
 
-\section{Completitudinea, corectitudinea și  \newline terminarea programului}
+\section{Aspecte importante ale implementarii}
 
-Cele mai importante proprietăți pe care le respectă acest 'SAT solver' sunt \newline completitudinea algoritmului, corectitudinea implementării și siguranță că programul se va termina și va produce un rezultat.
+Cele mai importante proprietăți pe care le respectă acest 'SAT solver' sunt \newline faptul că sunt acoperite toate posibilele atribuiri pentru o formula, corectitudinea implementării, siguranța că programul se va termina și va produce un rezultat.
 
-\subsection{Completitudinea programului}
+\subsection{Acoperirea fiecărei soluții}
 
-Este dovedită completitudinea algoritmului DPLL pentru o formulă in formă normală conjunctivă (CNF), așa cum este el descris in Capitolul 1.
+Faptul că algoritmul DPLL asigură încercarea fiecărei posibile atribuiri de variabile pentru formule în formă normală conjunctivă și în același timp garantează că orice atribuire ignorată este falsă, este demonstrat încă de la introducerea sa.
 
 Singura optimizare a algoritmului DPLL care a fost implementată se leagă de \newline verificarea existenței unei clauze false la fiecare pas recursiv după etapa de \textit{'unit\_propagation'}. \newpage Mai exact, la fiecare pas există o listă de literali, de lungime cel puțin 1, care au fost \newline adăugați la soluție, dar acești literali noi nu schimbă valoarea clauzelor care nu conțin nici unul din literalii din listă.
  
@@ -218,7 +218,7 @@ let rec ta_contition (ta : list variable_info) =
 
 \end{lstlisting}
 
-Structurile de date au fost alese a fi simple în detrimentul eficienței vitezei de execuție a programului, pentru a putea analiza dificultatea și complexitatea menținerii corectitudinii în implementarea unui algoritm complet in limbajul F*. 
+Structurile de date au fost alese a fi simple în detrimentul eficienței vitezei de execuție a programului, pentru a putea analiza dificultatea și complexitatea menținerii corectitudinii în implementarea corectă algoritmului DPLL în limbajul F*. 
 
 
 
@@ -391,16 +391,16 @@ Compilatorul a avut nevoie de aproximativ 500 de secunde pentru verificarea fiș
 \newline
 \begin{center}
 
-\begin{tabular}{|l|l|} \hline
-	Nume fișier & Durata verificare/compilare \\\hline
-	DataTypes & 8 secunde \\\hline
-	DataTypeUtils & 33 secunde \\\hline
-	DpllPropagation & 285 secunde \\\hline
-	OccurenceMatrixUtils & 91 secunde \\\hline
-	Dpll & 71 secunde \\\hline
-	ConvertorToString & 3 secunde \\\hline
-	InputFileParser & 4 secunde \\\hline
-	Main & 3 secunde \\\hline	
+\begin{tabular}{|l|l|l|} \hline
+	Nume fișier & Durata verificare/compilare & Nr. linii .fst / Nr. linii .ml \\\hline
+	DataTypes & 8 secunde & 166 : 106 \\\hline
+	DataTypeUtils & 33 secunde & 760 : 297 \\\hline
+	DpllPropagation & 285 secunde & 612 : 118 \\\hline
+	OccurenceMatrixUtils & 91 secunde & 493 : 142 \\\hline
+	Dpll & 71 secunde & 195 : 61 \\\hline
+	ConvertorToString & 3 secunde & \_\\\hline
+	InputFileParser & 4 secunde & \_ \\\hline
+	Main & 3 secunde & 30 : 17 \\\hline	
 \end{tabular}
 \end{center}
 
@@ -416,7 +416,7 @@ Tabelul următor ilustrează timpii necesari obținerii unor rezultate.
 \end{tabular}
 \end{center}
 
-Analizând codul sursă, se observă că fișierele ce conțin mai multe linii de cod pentru procesarea datelor și mai puține ce necesită demonstrarea unor proprietăți simple, au nevoie de mai puțin timp pentru a se verifica și compila. În schimb, fișierele care au foarte puține linii de cod ce contribuie la formarea rezultatului și care ajung să fie extrase în fișierele '.ml', dar multe proprietăți mai complexe ale căror demonstrație trebuie verificată, necesită mult mai mult timp de compilare.
+Analizând codul sursă sau tabelul anterior, se observă că fișierele ce conțin mai multe linii de cod pentru procesarea datelor și mai puține ce necesită demonstrarea unor proprietăți simple, au nevoie de mai puțin timp pentru a se verifica și compila. În schimb, fișierele care au foarte puține linii de cod ce contribuie la formarea rezultatului și care ajung să fie extrase în fișierele '.ml', dar multe proprietăți mai complexe ale căror demonstrație trebuie verificată, necesită mult mai mult timp de compilare.
 \newpage
 
 Dispozitivul pe care s-a făcut această contorizare avea următoarele specificații:
@@ -442,4 +442,4 @@ O alta optimizare ce se poate implementa este paralelizarea calculelor și împ�
 
 O mică îmbunătățire, din perspectiva limbajului de programare de aceasta dată, poate fi detectarea instrucțiunilor ce au rolul de a ajuta demonstrarea unor proprietăți însă ajung pe parcursul dezvoltării programului să devină redundante, iar eliminarea lor ar putea reduce puțin timpii de validare/compilare.
 
-De asemenea, mai exista varianta de a simplifica problema pe care algoritmul trebuie să o rezolve, iar analiza fiecărei clauze în parte, poate duce la identificarea unor clauze și literali redundanți, care pot fi eliminați din formula primită fără a schimba completitudinea și corectitudinea rezultatului final.
+De asemenea, mai exista varianta de a simplifica problema pe care algoritmul trebuie să o rezolve, iar analiza fiecărei clauze în parte, poate duce la identificarea unor clauze și literali redundanți, care pot fi eliminați din formula primită fără a schimba corectitudinea rezultatului final.
